@@ -16,7 +16,7 @@
       <TextField id="loginUsername" fx:id="usernameField" layoutX="196.0" layoutY="230.0" promptText="Username" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Desktop/calendarLogo.png" />
+            <Image url="@../resources/calendarLogo.png" />
          </image>
       </ImageView>
       <ButtonBar layoutX="377.0" layoutY="328.0" prefHeight="40.0" prefWidth="200.0">
@@ -25,7 +25,7 @@
             <Button id="loginSubmitButton" fx:id="submitButton" mnemonicParsing="false" text="Submit" />
         </buttons>
       </ButtonBar>
-      <Label layoutX="197.0" layoutY="126.0" text="Schedules">
+      <Label layoutX="197.0" layoutY="126.0" text="Leap Year">
          <font>
             <Font size="36.0" />
          </font>
