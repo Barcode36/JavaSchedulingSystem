@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package javaschedulingsystem;
 
 import java.io.IOException;
@@ -39,12 +35,12 @@ public class LoginViewController implements Initializable {
         // Eventually this will actually go to the database
         // and authorize/authenticate user
         
-        // TODO TEMPORARY - change scene to Appointments View to bypass login functionality
-//            Parent parent = FXMLLoader.load(getClass().getResource("AppointmentsView.fxml"));
-//            Scene scene = new Scene(parent);
-//            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//            window.setScene(scene);
-//            window.show();
+        // TEMPORARY - change scene to Appointments View to bypass login functionality
+            Parent parent = FXMLLoader.load(getClass().getResource("AppointmentsView.fxml"));
+            Scene scene = new Scene(parent);
+            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
         
     }
     

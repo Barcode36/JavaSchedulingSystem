@@ -22,7 +22,7 @@
       <ButtonBar layoutX="377.0" layoutY="328.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button id="loginExitButton" fx:id="exitButton" mnemonicParsing="false" onAction="#loginExitButtonHandler" text="Exit" />
-            <Button id="loginSubmitButton" fx:id="submitButton" mnemonicParsing="false" text="Submit" />
+            <Button id="loginSubmitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#loginSubmitButtonHandler" text="Submit" />
         </buttons>
       </ButtonBar>
       <Label layoutX="197.0" layoutY="126.0" text="Leap Year">
