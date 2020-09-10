@@ -9,8 +9,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="javaschedulingsystem.AppointmentsViewController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaschedulingsystem.AppointmentsViewController">
    <children>
       <TabPane prefHeight="400.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -18,7 +17,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button layoutX="15.0" layoutY="47.0" mnemonicParsing="false" text="New Appt" />
+                        <Button fx:id="addApptButton" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#addApptButtonHandler" text="New Appt" />
                         <TableView layoutX="107.0" layoutY="47.0" prefHeight="200.0" prefWidth="615.0">
                           <columns>
                             <TableColumn prefWidth="95.0" text="Date" />
@@ -27,8 +26,8 @@
                               <TableColumn prefWidth="276.0" text="Customer" />
                           </columns>
                         </TableView>
-                        <RadioButton layoutX="166.0" layoutY="22.0" mnemonicParsing="false" text="Week" />
-                        <RadioButton layoutX="239.0" layoutY="22.0" mnemonicParsing="false" text="Month" />
+                        <RadioButton fx:id="viewWeekRadio" layoutX="166.0" layoutY="22.0" mnemonicParsing="false" text="Week" />
+                        <RadioButton fx:id="viewMonthRadio" layoutX="239.0" layoutY="22.0" mnemonicParsing="false" text="Month" />
                         <Label layoutX="107.0" layoutY="23.0" text="View By" />
                      </children>
                   </AnchorPane>
