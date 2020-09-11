@@ -19,13 +19,22 @@ import javafx.stage.Stage;
 
 public class AppointmentsViewController implements Initializable {
 
+    // FXML variables for Appointment View controls
     @FXML private Button addApptButton;
     @FXML private RadioButton viewWeekRadio;
     @FXML private RadioButton viewMonthRadio;
     @FXML private TableView apptsTable;
+    
+    // FXML variables for Customer View controls
     @FXML private Button newCustomerButton;
     @FXML private TableView customerTable;
  
+    // FXML variables for Reports View controls
+    @FXML private Button apptTypesReportButton;
+    @FXML private Button consultantScheduleReportButton;
+    @FXML private Button oneOtherReportButton;
+    @FXML private Button loginReportButton;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -39,14 +48,48 @@ public class AppointmentsViewController implements Initializable {
         window.show();
     }
     
+    //**** Appointment View methods ****//
+
     // Change scene to Add Appt View
     public void addApptButtonHandler(ActionEvent event) throws IOException {
         sceneChangeHandler(event, "AddAppointmentView.fxml");
     }
     
+    public void viewByWeekHandler(ActionEvent event) {
+        // TODO - view appts by week functionality
+    }
+    
+    public void viewByMonthHandler(ActionEvent event) {
+        // TODO - view appts by month functionality
+    }
+    
+    
+    //**** Customer View methods ****//
+    
     // Change scene to Add Customer View
     public void addCustomerButtonHandler(ActionEvent event) throws IOException {
         sceneChangeHandler(event, "AddCustomerView.fxml");
     }
+    
+    
+    //**** Report View methods ****//
+    // TODO - each of these methods should open the same view 
+    // but display different reports in that view
+    public void apptTypesByMonthReportButtonHandler(ActionEvent event) throws IOException {
+        sceneChangeHandler(event, "SpecificReportView.fxml");
+    }
+    
+    public void consultantScheduleReportButtonHandler(ActionEvent event) throws IOException {
+        sceneChangeHandler(event, "SpecificReportView.fxml");
+    }
+    
+    public void oneOtherReportButtonHandler(ActionEvent event) throws IOException {
+        sceneChangeHandler(event, "SpecificReportView.fxml");
+    }
+    
+    public void loginReportButtonHandler(ActionEvent event) throws IOException {
+        sceneChangeHandler(event, "SpecificReportView.fxml");
+    }
+    
     
 }
