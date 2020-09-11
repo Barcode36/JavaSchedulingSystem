@@ -18,7 +18,7 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="addApptButton" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#addApptButtonHandler" text="New Appt" />
-                        <TableView layoutX="107.0" layoutY="47.0" prefHeight="200.0" prefWidth="615.0">
+                        <TableView fx:id="apptsTable" layoutX="107.0" layoutY="47.0" prefHeight="276.0" prefWidth="615.0">
                           <columns>
                             <TableColumn prefWidth="95.0" text="Date" />
                             <TableColumn prefWidth="89.0" text="Time" />
@@ -33,7 +33,22 @@
                   </AnchorPane>
                </content>
           </Tab>
-          <Tab text="Customers" />
+          <Tab text="Customers">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="newCustomerButton" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" text="New Cust" />
+                        <TableView fx:id="customerTable" layoutX="107.0" layoutY="47.0" prefHeight="277.0" prefWidth="614.0">
+                          <columns>
+                            <TableColumn prefWidth="107.0" text="First Name" />
+                            <TableColumn prefWidth="112.0" text="Last Name" />
+                              <TableColumn prefWidth="219.0" text="Address" />
+                              <TableColumn prefWidth="148.0" text="Phone" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
             <Tab text="Reports">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
