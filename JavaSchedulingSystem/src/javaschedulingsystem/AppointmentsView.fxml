@@ -37,7 +37,7 @@
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="newCustomerButton" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" text="New Cust" />
+                        <Button fx:id="newCustomerButton" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" onAction="#addCustomerButtonHandler" text="New Cust" />
                         <TableView fx:id="customerTable" layoutX="107.0" layoutY="47.0" prefHeight="277.0" prefWidth="614.0">
                           <columns>
                             <TableColumn prefWidth="107.0" text="First Name" />
