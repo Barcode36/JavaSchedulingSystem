@@ -1,5 +1,5 @@
 
-package javaschedulingsystem;
+package view_controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

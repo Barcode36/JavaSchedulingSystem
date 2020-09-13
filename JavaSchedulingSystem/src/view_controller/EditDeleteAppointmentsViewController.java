@@ -1,5 +1,5 @@
 
-package javaschedulingsystem;
+package view_controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,37 +17,48 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 
-public class AddAppointmentViewController implements Initializable {
+public class EditDeleteAppointmentsViewController implements Initializable {
 
     // FXML variables for view controls
-    @FXML private ChoiceBox apptTypeChoice;
+    @FXML private ChoiceBox apptTypeChoiceBox;
     @FXML private TextField dateField;
     @FXML private TextField timeField;
-    @FXML private ChoiceBox customerChoice;
+    @FXML private ChoiceBox customerChoiceBox;
+    @FXML private Button deleteButton;
     @FXML private Button cancelButton;
     @FXML private Button saveButton;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
     
-    public void saveButtonHandler(ActionEvent event) throws IOException {
-    
-        // TODO: Go to dB and create a new appointment
-        
-        
-        // Change back to Appointments View
-        cancelButtonHandler(event);
-        
-    }
-    
-    public void cancelButtonHandler(ActionEvent event) throws IOException {
+    public void changeSceneHandler(ActionEvent event) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource("AppointmentsView.fxml"));
         Scene scene = new Scene(parent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+    }
+    
+    public void deleteButtonHandler(ActionEvent event) throws IOException {
+        // TODO - go to dB and delete appt
+        
+        // Return to Appointments View
+        changeSceneHandler(event);
+    }
+
+    // Do nothing in dB and return to Appointments View
+    public void cancelButtonHandler(ActionEvent event) throws IOException {
+        changeSceneHandler(event);
+    }
+    
+    public void saveButtonHandler(ActionEvent event) throws IOException {
+        // TODO - go to dB and edit appt
+        
+        // Return to Appointments View
+        changeSceneHandler(event);
     }
     
 }
