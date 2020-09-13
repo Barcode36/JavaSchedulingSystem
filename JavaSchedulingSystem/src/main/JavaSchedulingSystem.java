@@ -1,6 +1,7 @@
 
 package main;
 
+import dao.DBConnection;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,14 @@ public class JavaSchedulingSystem extends Application {
 
     
     public static void main(String[] args) {
+        // Establish connection to database
+        DBConnection.startConnection();
+        
+        // Launch Java application
         launch(args);
+        
+        // Close connection to database
+        DBConnection.closeConnection();
     }
     
 }
