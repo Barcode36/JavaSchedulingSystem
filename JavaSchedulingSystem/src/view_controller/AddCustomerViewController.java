@@ -1,5 +1,5 @@
 
-package javaschedulingsystem;
+package view_controller;
 
 import java.io.IOException;
 import java.net.URL;

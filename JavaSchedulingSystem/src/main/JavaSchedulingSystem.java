@@ -1,5 +1,5 @@
 
-package javaschedulingsystem;
+package main;
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -13,7 +13,7 @@ public class JavaSchedulingSystem extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view_controller/LoginView.fxml"));
         
         Scene scene = new Scene(root);
         
