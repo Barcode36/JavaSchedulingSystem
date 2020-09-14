@@ -26,9 +26,10 @@
                               <TableColumn prefWidth="276.0" text="Customer" />
                           </columns>
                         </TableView>
-                        <RadioButton fx:id="viewWeekRadio" layoutX="166.0" layoutY="22.0" mnemonicParsing="false" onAction="#viewByWeekHandler" text="Week" />
-                        <RadioButton fx:id="viewMonthRadio" layoutX="239.0" layoutY="22.0" mnemonicParsing="false" onAction="#viewByMonthHandler" text="Month" />
+                        <RadioButton fx:id="viewWeekRadio" layoutX="213.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByWeekHandler" text="Week" />
+                        <RadioButton fx:id="viewMonthRadio" layoutX="279.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByMonthHandler" text="Month" />
                         <Label layoutX="107.0" layoutY="23.0" text="View By" />
+                        <RadioButton fx:id="viewAllRadio" layoutX="163.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewAllHandler" text="All" />
                      </children>
                   </AnchorPane>
                </content>
