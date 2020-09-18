@@ -9,31 +9,28 @@ import java.sql.SQLException;
 public class DBConnection {
     
     // JDBC URL parts
-    private static final String protocol = "jdbc";
-    private static final String vendorName = ":mysql:";
-    private static final String ipAddress = "//wgudb.ucertify.com/U06ciQ";
+    private static final String PROTOCOL = "jdbc";
+    private static final String VENDORNAME = ":mysql:";
+    private static final String IPADDRESS = "//wgudb.ucertify.com/U06ciQ";
     //JDBC URL
-    private static final String jdbcURL = protocol + vendorName + ipAddress;
+    private static final String JDBCURL = PROTOCOL + VENDORNAME + IPADDRESS;
     
     // Reference to MySQL JDBC driver and Connection
-    private static final String MYSQLJDBCDriver = "com.mysql.jdbc.Driver";
-    private static Connection conn = null;
+    private static final String MYSQLJDBCDRIVER = "com.mysql.jdbc.Driver";
+    static Connection conn = null;
     
     // User info
-    private static final String username = "U06ciQ";
-    private static final String password = "53688727274";
+    private static final String USERNAME = "U06ciQ";
+    private static final String PASSWORD = "53688727274";
     
     
     public static Connection startConnection() {
         try {
-            Class.forName(MYSQLJDBCDriver);
-            conn = (Connection)DriverManager.getConnection(jdbcURL, username, password);
+            Class.forName(MYSQLJDBCDRIVER);
+            conn = (Connection)DriverManager.getConnection(JDBCURL, USERNAME, PASSWORD);
             System.out.println("Database connection successful");
         }
-            catch(ClassNotFoundException e) {
-                System.out.println(e.getMessage());
-        }
-            catch(SQLException e) {
+            catch(ClassNotFoundException | SQLException e) {
                 System.out.println(e.getMessage());
         }
         
