@@ -65,4 +65,59 @@ public class User {
         this.userPassword = userPassword;
     }
     
+    
+    // Active Getters and Setters
+    
+    public int getUserActive() {
+        return active;
+    }
+    
+    public void setUserActive(int active) {
+        this.active = active;
+    }
+    
+    
+    // Create Date Getters and Setters
+    
+    public LocalDate getUserCreateDate() {
+        return createDate;
+    }
+    
+    public void setUserCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+    
+    
+    // Created By Getters and Setters
+    
+    public String getUserCreatedBy() {
+        return createdBy;
+    }
+    
+    public void setUserCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+    
+    
+    // Last Update Getters and Setters
+    
+    public Timestamp getUserLastUpdate() {
+        return lastUpdate;
+    }
+    
+    public void setUserLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+    
+    
+    // Last Update By Getters and Setters
+    
+    public String getUserLastUpdateBy() {
+        return lastUpdateBy;
+    }
+    
+    public void setUserLastUpdateBy(String lastUpdateBy) {
+        this.lastUpdateBy = lastUpdateBy;
+    }
+    
 }
