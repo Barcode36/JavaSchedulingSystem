@@ -3,23 +3,34 @@ package models;
 
 // Object model for application customers
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+
 public class Customer {
     
     // Customer Object fields
     private int customerId;
-    private String firstName;
-    private String lastName;
-    private String address;
-    private String phone;
+    private String customerName;
+    private int addressId;
+    private int active;
+    private LocalDateTime createDate;
+    private String createdBy;
+    private Timestamp lastUpdate;
+    private String lastUpdateBy;
     
     
     // Customer Constructor
-    public Customer(int customerId, String firstName, String lastName,  String address, String phone) {
+    public Customer(int customerId, String customerName, int addressId, int active, 
+                    LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
         this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
+        this.customerName = customerName;
+        this.addressId = addressId;
+        this.active = active;
+        this.createDate = createDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdateBy = lastUpdateBy;
     }
     
     // CustomerID Getters and Setters
@@ -35,45 +46,73 @@ public class Customer {
     
     // First Name Getters and Setters
     
-    public String getCustomerFirstName() {
-        return firstName;
+    public String getCustomerName() {
+        return customerName;
     }
     
-    public void setCustomerFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    
-    
-    // Last Name Getters and Setters
-    
-    public String getCustomerLastName() {
-        return lastName;
-    }
-    
-    public void setCustomerLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
     
     
     // Address Getters and Setters
     
-    public String getCustomerAddress() {
-        return address;
+    public int getCustomerAddressId() {
+        return addressId;
     }
     
-    public void setCustomerAddress(String address) {
-        this.address = address;
+    public void setCustomerAddressId(int addressId) {
+        this.addressId = addressId;
     }
     
     
-    // Phone Getters and Setters
-    
-    public String getCustomerPhone() {
-        return phone;
+    // Active Getters and Setters
+    public int getCustomerActive() {
+        return active;
     }
     
-    public void setCustomerPhone(String phone) {
-        this.phone = phone;
+    public void setCustomerActive(int active) {
+        this.active = active;
+    }
+    
+    
+    // Create Date Getters and Setters
+    public LocalDateTime getCustomerCreateDate() {
+        return createDate;
+    }
+    
+    public void setCustomerCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+    
+    
+    // Created By Getters and Setters
+    public String getCustomerCreatedBy() {
+        return createdBy;
+    }
+    
+    public void setCustomerCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+    
+    
+    // Last Update Getters and Setters
+    public Timestamp getCustomerLastUpdate() {
+        return lastUpdate;
+    }
+    
+    public void setCustomerLastUpdate(Timestamp lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+    
+    
+    // Last Updated By Getters and Setters
+    public String getCustomerLastUpdateBy() {
+        return lastUpdateBy;
+    }
+    
+    public void setCustomerLastUpdateBy(String lastUpdateBy) {
+        this.lastUpdateBy = lastUpdateBy;
     }
     
 }

@@ -1,10 +1,19 @@
 
 package view_controller;
 
+import dao.CustomerDao;
 import dao.UserDao;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +74,11 @@ public class LoginViewController implements Initializable {
     
     public void loginExitButtonHandler(ActionEvent event) throws SQLException {
         // TODO - finish implementing sign in process
-         
+        Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
+        
+
+        
+//        CustomerDao.createCustomer(2, "Bob", 1, 1, asdf, "admin", timestamp, "admin"); 
     }
     
     
