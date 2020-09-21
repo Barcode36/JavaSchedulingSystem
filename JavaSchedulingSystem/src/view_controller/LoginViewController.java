@@ -74,11 +74,6 @@ public class LoginViewController implements Initializable {
     
     public void loginExitButtonHandler(ActionEvent event) throws SQLException {
         // TODO - finish implementing sign in process
-        Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
-        
-
-        
-//        CustomerDao.createCustomer(2, "Bob", 1, 1, asdf, "admin", timestamp, "admin"); 
     }
     
     

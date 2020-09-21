@@ -4,7 +4,6 @@ package models;
 // Object model for application customers
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 
 public class Customer {
@@ -14,7 +13,7 @@ public class Customer {
     private String customerName;
     private int addressId;
     private int active;
-    private LocalDateTime createDate;
+    private Timestamp createDate;
     private String createdBy;
     private Timestamp lastUpdate;
     private String lastUpdateBy;
@@ -22,7 +21,7 @@ public class Customer {
     
     // Customer Constructor
     public Customer(int customerId, String customerName, int addressId, int active, 
-                    LocalDateTime createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
+                    Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.addressId = addressId;
@@ -77,11 +76,11 @@ public class Customer {
     
     
     // Create Date Getters and Setters
-    public LocalDateTime getCustomerCreateDate() {
+    public Timestamp getCustomerCreateDate() {
         return createDate;
     }
     
-    public void setCustomerCreateDate(LocalDateTime createDate) {
+    public void setCustomerCreateDate(Timestamp createDate) {
         this.createDate = createDate;
     }
     

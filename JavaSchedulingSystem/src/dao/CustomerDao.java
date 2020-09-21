@@ -3,16 +3,16 @@ package dao;
 
 
 import static dao.DBConnection.conn;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import models.Customer;
 
-// Get Customer
-// Create Customer
+
+
 // Update Customer
 // Delete Customer
 public class CustomerDao {
@@ -31,9 +31,6 @@ public class CustomerDao {
         
         Customer selectedCustomer = null;
         
-        // Prep localDateTime for createDate
-        Date date = rs.getDate("createDate");
-        Timestamp createDateTS = new Timestamp(date.getTime());
         
         // Get Customer info from dB query
         while(rs.next()) {
@@ -41,7 +38,7 @@ public class CustomerDao {
             String name = rs.getString("customerName");
             int addressId = rs.getInt("addressId");
             int active = rs.getInt("active");
-            LocalDateTime createDate = createDateTS.toLocalDateTime();
+            Timestamp createDate = rs.getTimestamp("createDate");
             String createdBy = rs.getString("createdBy");
             Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
             String lastUpdateBy = rs.getString("lastUpdateBy");
@@ -53,34 +50,100 @@ public class CustomerDao {
         return selectedCustomer;
     }
     
-    public static void createCustomer(int customerId, String customerName, int addressId, int active, 
-                                      LocalDateTime createDate, String createdBy, Timestamp lastUpdate, 
+    
+
+    // Get all customers
+    public static ObservableList<Customer> getAllCustomers() throws SQLException {
+        
+        // Prepare Observable List variable to hold all users
+        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+        
+        // Create SQL select all users statement
+        String sqlStatement = "SELECT * FROM customer";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.execute();
+        
+        ResultSet rs = ps.getResultSet();
+        
+        Customer nextCustomer;
+        
+        // Get User info from dB query
+        while(rs.next()) {
+            int customerId = rs.getInt("customerId");
+            String name = rs.getString("customerName");
+            // TODO - look up proper address
+            int address = rs.getInt("addressId");
+            int active = rs.getInt("active");
+            Timestamp createDate = rs.getTimestamp("createDate");
+            String createdBy = rs.getString("createdBy");
+            Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
+            String lastUpdateBy = rs.getString("lastUpdateBy");
+            
+            nextCustomer = new Customer(customerId, name, address, active, createDate, 
+                                    createdBy, lastUpdate, lastUpdateBy);  
+            allCustomers.add(nextCustomer);
+            
+        }
+        
+        // Return observable list
+        return allCustomers;
+    }
+    
+    
+    
+    // Add a new customer to dB
+    public static void createCustomer(String customerName, int addressId, int active, 
+                                      Timestamp createDate, String createdBy, Timestamp lastUpdate, 
                                       String lastUpdateBy) throws SQLException {
         // Create SQL insert statement using Customer info
-        String sqlStatement = "INSERT INTO customer(customerId, customerName, addressId, active,"
+        String sqlStatement = "INSERT INTO customer(customerName, addressId, active,"
                               + "createDate, createdBy, lastUpdate, lastUpdateBy)"
-                              + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                              + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, customerName);
+        ps.setInt(2, addressId);
+        ps.setInt(3, active);
+        ps.setTimestamp(4, createDate);
+        ps.setString(5, createdBy);
+        ps.setTimestamp(6, lastUpdate);
+        ps.setString(7, lastUpdateBy);
+        ps.execute();
+    }
+    
+    public static void updateCustomer(int customerId, String customerName, String address, String phone) throws SQLException {
+    
+        // Create SQL select statement using customerName
+        String sqlStatement = "UPDATE customer SET customerName = ?, address = ?, "
+                              + "phone = ? WHERE customerId = ?";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, customerName);
+        ps.setString(2, address);
+        ps.setString(3, phone);
+        ps.setInt(4, customerId);
+        ps.execute();
+        
+    }
+    
+    public static void deleteCustomer(int customerId) throws SQLException {
+    
+        // Create SQL select statement using customerName
+        String sqlStatement = "DELETE FROM customer WHERE customerId = ?";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);
         PreparedStatement ps = DBQuery.getPreparedStatement();
         ps.setInt(1, customerId);
-        ps.setString(2, customerName);
-        ps.setInt(3, addressId);
-        ps.setInt(4, active);
-        ps.setObject(5, createDate);
-        ps.setString(6, createdBy);
-        ps.setTimestamp(7, lastUpdate);
-        ps.setString(8, lastUpdateBy);
         ps.execute();
-    }
-    
-    public static void updateCustomer() {
-    
-    }
-    
-    public static void deleteCustomer() {
-    
+        
     }
     
 }
