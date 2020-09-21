@@ -83,7 +83,7 @@ public class UserDao {
             
         }
         
-        // update this return
+        // Return users observable list
         return allUsers;
     }
     

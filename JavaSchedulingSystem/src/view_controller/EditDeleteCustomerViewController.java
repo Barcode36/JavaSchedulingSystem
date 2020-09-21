@@ -1,8 +1,10 @@
 
 package view_controller;
 
+import dao.CustomerDao;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,8 +21,7 @@ import javafx.stage.Stage;
 public class EditDeleteCustomerViewController implements Initializable {
 
     // FXML variables for view controls
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
+    @FXML private TextField customerNameField;
     @FXML private TextField addressField;
     @FXML private TextField phoneField;
     @FXML private Button deleteButton;
@@ -32,6 +33,8 @@ public class EditDeleteCustomerViewController implements Initializable {
         // TODO
     }    
     
+    
+    
     // Handle scene changes
     public void sceneChangeHandler(ActionEvent event, String view) throws IOException {
         Parent parent = FXMLLoader.load(getClass().getResource(view));
@@ -41,15 +44,20 @@ public class EditDeleteCustomerViewController implements Initializable {
         window.show();
     }
     
+    
+    
     // Delete customer and change scene to Appointments View
-    public void deleteButtonHandler(ActionEvent event) throws IOException {
+    public void deleteButtonHandler(ActionEvent event) throws IOException, SQLException {
         
-        // TODO - go to dB and delete customer
+        // TODO - get customerId from all Customers view when clicking through to delete customer
+        CustomerDao.deleteCustomer(0);
         
         // Change scene to Appointments View
         sceneChangeHandler(event, "Appointments.fxml");
         
     }
+    
+    
     
     // Do nothing and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
@@ -59,9 +67,15 @@ public class EditDeleteCustomerViewController implements Initializable {
     }
     
     // Edit customer and change scene to Appointments View
-    public void saveButtonHandler(ActionEvent event) throws IOException {
+    public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
     
-        // TODO - go to dB and edit customer info
+        String customerName = customerNameField.getText();
+        String address = addressField.getText();
+        String phone = phoneField.getText();
+        
+        // TODO - figure out how to get the customerId from the all Customers view when
+        // clicking through to edit customer view
+        CustomerDao.updateCustomer(0, customerName, address, phone);
         
         // Change scene to Appointments View
         sceneChangeHandler(event, "Appointments.fxml");
