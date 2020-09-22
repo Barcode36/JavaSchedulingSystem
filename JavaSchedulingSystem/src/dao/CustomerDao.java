@@ -13,8 +13,6 @@ import models.Customer;
 
 
 
-// Update Customer
-// Delete Customer
 public class CustomerDao {
     
     public static Customer getCustomer(String customerName) throws SQLException {
