@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import models.City;
 
 
 
@@ -32,8 +33,8 @@ public class CityDao {
         // Get City info from dB query
         while(rs.next()) {
             int cityId = rs.getInt("cityId");
-            int cityName = rs.getInt("city");
-            int countryId = rs.getInt(countryId);
+            String cityName = rs.getString("city");
+            int countryId = rs.getInt("countryId");
             Timestamp createDate = rs.getTimestamp("createDate");
             String createdBy = rs.getString("createdBy");
             Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
