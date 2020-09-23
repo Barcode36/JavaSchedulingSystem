@@ -56,7 +56,7 @@ public class LoginViewController implements Initializable {
     
     
     public void loginExitButtonHandler(ActionEvent event) throws SQLException {
-        // TODO - finish implementing sign in process
+        Utils.exitApplication();
     }
     
     
