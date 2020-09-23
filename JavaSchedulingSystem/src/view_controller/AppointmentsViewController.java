@@ -1,15 +1,23 @@
 
 package view_controller;
 
+import dao.CustomerDao;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import models.Customer;
 import utilities.Utils;
 
 
@@ -24,7 +32,10 @@ public class AppointmentsViewController implements Initializable {
         
     // FXML variables for Customer View controls
     @FXML private Button newCustomerButton;
-    @FXML private TableView customerTable;
+    @FXML private TableView<Customer> customerTable;
+    @FXML private TableColumn<Customer, String> customerNameColumn;
+    @FXML private TableColumn<Customer, Integer> customerAddressColumn;
+    @FXML private TableColumn<Customer, String> customerPhoneColumn;
  
     // FXML variables for Reports View controls
     @FXML private Button apptTypesReportButton;
@@ -34,14 +45,28 @@ public class AppointmentsViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        // Bind customer table columns
+       customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+       customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("customerAddressId"));
+       customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("customerCreatedBy"));
+       
+       
+        try {
+            ObservableList<Customer> customers = CustomerDao.getAllCustomers();
+            customerTable.setItems(customers);
+        }
+         catch (SQLException ex) {
+            Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }   
     
     //**** Appointment View methods ****//
 
     // Change scene to Add Appt View
     public void addApptButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/AddAppointmentView.fxml", event);
+        Utils.sceneChanger("view_controller/AddAppointmentView.fxml", event);
     }
     
     public void viewAllHandler(ActionEvent event) {
@@ -61,7 +86,7 @@ public class AppointmentsViewController implements Initializable {
     
     // Change scene to Add Customer View
     public void addCustomerButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/AddCustomerView.fxml", event);
+        Utils.sceneChanger("view_controller/AddCustomerView.fxml", event);
     }
     
     
@@ -69,19 +94,19 @@ public class AppointmentsViewController implements Initializable {
     // TODO - each of these methods should open the same view 
     // but display different reports in that view
     public void apptTypesByMonthReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/SpecificReportView.fxml", event);
+        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
     }
     
     public void consultantScheduleReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/SpecificReportView.fxml", event);
+        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
     }
     
     public void oneOtherReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/SpecificReportView.fxml", event);
+        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
     }
     
     public void loginReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/SpecificReportView.fxml", event);
+        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
     }
     
     

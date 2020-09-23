@@ -43,7 +43,7 @@ public class LoginViewController implements Initializable {
         try {
             // If entered password, matches password from dB, change scene to Appointments View
             if (enteredPass == null ? officialPassword == null : enteredPass.equals(officialPassword)) {
-                Utils.sceneChanger("/AppointmentsView.fxml", event);
+                Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
             } else {
                 // TODO - add mismatched password error handling
                 System.out.println("Passwords do not match");
