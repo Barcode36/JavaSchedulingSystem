@@ -8,15 +8,11 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import models.User;
+import utilities.Utils;
 
 
 public class LoginViewController implements Initializable {
@@ -47,11 +43,7 @@ public class LoginViewController implements Initializable {
         try {
             // If entered password, matches password from dB, change scene to Appointments View
             if (enteredPass == null ? officialPassword == null : enteredPass.equals(officialPassword)) {
-                Parent parent = FXMLLoader.load(getClass().getResource("AppointmentsView.fxml"));
-                Scene scene = new Scene(parent);
-                Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-                window.setScene(scene);
-                window.show();
+                Utils.sceneChanger("/AppointmentsView.fxml", event);
             } else {
                 // TODO - add mismatched password error handling
                 System.out.println("Passwords do not match");

@@ -6,15 +6,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import utilities.Utils;
 
 
 public class EditDeleteAppointmentsViewController implements Initializable {
@@ -34,31 +30,23 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         // TODO
     }    
     
-    public void changeSceneHandler(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("AppointmentsView.fxml"));
-        Scene scene = new Scene(parent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
-    
     public void deleteButtonHandler(ActionEvent event) throws IOException {
         // TODO - go to dB and delete appt
         
         // Return to Appointments View
-        changeSceneHandler(event);
+        Utils.sceneChanger("/AppointmentsView.fxml", event);
     }
 
     // Do nothing in dB and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        changeSceneHandler(event);
+        Utils.sceneChanger("/AppointmentsView.fxml", event);
     }
     
     public void saveButtonHandler(ActionEvent event) throws IOException {
         // TODO - go to dB and edit appt
         
         // Return to Appointments View
-        changeSceneHandler(event);
+        Utils.sceneChanger("/AppointmentsView.fxml", event);
     }
     
 }

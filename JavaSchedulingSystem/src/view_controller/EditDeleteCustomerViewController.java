@@ -8,14 +8,10 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import utilities.Utils;
 
 
 public class EditDeleteCustomerViewController implements Initializable {
@@ -35,17 +31,6 @@ public class EditDeleteCustomerViewController implements Initializable {
     
     
     
-    // Handle scene changes
-    public void sceneChangeHandler(ActionEvent event, String view) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource(view));
-        Scene scene = new Scene(parent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
-    
-    
-    
     // Delete customer and change scene to Appointments View
     public void deleteButtonHandler(ActionEvent event) throws IOException, SQLException {
         
@@ -53,7 +38,7 @@ public class EditDeleteCustomerViewController implements Initializable {
         CustomerDao.deleteCustomer(0);
         
         // Change scene to Appointments View
-        sceneChangeHandler(event, "Appointments.fxml");
+        Utils.sceneChanger("/AppointmentsView.fxml", event);
         
     }
     
@@ -63,7 +48,7 @@ public class EditDeleteCustomerViewController implements Initializable {
     public void cancelButtonHandler(ActionEvent event) throws IOException {
     
         // Change scene to Appointments View
-        sceneChangeHandler(event, "Appointments.fxml");
+        Utils.sceneChanger("/AppointmentsView.fxml", event);
     }
     
     // Edit customer and change scene to Appointments View
@@ -78,7 +63,7 @@ public class EditDeleteCustomerViewController implements Initializable {
         CustomerDao.updateCustomer(0, customerName, address, phone);
         
         // Change scene to Appointments View
-        sceneChangeHandler(event, "Appointments.fxml");
+        Utils.sceneChanger("/AppointmentsView.fxml", event);
         
     }
     
