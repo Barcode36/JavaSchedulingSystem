@@ -1,7 +1,6 @@
 
 package dao;
 
-// Get city
 
 import static dao.DBConnection.conn;
 import java.sql.PreparedStatement;
