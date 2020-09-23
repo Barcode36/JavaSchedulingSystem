@@ -4,74 +4,76 @@ package models;
 // Object model for application customers
 
 import java.sql.Timestamp;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 
 public class Customer {
     
     // Customer Object fields
-    private int customerId;
-    private String customerName;
-    private int addressId;
-    private int active;
+    private SimpleIntegerProperty customerId = new SimpleIntegerProperty();
+    private SimpleStringProperty customerName = new SimpleStringProperty();
+    private SimpleIntegerProperty addressId = new SimpleIntegerProperty();
+    private SimpleIntegerProperty active = new SimpleIntegerProperty();
     private Timestamp createDate;
-    private String createdBy;
+    private SimpleStringProperty createdBy = new SimpleStringProperty();
     private Timestamp lastUpdate;
-    private String lastUpdateBy;
+    private SimpleStringProperty lastUpdateBy = new SimpleStringProperty();
     
     
     // Customer Constructor
     public Customer(int customerId, String customerName, int addressId, int active, 
                     Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
-        this.customerId = customerId;
-        this.customerName = customerName;
-        this.addressId = addressId;
-        this.active = active;
-        this.createDate = createDate;
-        this.createdBy = createdBy;
-        this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        setCustomerId(customerId);
+        setCustomerName(customerName);
+        setCustomerAddressId(addressId);
+        setCustomerActive(active);
+        setCustomerCreateDate(createDate);
+        setCustomerCreatedBy(createdBy);
+        setCustomerLastUpdate(lastUpdate);
+        setCustomerLastUpdateBy(lastUpdateBy);
     }
     
     // CustomerID Getters and Setters
     
     public int getCustomerId() {
-        return customerId;
+        return customerId.get();
     }
     
     public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+        this.customerId.set(customerId);
     }
     
     
     // First Name Getters and Setters
     
     public String getCustomerName() {
-        return customerName;
+        return customerName.get();
     }
     
     public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+        this.customerName.set(customerName);
     }
     
     
     // Address Getters and Setters
     
     public int getCustomerAddressId() {
-        return addressId;
+        return addressId.get();
     }
     
     public void setCustomerAddressId(int addressId) {
-        this.addressId = addressId;
+        this.addressId.set(addressId);
     }
     
     
     // Active Getters and Setters
     public int getCustomerActive() {
-        return active;
+        return active.get();
     }
     
     public void setCustomerActive(int active) {
-        this.active = active;
+        this.active.set(active);
     }
     
     
@@ -87,11 +89,11 @@ public class Customer {
     
     // Created By Getters and Setters
     public String getCustomerCreatedBy() {
-        return createdBy;
+        return createdBy.get();
     }
     
     public void setCustomerCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+        this.createdBy.set(createdBy);
     }
     
     
@@ -107,11 +109,11 @@ public class Customer {
     
     // Last Updated By Getters and Setters
     public String getCustomerLastUpdateBy() {
-        return lastUpdateBy;
+        return lastUpdateBy.get();
     }
     
     public void setCustomerLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+        this.lastUpdateBy.set(lastUpdateBy);
     }
     
 }
