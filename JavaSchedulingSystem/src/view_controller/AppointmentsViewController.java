@@ -30,6 +30,7 @@ public class AppointmentsViewController implements Initializable {
 
     // FXML variables for Appointment View controls
     @FXML private Button addApptButton;
+    @FXML private Button editApptButton;
     @FXML private RadioButton viewAllRadio;
     @FXML private RadioButton viewWeekRadio;
     @FXML private RadioButton viewMonthRadio;
@@ -100,6 +101,10 @@ public class AppointmentsViewController implements Initializable {
     // Change scene to Add Appt View
     public void addApptButtonHandler(ActionEvent event) throws IOException {
         Utils.sceneChanger("view_controller/AddAppointmentView.fxml", event);
+    }
+    
+    public void editApptButtonHandler(ActionEvent event) throws IOException {
+        Utils.sceneChanger("view_controller/EditDeleteAppointmentsView.fxml", event);
     }
     
     public void viewAllHandler(ActionEvent event) {

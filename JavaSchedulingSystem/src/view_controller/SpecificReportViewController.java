@@ -23,7 +23,7 @@ public class SpecificReportViewController implements Initializable {
     }    
     
     public void backButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
 }

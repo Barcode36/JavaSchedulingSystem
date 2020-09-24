@@ -38,7 +38,7 @@ public class EditDeleteCustomerViewController implements Initializable {
         CustomerDao.deleteCustomer(0);
         
         // Change scene to Appointments View
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
         
     }
     
@@ -48,7 +48,7 @@ public class EditDeleteCustomerViewController implements Initializable {
     public void cancelButtonHandler(ActionEvent event) throws IOException {
     
         // Change scene to Appointments View
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
     // Edit customer and change scene to Appointments View
@@ -63,7 +63,7 @@ public class EditDeleteCustomerViewController implements Initializable {
         CustomerDao.updateCustomer(0, customerName, address, phone);
         
         // Change scene to Appointments View
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
         
     }
     

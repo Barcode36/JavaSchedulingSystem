@@ -29,6 +29,7 @@
                         <RadioButton fx:id="viewMonthRadio" layoutX="279.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByMonthHandler" text="Month" />
                         <Label layoutX="107.0" layoutY="23.0" text="View By" />
                         <RadioButton fx:id="viewAllRadio" layoutX="163.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewAllHandler" text="All" />
+                        <Button fx:id="editApptButton" layoutX="16.0" layoutY="94.0" mnemonicParsing="false" onAction="#editApptButtonHandler" prefHeight="27.0" prefWidth="73.0" text="Edit Appt" />
                      </children>
                   </AnchorPane>
                </content>
