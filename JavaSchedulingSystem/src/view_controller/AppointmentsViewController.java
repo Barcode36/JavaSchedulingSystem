@@ -3,6 +3,7 @@ package view_controller;
 
 import dao.AppointmentDao;
 import dao.CustomerDao;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.Appointment;
@@ -38,6 +40,7 @@ public class AppointmentsViewController implements Initializable {
         
     // FXML variables for Customer View controls
     @FXML private Button newCustomerButton;
+    @FXML private Button editCustomerButton;
     @FXML private TableView<Customer> customerTable;
     @FXML private TableColumn<Customer, String> customerNameColumn;
     @FXML private TableColumn<Customer, Integer> customerAddressColumn;
@@ -52,6 +55,9 @@ public class AppointmentsViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+       
+       //****** Appointments Table ******
+       
        // Bind appointment table columns
        appointmentCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
        appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
@@ -67,6 +73,10 @@ public class AppointmentsViewController implements Initializable {
         }
             
        
+       
+        
+       //****** Customer Table ******
+       
        // Bind customer table columns
        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
        customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("customerAddressId"));
@@ -81,7 +91,9 @@ public class AppointmentsViewController implements Initializable {
             Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
     }   
+    
     
     //**** Appointment View methods ****//
 
@@ -108,6 +120,11 @@ public class AppointmentsViewController implements Initializable {
     // Change scene to Add Customer View
     public void addCustomerButtonHandler(ActionEvent event) throws IOException {
         Utils.sceneChanger("view_controller/AddCustomerView.fxml", event);
+    }
+    
+    public void editCustomerButtonHandler(ActionEvent event) throws IOException {
+        Customer customer = customerTable.getSelectionModel().getSelectedItem();
+        Utils.sceneChanger("view_controller/EditDeleteCustomerView.fxml", event);
     }
     
     
