@@ -1,10 +1,12 @@
 
 package view_controller;
 
+import dao.AppointmentDao;
 import dao.CustomerDao;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import models.Appointment;
 import models.Customer;
 import utilities.Utils;
 
@@ -28,7 +31,10 @@ public class AppointmentsViewController implements Initializable {
     @FXML private RadioButton viewAllRadio;
     @FXML private RadioButton viewWeekRadio;
     @FXML private RadioButton viewMonthRadio;
-    @FXML private TableView apptsTable;
+    @FXML private TableView appointmentsTable;
+    @FXML private TableColumn<Appointment, String> appointmentDateColumn;
+    @FXML private TableColumn<Appointment, String> appointmentTypeColumn;
+    @FXML private TableColumn<Appointment, Integer> appointmentCustomerColumn;
         
     // FXML variables for Customer View controls
     @FXML private Button newCustomerButton;
@@ -46,12 +52,27 @@ public class AppointmentsViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        // Bind customer table columns
+       // Bind appointment table columns
+       appointmentCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+       appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+       appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
+       
+        
+        try {
+            // Populate appointments table view
+            ObservableList<Appointment> appointments = AppointmentDao.getAllAppointments();
+            appointmentsTable.setItems(appointments);
+        } catch (SQLException ex) {
+            Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+       
+       // Bind customer table columns
        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
        customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("customerAddressId"));
        customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("customerCreatedBy"));
        
-       
+       // Populate customer table view
         try {
             ObservableList<Customer> customers = CustomerDao.getAllCustomers();
             customerTable.setItems(customers);

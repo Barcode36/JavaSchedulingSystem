@@ -18,12 +18,11 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="addApptButton" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#addApptButtonHandler" text="New Appt" />
-                        <TableView fx:id="apptsTable" layoutX="107.0" layoutY="47.0" prefHeight="276.0" prefWidth="615.0">
+                        <TableView fx:id="appointmentsTable" layoutX="107.0" layoutY="47.0" prefHeight="276.0" prefWidth="615.0">
                           <columns>
-                            <TableColumn prefWidth="95.0" text="Date" />
-                            <TableColumn prefWidth="89.0" text="Time" />
-                              <TableColumn prefWidth="154.0" text="Appt. Type" />
-                              <TableColumn prefWidth="276.0" text="Customer" />
+                            <TableColumn fx:id="appointmentDateColumn" prefWidth="177.0" text="Date" />
+                              <TableColumn fx:id="appointmentTypeColumn" prefWidth="156.0" text="Appt. Type" />
+                              <TableColumn fx:id="appointmentCustomerColumn" prefWidth="281.0" text="Customer" />
                           </columns>
                         </TableView>
                         <RadioButton fx:id="viewWeekRadio" layoutX="213.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByWeekHandler" text="Week" />
