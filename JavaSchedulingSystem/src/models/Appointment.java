@@ -4,26 +4,29 @@ package models;
 // Object model for application appointments
 
 import java.sql.Timestamp;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 
 
 public class Appointment {
     
     // Appointment Object fields
-    private int appointmentId;
-    private int customerId;
-    private int userId;
-    private String title;
-    private String description;
-    private String location;
-    private String contact;
-    private String appointmentType;
-    private String appointmentURL;
+    private SimpleIntegerProperty appointmentId = new SimpleIntegerProperty();
+    private SimpleIntegerProperty customerId = new SimpleIntegerProperty();
+    private SimpleIntegerProperty userId = new SimpleIntegerProperty();
+    private SimpleStringProperty title = new SimpleStringProperty();
+    private SimpleStringProperty description = new SimpleStringProperty();
+    private SimpleStringProperty location = new SimpleStringProperty();
+    private SimpleStringProperty contact = new SimpleStringProperty();
+    private SimpleStringProperty appointmentType = new SimpleStringProperty();
+    private SimpleStringProperty appointmentURL = new SimpleStringProperty();
     private Timestamp appointmentStart;
     private Timestamp appointmentEnd;
     private Timestamp createDate;
-    private String createdBy;
+    private SimpleStringProperty createdBy = new SimpleStringProperty();
     private Timestamp lastUpdate;
-    private String lastUpdateBy;
+    private SimpleStringProperty lastUpdateBy = new SimpleStringProperty();
     
     
     // Appointment Constructor
@@ -31,21 +34,21 @@ public class Appointment {
                        String location, String contact, String appointmentType, String appointmentURL,
                        Timestamp appointmentStart, Timestamp appointmentEnd, Timestamp createDate,
                        String createdBy, Timestamp lastUpdate, String lastUpdateBy) {
-        this.appointmentId = appointmentId;
-        this.customerId = customerId;
-        this.userId = userId;
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.contact = contact;
-        this.appointmentType = appointmentType;
-        this.appointmentURL = appointmentURL;
+        setAppointmentId(appointmentId);
+        setCustomerId(customerId);
+        setUserId(userId);
+        setTitle(title);
+        setDescription(description);
+        setLocation(location);
+        setContact(contact);
+        setAppointmentType(appointmentType);
+        setAppointmentURL(appointmentURL);
         this.appointmentStart = appointmentStart;
         this.appointmentEnd = appointmentEnd;
         this.createDate = createDate;
-        this.createdBy = createdBy;
+        setCreatedBy(createdBy);
         this.lastUpdate = lastUpdate;
-        this.lastUpdateBy = lastUpdateBy;
+        setLastUpdateBy(lastUpdateBy);
        
     }
     
@@ -53,76 +56,76 @@ public class Appointment {
     
     // Appointment ID Getters and Setters
     public int getAppointmentId() {
-        return appointmentId;
+        return appointmentId.get();
     }
     
     public void setAppointmentId(int appointmentId) {
-        this.appointmentId = appointmentId;
+        this.appointmentId.set(appointmentId);
     }
     
     
     
     // Customer ID Getters and Setters
     public int getCustomerId() {
-        return customerId;
+        return customerId.get();
     }
     
     public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+        this.customerId.set(customerId);
     }
     
     
     // User ID Getters and Setters
     public int getUserId() {
-        return userId;
+        return userId.get();
     }
     
     public void setUserId(int userId) {
-        this.userId = userId;
+        this.userId.set(userId);
     }
     
     
     
     // Title Getters and Setters
     public String getTitle() {
-        return title;
+        return title.get();
     }
     
     public void setTitle(String title) {
-        this.title = title;
+        this.title.set(title);
     }
     
     
     
     // Description Getters and Setters
     public String getDescription() {
-        return description;
+        return description.get();
     }
     
     public void setDescription(String description) {
-        this.description = description;
+        this.description.set(description);
     }
     
     
     
     // Location Getters and Setters
     public String getLocation() {
-        return location;
+        return location.get();
     }
     
     public void setLocation(String location) {
-        this.location = location;
+        this.location.set(location);
     }
     
     
     
     // Contact Getters and Setters
     public String getContact() {
-        return contact;
+        return contact.get();
     }
     
     public void setContact(String contact) {
-        this.contact = contact;
+        this.contact.set(contact);
     }
     
     
@@ -130,22 +133,22 @@ public class Appointment {
     // Appointment Type Getters and Setters
     
     public String getAppointmentType() {
-        return appointmentType;
+        return appointmentType.get();
     }
     
     public void setAppointmentType(String appointmentType) {
-        this.appointmentType = appointmentType;
+        this.appointmentType.set(appointmentType);
     }
     
     
     
     // Appointment URL Getters and Setters
-    public String getURL() {
-        return appointmentURL;
+    public String getAppointmentURL() {
+        return appointmentURL.get();
     }
     
-    public void setURL(String appointmentURL) {
-        this.appointmentURL = appointmentURL;
+    public void setAppointmentURL(String appointmentURL) {
+        this.appointmentURL.set(appointmentURL);
     }
     
     
@@ -185,11 +188,11 @@ public class Appointment {
     
     // CreatedBy Getters and Setters
     public String getCreatedBy() {
-        return createdBy;
+        return createdBy.get();
     }
     
     public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+        this.createdBy.set(createdBy);
     }
     
     
@@ -207,11 +210,11 @@ public class Appointment {
     
     // Last Update By Getters and Setters
     public String getLastUpdateBy() {
-        return lastUpdateBy;
+        return lastUpdateBy.get();
     }
     
     public void setLastUpdateBy(String lastUpdateBy) {
-        this.lastUpdateBy = lastUpdateBy;
+        this.lastUpdateBy.set(lastUpdateBy);
     }
     
 }

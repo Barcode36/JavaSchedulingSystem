@@ -86,7 +86,7 @@ public class AppointmentDao {
             String description = rs.getString("description");
             String location = rs.getString("location");
             String contact = rs.getString("contact");
-            String appointmentType = rs.getString("appointmentType");
+            String appointmentType = rs.getString("type");
             String appointmentURL = rs.getString("url");
             Timestamp appointmentStart = rs.getTimestamp("start");
             Timestamp appointmentEnd = rs.getTimestamp("end");
