@@ -12,23 +12,23 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view_controller.LoginViewController">
    <children>
-      <PasswordField id="loginPassword" fx:id="passwordField" layoutX="320.0" layoutY="248.0" promptText="Password" />
-      <TextField id="loginUsername" fx:id="usernameField" layoutX="320.0" layoutY="200.0" promptText="Username" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../resources/calendarLogo.png" />
          </image>
       </ImageView>
-      <ButtonBar layoutX="558.0" layoutY="328.0" prefHeight="40.0" prefWidth="200.0">
+      <Label focusTraversable="false" layoutX="197.0" layoutY="126.0" text="Leap Year">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <TextField id="loginUsername" fx:id="usernameField" layoutX="320.0" layoutY="200.0" promptText="Username" />
+      <PasswordField id="loginPassword" fx:id="passwordField" layoutX="320.0" layoutY="248.0" promptText="Password" />
+      <ButtonBar focusTraversable="false" layoutX="558.0" layoutY="328.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
             <Button id="loginExitButton" fx:id="exitButton" mnemonicParsing="false" onAction="#loginExitButtonHandler" text="Exit" />
             <Button id="loginSubmitButton" fx:id="submitButton" mnemonicParsing="false" onAction="#loginSubmitButtonHandler" text="Submit" />
         </buttons>
       </ButtonBar>
-      <Label layoutX="197.0" layoutY="126.0" text="Leap Year">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>
