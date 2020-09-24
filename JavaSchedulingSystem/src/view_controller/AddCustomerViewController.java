@@ -32,7 +32,7 @@ public class AddCustomerViewController implements Initializable {
     
     // Do nothing and return to Customer View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
@@ -53,7 +53,7 @@ public class AddCustomerViewController implements Initializable {
 
         
         CustomerDao.createCustomer(customerName, addressId, active, timestamp, createdBy, timestamp, lastUpdateBy); 
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
         
     }
     

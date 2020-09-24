@@ -34,19 +34,19 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         // TODO - go to dB and delete appt
         
         // Return to Appointments View
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
 
     // Do nothing in dB and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
     public void saveButtonHandler(ActionEvent event) throws IOException {
         // TODO - go to dB and edit appt
         
         // Return to Appointments View
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
 }

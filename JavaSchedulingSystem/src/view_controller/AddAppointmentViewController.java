@@ -34,12 +34,12 @@ public class AddAppointmentViewController implements Initializable {
         
         
         // Change back to Appointments View
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
         
     }
     
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("/AppointmentsView.fxml", event);
+        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
 }
