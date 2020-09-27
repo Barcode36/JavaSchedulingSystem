@@ -3,24 +3,28 @@ package view_controller;
 
 import dao.AppointmentDao;
 import dao.CustomerDao;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Appointment;
 import models.Customer;
 import utilities.Utils;
@@ -127,9 +131,21 @@ public class AppointmentsViewController implements Initializable {
         Utils.sceneChanger("view_controller/AddCustomerView.fxml", event);
     }
     
-    public void editCustomerButtonHandler(ActionEvent event) throws IOException {
+    // Open Edit Customer view and pass selected customer through
+    public Stage editCustomerButtonHandler(ActionEvent event) throws IOException {
         Customer customer = customerTable.getSelectionModel().getSelectedItem();
-        Utils.sceneChanger("view_controller/EditDeleteCustomerView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("EditDeleteCustomerView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        EditDeleteCustomerViewController controller = loader.getController();
+        controller.initCustomer(customer);
+        stage.show();
+        
+        return stage;
     }
     
     
