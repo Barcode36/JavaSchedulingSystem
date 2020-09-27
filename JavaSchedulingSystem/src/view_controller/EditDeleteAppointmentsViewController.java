@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import models.Appointment;
 import utilities.Utils;
 
 
@@ -28,7 +29,12 @@ public class EditDeleteAppointmentsViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }  
+    
+    // Load initial customer data into edit fields
+    public void initAppointment(Appointment appointment) {
+        // TODO - Load appointment data into fields on edit appts view
+    }
     
     public void deleteButtonHandler(ActionEvent event) throws IOException {
         // TODO - go to dB and delete appt

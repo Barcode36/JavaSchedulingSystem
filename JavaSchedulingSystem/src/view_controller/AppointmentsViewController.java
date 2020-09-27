@@ -38,7 +38,7 @@ public class AppointmentsViewController implements Initializable {
     @FXML private RadioButton viewAllRadio;
     @FXML private RadioButton viewWeekRadio;
     @FXML private RadioButton viewMonthRadio;
-    @FXML private TableView appointmentsTable;
+    @FXML private TableView<Appointment> appointmentsTable;
     @FXML private TableColumn<Appointment, String> appointmentDateColumn;
     @FXML private TableColumn<Appointment, String> appointmentTypeColumn;
     @FXML private TableColumn<Appointment, Integer> appointmentCustomerColumn;
@@ -107,8 +107,21 @@ public class AppointmentsViewController implements Initializable {
         Utils.sceneChanger("view_controller/AddAppointmentView.fxml", event);
     }
     
-    public void editApptButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/EditDeleteAppointmentsView.fxml", event);
+    public Stage editApptButtonHandler(ActionEvent event) throws IOException {
+        // Open Edit Appointment view and pass selected appointment through
+        Appointment appointment = appointmentsTable.getSelectionModel().getSelectedItem();
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("EditDeleteAppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        EditDeleteAppointmentsViewController controller = loader.getController();
+        controller.initAppointment(appointment);
+        stage.show();
+        
+        return stage;
     }
     
     public void viewAllHandler(ActionEvent event) {
