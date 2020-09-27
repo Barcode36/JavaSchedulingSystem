@@ -41,4 +41,12 @@ public class Utils {
         } 
     }
     
+    // Throws error alert
+    public static void throwErrorAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(message);
+        alert.showAndWait();
+    }
+    
 }
