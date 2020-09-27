@@ -5,6 +5,7 @@ import dao.UserDao;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,10 @@ public class LoginViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Do I need to do anything upon initialize?
+        
+        // Get user geolocation
+        Locale currentLocale = Locale.getDefault();
+        String language = currentLocale.getDisplayLanguage();
     }    
     
     

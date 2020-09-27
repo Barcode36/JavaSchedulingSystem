@@ -22,9 +22,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import models.Appointment;
 import models.Customer;
 import utilities.Utils;
@@ -59,7 +57,6 @@ public class AppointmentsViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
        
        //****** Appointments Table ******
        
