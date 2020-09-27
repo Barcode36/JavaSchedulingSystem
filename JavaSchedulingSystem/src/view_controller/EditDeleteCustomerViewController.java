@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import models.Customer;
 import utilities.Utils;
 
 
@@ -28,6 +29,12 @@ public class EditDeleteCustomerViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+    // Load initial customer data into edit fields
+    public void initCustomer(Customer customer) {
+        // TODO - Using address Id of customer, get address, city, and phone strings
+        customerNameField.setText(customer.getCustomerName());
+    }
     
     
     
