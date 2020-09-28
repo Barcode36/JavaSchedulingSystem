@@ -33,7 +33,6 @@ public class LoginViewController implements Initializable {
         // Get user geolocation
         Locale currentLocale = Locale.getDefault();
         this.language = currentLocale.getDisplayLanguage();
-        System.out.println(this.language);
         
         // If user's language is Korean, change language on login screen
         if (this.language.equals("한국어")) {
@@ -53,7 +52,7 @@ public class LoginViewController implements Initializable {
         // If no such user, throw error alert
         if(user == null) {
             if (this.language.equals("한국어")) {
-                Utils.throwErrorAlert("사용자 이름 또는 비밀번호가 유효하지 않습니다.");
+                Utils.throwErrorAlert("사용자 이름 또는 비밀번호가 유효하지 않습니다.", "Korean");
             } else {
                 Utils.throwErrorAlert("Your username or password is invalid.");
             }
@@ -86,7 +85,11 @@ public class LoginViewController implements Initializable {
     
     // Close application
     public void loginExitButtonHandler(ActionEvent event) throws SQLException {
-        Utils.exitApplication();
+        if(this.language.equals("한국어")) {
+            Utils.exitApplication("Korean");
+        } else {
+            Utils.exitApplication();
+        }
     }
     
     
