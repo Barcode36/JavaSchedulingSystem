@@ -1,6 +1,6 @@
 # Java Scheduling System
 
-A. Create a log-in form that can determine the user’s location and translate log-in and error control messages (e.g., “The username and password did not match.”) into two languages.
+~A. Create a log-in form that can determine the user’s location and translate log-in and error control messages (e.g., “The username and password did not match.”) into two languages.~
 
 B. Provide the ability to add, update, and delete customer records in the database, including name, address, and phone number.
 
