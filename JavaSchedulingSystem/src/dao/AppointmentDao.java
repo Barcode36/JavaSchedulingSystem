@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Appointment;
+import models.AppointmentShort;
 
 
 
@@ -61,12 +62,12 @@ public class AppointmentDao {
     
     
     // Get all appointments
-    public static ObservableList<Appointment> getAllAppointments() throws SQLException {
+    public static ObservableList<AppointmentShort> getAllAppointments() throws SQLException {
         // Prepare Observable List variable to hold all users
-        ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+        ObservableList<AppointmentShort> allAppointments = FXCollections.observableArrayList();
         
         // Create SQL select all users statement
-        String sqlStatement = "SELECT * FROM appointment";
+        String sqlStatement = "SELECT a.appointmentId, a.start, a.type, c.customerName FROM appointment a INNER JOIN customer c USING(customerId);";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);
@@ -75,30 +76,16 @@ public class AppointmentDao {
         
         ResultSet rs = ps.getResultSet();
         
-        Appointment nextAppointment;
+        AppointmentShort nextAppointment;
         
         // Get User info from dB query
         while(rs.next()) {
             int appointmentId = rs.getInt("appointmentId");
-            int customerId = rs.getInt("customerId");
-            int userId = rs.getInt("userId");
-            String title = rs.getString("title");
-            String description = rs.getString("description");
-            String location = rs.getString("location");
-            String contact = rs.getString("contact");
-            String appointmentType = rs.getString("type");
-            String appointmentURL = rs.getString("url");
             Timestamp appointmentStart = rs.getTimestamp("start");
-            Timestamp appointmentEnd = rs.getTimestamp("end");
-            Timestamp createDate = rs.getTimestamp("createDate");
-            String createdBy = rs.getString("createdBy");
-            Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
-            String lastUpdateBy = rs.getString("lastUpdateBy");
+            String appointmentType = rs.getString("type");
+            String customerName = rs.getString("customerName");
             
-            nextAppointment = new Appointment(appointmentId, customerId, userId, title, description,
-                                              location, contact, appointmentType, appointmentURL,
-                                              appointmentStart, appointmentEnd, createDate, createdBy,
-                                              lastUpdate, lastUpdateBy);  
+            nextAppointment = new AppointmentShort(appointmentId, appointmentStart, appointmentType, customerName);  
             allAppointments.add(nextAppointment);
             
         }
