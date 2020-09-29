@@ -1,6 +1,7 @@
 
 package view_controller;
 
+import models.AppointmentShort;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,7 +33,7 @@ public class EditDeleteAppointmentsViewController implements Initializable {
     }  
     
     // Load initial customer data into edit fields
-    public void initAppointment(Appointment appointment) {
+    public void initAppointment(AppointmentShort appointment) {
         // TODO - Load appointment data into fields on edit appts view
     }
     

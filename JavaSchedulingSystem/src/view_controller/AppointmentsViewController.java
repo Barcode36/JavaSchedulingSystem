@@ -23,7 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import models.Appointment;
+import models.AppointmentShort;
 import models.Customer;
 import utilities.Utils;
 
@@ -36,10 +36,10 @@ public class AppointmentsViewController implements Initializable {
     @FXML private RadioButton viewAllRadio;
     @FXML private RadioButton viewWeekRadio;
     @FXML private RadioButton viewMonthRadio;
-    @FXML private TableView<Appointment> appointmentsTable;
-    @FXML private TableColumn<Appointment, String> appointmentDateColumn;
-    @FXML private TableColumn<Appointment, String> appointmentTypeColumn;
-    @FXML private TableColumn<Appointment, Integer> appointmentCustomerColumn;
+    @FXML private TableView<AppointmentShort> appointmentsTable;
+    @FXML private TableColumn<AppointmentShort, String> appointmentDateColumn;
+    @FXML private TableColumn<AppointmentShort, String> appointmentTypeColumn;
+    @FXML private TableColumn<AppointmentShort, Integer> appointmentCustomerColumn;
         
     // FXML variables for Customer View controls
     @FXML private Button newCustomerButton;
@@ -61,14 +61,14 @@ public class AppointmentsViewController implements Initializable {
        //****** Appointments Table ******
        
        // Bind appointment table columns
-       appointmentCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+       appointmentCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
        appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
        appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
        
         
         try {
             // Populate appointments table view
-            ObservableList<Appointment> appointments = AppointmentDao.getAllAppointments();
+            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
             appointmentsTable.setItems(appointments);
         } catch (SQLException ex) {
             Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,7 +106,7 @@ public class AppointmentsViewController implements Initializable {
     
     public Stage editApptButtonHandler(ActionEvent event) throws IOException {
         // Open Edit Appointment view and pass selected appointment through
-        Appointment appointment = appointmentsTable.getSelectionModel().getSelectedItem();
+        AppointmentShort appointment = appointmentsTable.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("EditDeleteAppointmentsView.fxml"));
         Parent root = loader.load();
