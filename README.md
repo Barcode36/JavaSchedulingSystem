@@ -32,6 +32,6 @@ I. Provide the ability to generate each  of the following reports:
 
 * one additional report of your choice
 
-J. Provide the ability to track user activity by recording timestamps for user log-ins in a .txt file. Each new record should be appended to the log file, if the file already exists.
+~J. Provide the ability to track user activity by recording timestamps for user log-ins in a .txt file. Each new record should be appended to the log file, if the file already exists.~
 
 
