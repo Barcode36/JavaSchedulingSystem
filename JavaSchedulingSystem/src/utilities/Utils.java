@@ -3,7 +3,17 @@ package utilities;
 
 // Utility methods common to lots of views
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.sql.Timestamp;
 import java.util.Optional;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -77,4 +87,13 @@ public class Utils {
         alert.showAndWait();
     }
     
+    // Write login timestamp to logfile
+    public static void loginTimestamp(String username, Timestamp timestamp) throws IOException {
+        String logString = "Username: " + username + "   |   Login Timestamp: " + timestamp.toString() + "\n";
+        File file = new File("log.txt");
+        FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), true);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(logString);
+        bufferedWriter.close();
+    }    
 }

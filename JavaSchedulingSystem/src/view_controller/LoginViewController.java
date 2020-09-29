@@ -5,6 +5,7 @@ import dao.UserDao;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -67,6 +68,8 @@ public class LoginViewController implements Initializable {
             try {
                 // If entered password, matches password from dB, change scene to Appointments View
                 if (enteredPass == null ? officialPassword == null : enteredPass.equals(officialPassword)) {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    Utils.loginTimestamp(user.getUserName(), timestamp);
                     Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
                 } else {
                     // If password does not match, throw error alert
@@ -74,8 +77,7 @@ public class LoginViewController implements Initializable {
                         Utils.throwErrorAlert("사용자 이름 또는 비밀번호가 유효하지 않습니다.");
                     } else {
                         Utils.throwErrorAlert("Your username or password is invalid.");
-                    }
-                    
+                    } 
                 } 
             } catch(IOException e) {
                 System.out.println(e.getMessage());      
@@ -91,7 +93,5 @@ public class LoginViewController implements Initializable {
             Utils.exitApplication();
         }
     }
-    
-    
-    
+  
 }
