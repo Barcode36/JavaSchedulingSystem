@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.AppointmentShort;
 import models.Customer;
+import models.CustomerShort;
 import utilities.Utils;
 
 
@@ -44,10 +45,10 @@ public class AppointmentsViewController implements Initializable {
     // FXML variables for Customer View controls
     @FXML private Button newCustomerButton;
     @FXML private Button editCustomerButton;
-    @FXML private TableView<Customer> customerTable;
-    @FXML private TableColumn<Customer, String> customerNameColumn;
-    @FXML private TableColumn<Customer, Integer> customerAddressColumn;
-    @FXML private TableColumn<Customer, String> customerPhoneColumn;
+    @FXML private TableView<CustomerShort> customerTable;
+    @FXML private TableColumn<CustomerShort, String> customerNameColumn;
+    @FXML private TableColumn<CustomerShort, String> customerAddressColumn;
+    @FXML private TableColumn<CustomerShort, String> customerPhoneColumn;
  
     // FXML variables for Reports View controls
     @FXML private Button apptTypesReportButton;
@@ -81,12 +82,12 @@ public class AppointmentsViewController implements Initializable {
        
        // Bind customer table columns
        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-       customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("customerAddressId"));
-       customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("customerCreatedBy"));
+       customerAddressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+       customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
        
        // Populate customer table view
         try {
-            ObservableList<Customer> customers = CustomerDao.getAllCustomers();
+            ObservableList<CustomerShort> customers = CustomerDao.getAllCustomers();
             customerTable.setItems(customers);
         }
          catch (SQLException ex) {
@@ -143,7 +144,7 @@ public class AppointmentsViewController implements Initializable {
     
     // Open Edit Customer view and pass selected customer through
     public Stage editCustomerButtonHandler(ActionEvent event) throws IOException {
-        Customer customer = customerTable.getSelectionModel().getSelectedItem();
+        CustomerShort customer = customerTable.getSelectionModel().getSelectedItem();
         FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("EditDeleteCustomerView.fxml"));
         Parent root = loader.load();
