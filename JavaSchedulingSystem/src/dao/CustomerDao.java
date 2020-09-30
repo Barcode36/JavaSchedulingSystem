@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Customer;
+import models.CustomerShort;
 
 
 
@@ -51,13 +52,13 @@ public class CustomerDao {
     
 
     // Get all customers
-    public static ObservableList<Customer> getAllCustomers() throws SQLException {
+    public static ObservableList<CustomerShort> getAllCustomers() throws SQLException {
         
         // Prepare Observable List variable to hold all users
-        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
+        ObservableList<CustomerShort> allCustomers = FXCollections.observableArrayList();
         
         // Create SQL select all users statement
-        String sqlStatement = "SELECT * FROM customer";
+        String sqlStatement = "SELECT c.customerId, c.customerName, a.address, a.phone FROM customer c INNER JOIN address a USING(addressId)";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);
@@ -66,22 +67,16 @@ public class CustomerDao {
         
         ResultSet rs = ps.getResultSet();
         
-        Customer nextCustomer;
+        CustomerShort nextCustomer;
         
         // Get User info from dB query
         while(rs.next()) {
             int customerId = rs.getInt("customerId");
             String name = rs.getString("customerName");
-            // TODO - look up proper address
-            int address = rs.getInt("addressId");
-            int active = rs.getInt("active");
-            Timestamp createDate = rs.getTimestamp("createDate");
-            String createdBy = rs.getString("createdBy");
-            Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
-            String lastUpdateBy = rs.getString("lastUpdateBy");
+            String address = rs.getString("address");
+            String phone = rs.getString("phone");
             
-            nextCustomer = new Customer(customerId, name, address, active, createDate, 
-                                    createdBy, lastUpdate, lastUpdateBy);  
+            nextCustomer = new CustomerShort(customerId, name, address, phone);  
             allCustomers.add(nextCustomer);
             
         }
