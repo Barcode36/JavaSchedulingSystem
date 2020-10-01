@@ -76,6 +76,22 @@ public class AddressDao {
         ps2.execute();
     }
     
+    
+    // Update address in database
+    public static void updatePhone(int addressId, String phone) throws SQLException {
+        
+        // Create SQL insert statement using address info
+        String sqlStatement = "UPDATE address SET phone = ? WHERE addressId = ?";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setString(1, phone);
+        ps.setInt(2, addressId);
+        ps.execute();
+    }
+    
+    
     // Get single Address
     public static int getAddressId() throws SQLException {
     
