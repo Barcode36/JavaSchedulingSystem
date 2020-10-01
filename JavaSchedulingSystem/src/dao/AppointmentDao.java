@@ -16,7 +16,7 @@ import models.AppointmentShort;
 public class AppointmentDao {
     
     // Get single appointment
-    public static Appointment getAppointment(int appointmentId) throws SQLException {
+    public static Appointment getAppointmentById(int appointmentId) throws SQLException {
     
          // Create SQL select statement using appointmentId
         String sqlStatement = "SELECT * FROM appointment WHERE appointmentId = ?";
@@ -59,6 +59,50 @@ public class AppointmentDao {
         return selectedAppointment;
     }
     
+    
+    // Get single appointment
+    public static Appointment getAppointmentByCustomerId(int customerId) throws SQLException {
+    
+         // Create SQL select statement using appointmentId
+        String sqlStatement = "SELECT * FROM appointment WHERE customerId = ?";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setInt(1, customerId);
+        ps.execute();
+        
+        ResultSet rs = ps.getResultSet();
+        
+        Appointment selectedAppointment = null;
+        
+        // Get Customer info from dB query
+        while(rs.next()) {
+            int appointmentId = rs.getInt("appointmentId");
+            int custId = rs.getInt("customerId");
+            int userId = rs.getInt("userId");
+            String title = rs.getString("title");
+            String desc = rs.getString("description");
+            String location = rs.getString("location");
+            String contact = rs.getString("contact");
+            String type = rs.getString("type");
+            String url = rs.getString("url");
+            Timestamp startTime = rs.getTimestamp("start");
+            Timestamp endTime = rs.getTimestamp("end");
+            Timestamp createDate = rs.getTimestamp("createDate");
+            String createdBy = rs.getString("createdBy");
+            Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
+            String lastUpdateBy = rs.getString("lastUpdateBy");
+            
+            selectedAppointment = new Appointment(appointmentId, custId, userId, title, 
+                                                  desc, location, contact, type, url, startTime, 
+                                                  endTime, createDate, createdBy, lastUpdate, 
+                                                  lastUpdateBy);    
+        }
+
+        // Return appointment
+        return selectedAppointment;
+    }
     
     
     // Get all appointments
