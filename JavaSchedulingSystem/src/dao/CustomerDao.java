@@ -109,19 +109,17 @@ public class CustomerDao {
         ps.execute();
     }
     
-    public static void updateCustomer(int customerId, String customerName, String address, String phone) throws SQLException {
+    public static void updateCustomer(int customerId, String customerName, int addressId) throws SQLException {
     
         // Create SQL select statement using customerName
-        String sqlStatement = "UPDATE customer SET customerName = ?, address = ?, "
-                              + "phone = ? WHERE customerId = ?";
+        String sqlStatement = "UPDATE customer SET customerName = ?, addressId = ? WHERE customerId = ?";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);
         PreparedStatement ps = DBQuery.getPreparedStatement();
         ps.setString(1, customerName);
-        ps.setString(2, address);
-        ps.setString(3, phone);
-        ps.setInt(4, customerId);
+        ps.setInt(2, addressId);
+        ps.setInt(3, customerId);
         ps.execute();
         
     }
