@@ -2,7 +2,7 @@
 
 ~A. Create a log-in form that can determine the user’s location and translate log-in and error control messages (e.g., “The username and password did not match.”) into two languages.~
 
-B. Provide the ability to add, update, and delete customer records in the database, including name, address, and phone number.
+~B. Provide the ability to add, update, and delete customer records in the database, including name, address, and phone number.~
 
 C. Provide the ability to add, update, and delete appointments, capturing the type of appointment and a link to the specific customer record in the database.
 
