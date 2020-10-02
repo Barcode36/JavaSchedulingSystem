@@ -10,10 +10,15 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import models.User;
 import utilities.Utils;
 
@@ -70,7 +75,17 @@ public class LoginViewController implements Initializable {
                 if (enteredPass == null ? officialPassword == null : enteredPass.equals(officialPassword)) {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     Utils.loginTimestamp(user.getUserName(), timestamp);
-                    Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+                    FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+        
+                    AppointmentsViewController controller = loader.getController();
+                    controller.initUser(user);
+                    stage.show();
+        
                 } else {
                     // If password does not match, throw error alert
                     if (this.language.equals("한국어")) {

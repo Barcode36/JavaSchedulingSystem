@@ -149,8 +149,8 @@ public class AppointmentDao {
         
         // Create SQL insert statement using Customer info
         String sqlStatement = "INSERT INTO appointment(customerId, userId, title, description,"
-                              + "location, contact, appointmentType, appointmentURL, appointmentStart,"
-                              + "appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy)"
+                              + "location, contact, type, url, start,"
+                              + "end, createDate, createdBy, lastUpdate, lastUpdateBy)"
                               + "VALUES(?, ?, ?, '', '', '', ?, '', ?, ?, ?, ?, ?, ?)";
         
         // Get reference to PreparedStatement
