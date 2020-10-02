@@ -1,18 +1,12 @@
 
 package utilities;
 
-// Utility methods common to lots of views
+// Utility methods common to lots of view controllers
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.sql.Timestamp;
 import java.util.Optional;
 import javafx.event.ActionEvent;
