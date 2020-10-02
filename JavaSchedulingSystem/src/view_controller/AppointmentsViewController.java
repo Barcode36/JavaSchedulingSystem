@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.AppointmentShort;
 import models.CustomerShort;
+import models.User;
 import utilities.Utils;
 
 
@@ -54,6 +55,8 @@ public class AppointmentsViewController implements Initializable {
     @FXML private Button consultantScheduleReportButton;
     @FXML private Button oneOtherReportButton;
     @FXML private Button loginReportButton;
+    
+    User user;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,12 +99,25 @@ public class AppointmentsViewController implements Initializable {
         
     }   
     
+    // Set current user of application
+    public void initUser(User user) {
+        this.user = user;
+    }
+    
     
     //**** Appointment View methods ****//
 
     // Change scene to Add Appt View
     public void addApptButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/AddAppointmentView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AddAppointmentView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        AddAppointmentViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     public Stage editApptButtonHandler(ActionEvent event) throws IOException {
