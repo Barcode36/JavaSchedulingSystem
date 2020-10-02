@@ -17,7 +17,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import models.CustomerShort;
 import utilities.Utils;
 
@@ -28,7 +27,8 @@ public class AddAppointmentViewController implements Initializable {
     @FXML private ChoiceBox apptTypeChoice;
     @FXML private DatePicker dateField;
     @FXML private ComboBox timeField;
-    @FXML private ChoiceBox customerChoice;
+    @FXML private ChoiceBox ampmField;
+    @FXML private ComboBox customerChoice;
     @FXML private Button cancelButton;
     @FXML private Button saveButton;
     
@@ -57,9 +57,15 @@ public class AddAppointmentViewController implements Initializable {
         
         
         // Set options for appointment time slots
-        ObservableList<String> times = FXCollections.observableArrayList("12a, 1230a, 1a, 130a, 2a, 230a");
+        ObservableList<String> times = FXCollections.observableArrayList(
+                "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", 
+                "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30",
+                "9:00", "9:30", "10:00", "10:30", "11:00", "11:30");
         timeField.setItems(times);
         
+        // Set options for am/pm choicebox
+        ObservableList<String> ampm = FXCollections.observableArrayList("am", "pm");
+        ampmField.setItems(ampm);
         
     }    
     
