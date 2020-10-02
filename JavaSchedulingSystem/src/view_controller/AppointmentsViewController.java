@@ -24,7 +24,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.AppointmentShort;
-import models.Customer;
 import models.CustomerShort;
 import utilities.Utils;
 
