@@ -4,7 +4,7 @@
 
 ~B. Provide the ability to add, update, and delete customer records in the database, including name, address, and phone number.~
 
-C. Provide the ability to add, update, and delete appointments, capturing the type of appointment and a link to the specific customer record in the database.
+~C. Provide the ability to add, update, and delete appointments, capturing the type of appointment and a link to the specific customer record in the database.~
 
 D. Provide the ability to view the calendar by month and by week.
 
