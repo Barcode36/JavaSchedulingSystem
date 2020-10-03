@@ -173,11 +173,12 @@ public class AppointmentDao {
     
     
     // Update appointment
-    public static void updateAppointment(int appointmentId, String appointmentType, 
-                                         Timestamp appointmentStart, int customerId) throws SQLException {
+    public static void updateAppointment(int appointmentId, String appointmentType,
+                                         Timestamp appointmentStart, Timestamp appointmentEnd, 
+                                         int customerId) throws SQLException {
     
         // Create SQL update statement
-        String sqlStatement = "UPDATE appointment SET appointmentType = ?, appointmentStart = ?, "
+        String sqlStatement = "UPDATE appointment SET type = ?, start = ?, end = ?,"
                               + "customerId = ? WHERE appointmentId = ?";
         
         // Get reference to PreparedStatement
@@ -185,8 +186,9 @@ public class AppointmentDao {
         PreparedStatement ps = DBQuery.getPreparedStatement();
         ps.setString(1, appointmentType);
         ps.setTimestamp(2, appointmentStart);
-        ps.setInt(3, customerId);
-        ps.setInt(4, appointmentId);
+        ps.setTimestamp(3, appointmentEnd);
+        ps.setInt(4, customerId);
+        ps.setInt(5, appointmentId);
         ps.execute();
         
     }
