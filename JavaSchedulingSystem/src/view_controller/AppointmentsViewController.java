@@ -137,11 +137,19 @@ public class AppointmentsViewController implements Initializable {
         return stage;
     }
     
-    public void toggleEditButton() {
+    public void toggleEditApptButton() {
         if(appointmentsTable.getSelectionModel().getSelectedItem() != null) {
             editApptButton.setDisable(false);
         } else {
             editApptButton.setDisable(true);
+        }
+    }
+    
+    public void toggleEditCustButton() {
+        if(customerTable.getSelectionModel().getSelectedItem() != null) {
+            editCustomerButton.setDisable(false);
+        } else {
+            editCustomerButton.setDisable(true);
         }
     }
     
