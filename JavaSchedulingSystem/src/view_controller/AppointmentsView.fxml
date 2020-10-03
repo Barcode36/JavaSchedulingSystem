@@ -18,7 +18,7 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="addApptButton" layoutX="15.0" layoutY="47.0" mnemonicParsing="false" onAction="#addApptButtonHandler" text="New Appt" />
-                        <TableView fx:id="appointmentsTable" layoutX="107.0" layoutY="47.0" onMouseClicked="#toggleEditButton" prefHeight="276.0" prefWidth="615.0">
+                        <TableView fx:id="appointmentsTable" layoutX="107.0" layoutY="47.0" onMouseClicked="#toggleEditApptButton" prefHeight="276.0" prefWidth="615.0">
                           <columns>
                             <TableColumn fx:id="appointmentDateColumn" prefWidth="177.0" text="Date" />
                               <TableColumn fx:id="appointmentTypeColumn" prefWidth="156.0" text="Appt. Type" />
@@ -39,14 +39,14 @@
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
                         <Button fx:id="newCustomerButton" layoutX="14.0" layoutY="47.0" mnemonicParsing="false" onAction="#addCustomerButtonHandler" text="New Cust" />
-                        <TableView fx:id="customerTable" layoutX="107.0" layoutY="47.0" prefHeight="277.0" prefWidth="614.0">
+                        <TableView fx:id="customerTable" layoutX="107.0" layoutY="47.0" onMouseClicked="#toggleEditCustButton" prefHeight="277.0" prefWidth="614.0">
                           <columns>
                             <TableColumn fx:id="customerNameColumn" prefWidth="151.0" text="Customer Name" />
                               <TableColumn fx:id="customerAddressColumn" prefWidth="310.0" text="Address" />
                               <TableColumn fx:id="customerPhoneColumn" prefWidth="152.0" text="Phone" />
                           </columns>
                         </TableView>
-                        <Button fx:id="editCustomerButton" layoutX="15.0" layoutY="92.0" mnemonicParsing="false" onAction="#editCustomerButtonHandler" prefHeight="27.0" prefWidth="72.0" text="Edit Cust" />
+                        <Button fx:id="editCustomerButton" disable="true" layoutX="15.0" layoutY="92.0" mnemonicParsing="false" onAction="#editCustomerButtonHandler" prefHeight="27.0" prefWidth="72.0" text="Edit Cust" />
                      </children>
                   </AnchorPane>
                </content></Tab>
