@@ -9,14 +9,16 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class AppointmentShort {
     private int appointmentId;
-     private Timestamp appointmentStart;
+    private Timestamp appointmentStart;
     private SimpleStringProperty appointmentType = new SimpleStringProperty();
     private SimpleStringProperty customerName = new SimpleStringProperty();
+    private Timestamp appointmentEnd;
     
     // Constructor
-    public AppointmentShort(int appointmentId, Timestamp appointmentStart, String appointmentType, String customerName) {
+    public AppointmentShort(int appointmentId, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentType, String customerName) {
         setAppointmentId(appointmentId);
         this.appointmentStart = appointmentStart;
+        this.appointmentEnd = appointmentEnd;
         setAppointmentType(appointmentType);
         setCustomerName(customerName);
     }
@@ -40,6 +42,17 @@ public class AppointmentShort {
     
     public void setAppointmentStart(Timestamp appointmentStart) {
        this.appointmentStart = appointmentStart;
+    }
+    
+    
+    
+    // Appointment End Getters and Setters
+    public Timestamp getAppointmentEnd() {
+        return appointmentEnd;
+    }
+    
+    public void setAppointmentEnd(Timestamp appointmentEnd) {
+        this.appointmentEnd = appointmentEnd;
     }
     
     
