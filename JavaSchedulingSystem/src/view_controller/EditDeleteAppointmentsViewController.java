@@ -115,10 +115,21 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
-    public void saveButtonHandler(ActionEvent event) throws IOException {
-        // TODO - go to dB and edit appt
+    // Update appointment and return to Appointment View
+    public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
+        String appointmentType = apptTypeChoiceBox.getValue().toString();
+        int customerId = CustomerDao.getCustomer(customerChoiceBox.getValue().toString()).getCustomerId();
         
-        // Return to Appointments View
+        // Get start and end times
+        LocalDate startDate = dateField.getValue();
+        String startDateString = startDate.toString();
+        String startTimeString = startTimeChoice.getValue().toString();
+        String endTimeString = endTimeChoice.getValue().toString();
+        Timestamp startTime = Timestamp.valueOf(startDateString + " " + startTimeString + ":00");        
+        Timestamp endTime = Timestamp.valueOf(startDateString + " " + endTimeString + ":00"); 
+         
+        
+        AppointmentDao.updateAppointment(this.appointmentId, appointmentType, startTime, endTime, customerId);
         Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
