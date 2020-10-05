@@ -7,8 +7,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.Clock;
+import java.util.Calendar;
+import java.util.Locale;
 import java.util.Optional;
+import java.util.TimeZone;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -90,4 +95,12 @@ public class Utils {
         bufferedWriter.write(logString);
         bufferedWriter.close();
     }    
+    
+    
+    // Convert local timestamp to UTC timestamp and return UTC timestamp
+    public static Timestamp toUTC() {
+        Clock clock = Clock.systemUTC();
+        Timestamp utcTimestamp = Timestamp.from(clock.instant());
+        return utcTimestamp;
+    }
 }
