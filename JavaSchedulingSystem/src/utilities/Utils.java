@@ -3,6 +3,7 @@ package utilities;
 
 // Utility methods common to lots of view controllers
 
+import com.sun.scenario.effect.Offset;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -99,9 +100,20 @@ public class Utils {
     
     
     // Convert local timestamp to UTC timestamp and return UTC timestamp
-    public static Timestamp toUTC() {
-        Clock clock = Clock.systemUTC();
-        Timestamp utcTimestamp = Timestamp.from(clock.instant());
+    public static Timestamp toUTC(Timestamp localTimestamp) {
+        // Convert local Timestamp to an Instant
+        Instant localInstant = localTimestamp.toInstant();
+        
+        // Get the time zone of the machine and get the UTC offset
+        TimeZone tz = TimeZone.getDefault();
+        int offset = tz.getOffset(System.currentTimeMillis());
+        
+        // Subtract offset from local instant to get utc millis
+        Instant utcMillis = localInstant.minusMillis(offset);
+        
+        // Convert utc millis to utc timestamp
+        Timestamp utcTimestamp = Timestamp.from(utcMillis);
+        
         return utcTimestamp;
     }
     

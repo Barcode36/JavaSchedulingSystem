@@ -129,7 +129,8 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         Timestamp endTime = Timestamp.valueOf(startDateString + " " + endTimeString + ":00"); 
          
         
-        AppointmentDao.updateAppointment(this.appointmentId, appointmentType, startTime, endTime, customerId);
+        AppointmentDao.updateAppointment(this.appointmentId, appointmentType, Utils.toUTC(startTime), 
+                                         Utils.toUTC(endTime), customerId);
         Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
     }
     
