@@ -115,8 +115,8 @@ public class AddAppointmentViewController implements Initializable {
         Thread.sleep(100);
         
         // Add new Appointment to database
-        AppointmentDao.createAppointment(customerId, userId, "", "", "", "", apptType, "", startTime, 
-                                         endTime, timestamp, this.user.getUserName(), timestamp, 
+        AppointmentDao.createAppointment(customerId, userId, "", "", "", "", apptType, "", Utils.toUTC(startTime), 
+                                         Utils.toUTC(endTime), timestamp, this.user.getUserName(), timestamp, 
                                          this.user.getUserName());
         
         // Change back to Appointments View
