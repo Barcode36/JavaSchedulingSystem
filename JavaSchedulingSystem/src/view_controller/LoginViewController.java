@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -102,6 +103,10 @@ public class LoginViewController implements Initializable {
     
     // Close application
     public void loginExitButtonHandler(ActionEvent event) throws SQLException {
+        // Temp while testing fromUTC
+        Utils.fromUTC(Timestamp.valueOf(LocalDate.now().atStartOfDay()));
+        
+        
         if(this.language.equals("한국어")) {
             Utils.exitApplication("Korean");
         } else {

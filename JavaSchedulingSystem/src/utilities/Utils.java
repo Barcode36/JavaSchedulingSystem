@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Clock;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Optional;
@@ -102,5 +103,16 @@ public class Utils {
         Clock clock = Clock.systemUTC();
         Timestamp utcTimestamp = Timestamp.from(clock.instant());
         return utcTimestamp;
+    }
+    
+    
+    // Convert UTC timestamp to local timestamp and return local timestamp
+    public static Timestamp fromUTC(Timestamp utcTimestamp) {
+        long epochMillis = utcTimestamp.getTime();
+        Instant ts = Instant.ofEpochMilli(epochMillis);
+        int offset = TimeZone.getDefault().getOffset(System.currentTimeMillis());
+        Instant localMillis = ts.plusMillis(offset);
+        Timestamp localTimestamp = Timestamp.from(localMillis);
+        return localTimestamp;
     }
 }
