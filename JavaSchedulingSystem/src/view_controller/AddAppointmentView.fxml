@@ -22,7 +22,7 @@
       <ChoiceBox fx:id="apptTypeChoice" layoutX="260.0" layoutY="103.0" prefHeight="27.0" prefWidth="161.0" />
       <Button fx:id="cancelButton" layoutX="641.0" layoutY="349.0" mnemonicParsing="false" onAction="#cancelButtonHandler" text="Cancel" />
       <Button fx:id="saveButton" layoutX="715.0" layoutY="349.0" mnemonicParsing="false" onAction="#saveButtonHandler" text="Save" />
-      <DatePicker fx:id="dateField" layoutX="261.0" layoutY="147.0" prefHeight="27.0" prefWidth="161.0" />
+      <DatePicker fx:id="dateField" layoutX="261.0" layoutY="147.0" onAction="#checkForValidDate" prefHeight="27.0" prefWidth="161.0" />
       <ComboBox fx:id="startTimeChoice" layoutX="261.0" layoutY="189.0" prefHeight="27.0" prefWidth="161.0" />
       <ComboBox fx:id="customerChoice" layoutX="261.0" layoutY="271.0" prefHeight="27.0" prefWidth="161.0" />
       <Label layoutX="162.0" layoutY="235.0" text="End Time:" />
