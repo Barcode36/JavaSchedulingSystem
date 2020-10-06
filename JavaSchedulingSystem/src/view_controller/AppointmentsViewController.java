@@ -132,6 +132,7 @@ public class AppointmentsViewController implements Initializable {
         
         EditDeleteAppointmentsViewController controller = loader.getController();
         controller.initAppointment(appointment);
+        controller.initUser(user);
         stage.show();
         
         return stage;
@@ -170,7 +171,16 @@ public class AppointmentsViewController implements Initializable {
     
     // Change scene to Add Customer View
     public void addCustomerButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/AddCustomerView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AddCustomerView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AddCustomerViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     // Open Edit Customer view and pass selected customer through
@@ -185,6 +195,7 @@ public class AppointmentsViewController implements Initializable {
         
         EditDeleteCustomerViewController controller = loader.getController();
         controller.initCustomer(customer);
+        controller.initUser(user);
         stage.show();
         
         return stage;
@@ -195,19 +206,56 @@ public class AppointmentsViewController implements Initializable {
     // TODO - each of these methods should open the same view 
     // but display different reports in that view
     public void apptTypesByMonthReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("SpecificReportView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        SpecificReportViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
+        
     }
     
     public void consultantScheduleReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("SpecificReportView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        SpecificReportViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     public void oneOtherReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("SpecificReportView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        SpecificReportViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     public void loginReportButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/SpecificReportView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("SpecificReportView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        SpecificReportViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     

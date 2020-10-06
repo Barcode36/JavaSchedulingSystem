@@ -12,12 +12,18 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import models.Address;
 import models.Appointment;
 import models.CustomerShort;
+import models.User;
 import utilities.Utils;
 
 
@@ -32,11 +38,17 @@ public class EditDeleteCustomerViewController implements Initializable {
     @FXML private Button saveButton;
     
     private int customerId;
+    User user;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     
     }    
+    
+    // Set current user of application
+    public void initUser(User user) {
+        this.user = user;
+    }
     
     // Load initial customer data into edit fields
     public void initCustomer(CustomerShort customer) {
@@ -55,7 +67,16 @@ public class EditDeleteCustomerViewController implements Initializable {
         if (appointment == null) {
             // Delete customer and change scene to Appointments View
             CustomerDao.deleteCustomer(customerId);
-            Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+            FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        
+            AppointmentsViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show();
         } else {
             Utils.throwErrorAlert("This customer cannot be deleted because they are scheduled for an appointment.");
         }
@@ -66,8 +87,16 @@ public class EditDeleteCustomerViewController implements Initializable {
     
     // Do nothing and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        // Change scene to Appointments View
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AppointmentsViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     
@@ -99,7 +128,16 @@ public class EditDeleteCustomerViewController implements Initializable {
         CustomerDao.updateCustomer(customerId, customerName, addressId);
         
         // Change scene to Appointments View
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AppointmentsViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
         
     }
    
