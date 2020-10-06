@@ -8,7 +8,7 @@
 
 D. Provide the ability to view the calendar by month and by week.
 
-E. Provide the ability to automatically adjust appointment times based on user time zones and daylight saving time.
+~E. Provide the ability to automatically adjust appointment times based on user time zones and daylight saving time.~
 
 F. Write exception controls to prevent each of the following. You may use the same mechanism of exception control more than once, but you must incorporate at least  two different mechanisms of exception control.
 
