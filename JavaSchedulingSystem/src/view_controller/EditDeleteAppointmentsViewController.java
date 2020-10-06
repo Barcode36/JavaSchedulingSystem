@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -128,10 +130,35 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         Timestamp startTime = Timestamp.valueOf(startDateString + " " + startTimeString + ":00");        
         Timestamp endTime = Timestamp.valueOf(startDateString + " " + endTimeString + ":00"); 
          
-        
-        AppointmentDao.updateAppointment(this.appointmentId, appointmentType, Utils.toUTC(startTime), 
-                                         Utils.toUTC(endTime), customerId);
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        // First, check to make sure start and end times are valid
+        if (Utils.checkForValidTimes(startTimeString, endTimeString)) {
+            Utils.throwErrorAlert("Your end time cannot be scheduled prior to your start time.");
+        } else {
+            AppointmentDao.updateAppointment(this.appointmentId, appointmentType, Utils.toUTC(startTime), 
+                                             Utils.toUTC(endTime), customerId);
+            Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        }
     }
+    
+    
+    // Check to make sure user isn't trying to schedule an appointment in the past
+    public void checkForValidDate() {
+        // Add event listener that detects when date picker field loses focus
+        dateField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) {
+                if(unfocused) {
+                    LocalDate today = LocalDate.now();
+                    LocalDate selectedDate = dateField.getValue();
+                    
+                    // If the user tries to create an appointment before today's date
+                    if(selectedDate.isBefore(today)) {
+                        Utils.throwErrorAlert("You cannot schedule an appointment in the past.");
+                    }
+                } 
+            }
+        });
+    }
+    
     
 }

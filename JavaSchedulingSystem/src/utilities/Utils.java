@@ -127,4 +127,16 @@ public class Utils {
         Timestamp localTimestamp = Timestamp.from(localMillis);
         return localTimestamp;
     }
+    
+    
+    public static Boolean checkForValidTimes(String startTime, String endTime) {
+        Integer startHour = Integer.parseInt(startTime.substring(0,2));
+        Integer endHour = Integer.parseInt(endTime.substring(0, 2));
+        if(startHour > endHour) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
 }
