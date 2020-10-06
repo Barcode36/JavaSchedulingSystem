@@ -11,10 +11,16 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import models.Address;
+import models.User;
 import utilities.Utils;
 
 
@@ -27,14 +33,30 @@ public class AddCustomerViewController implements Initializable {
     @FXML private Button cancelButton;
     @FXML private Button saveButton;
     
+    User user;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
     
+    // Set current user of application
+    public void initUser(User user) {
+        this.user = user;
+    }
+    
     // Do nothing and return to Customer View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AppointmentsViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
@@ -57,7 +79,16 @@ public class AddCustomerViewController implements Initializable {
             CustomerDao.createCustomer(customerName, dBAddress.getAddressId(), 1, timestamp, "admin", timestamp, "admin"); 
         }      
        
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AppointmentsViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
         
     }
     

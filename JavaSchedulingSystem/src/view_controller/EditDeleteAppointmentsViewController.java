@@ -18,12 +18,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
 import models.CustomerShort;
+import models.User;
 import utilities.Utils;
 
 
@@ -40,6 +46,7 @@ public class EditDeleteAppointmentsViewController implements Initializable {
     @FXML private Button saveButton;
     
     private int appointmentId;
+    User user;
     
     
     @Override
@@ -82,6 +89,11 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         
     }  
     
+    // Set current user of application
+    public void initUser(User user) {
+        this.user = user;
+    }
+    
     // Load initial customer data into edit fields
     public void initAppointment(AppointmentShort appointment) {
         appointmentId = appointment.getAppointmentId();
@@ -109,12 +121,30 @@ public class EditDeleteAppointmentsViewController implements Initializable {
     // Delete appointment and return to Appointments View
     public void deleteButtonHandler(ActionEvent event) throws IOException, SQLException {
         AppointmentDao.deleteAppointment(this.appointmentId);
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AppointmentsViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
 
     // Do nothing in dB and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
-        Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+        FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        
+        AppointmentsViewController controller = loader.getController();
+        controller.initUser(user);
+        stage.show();
     }
     
     // Update appointment and return to Appointment View
@@ -136,7 +166,16 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         } else {
             AppointmentDao.updateAppointment(this.appointmentId, appointmentType, Utils.toUTC(startTime), 
                                              Utils.toUTC(endTime), customerId);
-            Utils.sceneChanger("view_controller/AppointmentsView.fxml", event);
+            FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AppointmentsView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        
+            AppointmentsViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show();
         }
     }
     
