@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Appointment;
 import models.AppointmentShort;
+import utilities.Utils;
 
 
 
@@ -50,9 +51,9 @@ public class AppointmentDao {
             String lastUpdateBy = rs.getString("lastUpdateBy");
             
             selectedAppointment = new Appointment(appointmentIdNum, customerId, userId, title, 
-                                                  desc, location, contact, type, url, startTime, 
-                                                  endTime, createDate, createdBy, lastUpdate, 
-                                                  lastUpdateBy);    
+                                                  desc, location, contact, type, url, 
+                                                  Utils.fromUTC(startTime), Utils.fromUTC(endTime), 
+                                                  createDate, createdBy, lastUpdate, lastUpdateBy);    
         }
 
         // Return appointment
@@ -130,7 +131,7 @@ public class AppointmentDao {
             String customerName = rs.getString("customerName");
             Timestamp appointmentEnd = rs.getTimestamp("end");
             
-            nextAppointment = new AppointmentShort(appointmentId, appointmentStart, appointmentEnd, appointmentType, customerName);  
+            nextAppointment = new AppointmentShort(appointmentId, Utils.fromUTC(appointmentStart), Utils.fromUTC(appointmentEnd), appointmentType, customerName);  
             allAppointments.add(nextAppointment);
             
         }
