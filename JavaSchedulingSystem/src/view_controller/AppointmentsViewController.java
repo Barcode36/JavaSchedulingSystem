@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import models.Appointment;
 import models.AppointmentShort;
 import models.CustomerShort;
 import models.User;
@@ -104,6 +105,10 @@ public class AppointmentsViewController implements Initializable {
         this.user = user;
     }
     
+    // Check to see if current user has appointment within 15 minutes of login
+    public void upcomingAppointments(User user) throws SQLException, InterruptedException {
+        ObservableList<Appointment> upcomingAppointments = AppointmentDao.getAllAppointmentsByUser(user.getUserId());
+    }
     
     //**** Appointment View methods ****//
 
