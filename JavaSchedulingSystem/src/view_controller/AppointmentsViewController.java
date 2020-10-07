@@ -6,6 +6,8 @@ import dao.CustomerDao;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -107,7 +109,24 @@ public class AppointmentsViewController implements Initializable {
     
     // Check to see if current user has appointment within 15 minutes of login
     public void upcomingAppointments(User user) throws SQLException, InterruptedException {
-        ObservableList<Appointment> upcomingAppointments = AppointmentDao.getAllAppointmentsByUser(user.getUserId());
+        ObservableList<Timestamp> upcomingAppointmentTimes = AppointmentDao.getAllAppointmentTimesByUser(user.getUserId());
+        
+        // Get Instant for now and 15 mins from now
+        Instant now = Instant.now();
+        Instant fifteenAhead = now.plusSeconds(900);
+        
+        // Convert to Timestamps to compare to Timestamps from dB call
+        Timestamp nowTS = Timestamp.from(Instant.now());
+        Timestamp fifteenAheadTS = Timestamp.from(fifteenAhead);
+       
+        //Check each appointment timestamp to see if it is after 'now' but before 15 minutes from 'now'
+        for(Timestamp ts : upcomingAppointmentTimes) {
+            Timestamp localTime = Utils.fromUTC(ts);
+            if(localTime.compareTo(nowTS) > 0 && localTime.compareTo(fifteenAheadTS) <= 0) {
+                Utils.throwUpcomingAppointmentAlert(localTime);
+            }
+        }
+        
     }
     
     //**** Appointment View methods ****//

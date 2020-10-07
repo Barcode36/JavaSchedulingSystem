@@ -142,11 +142,12 @@ public class AppointmentDao {
     
     
     // Get all appointments
-    public static ObservableList<Appointment> getAllAppointmentsByUser(int userId) throws SQLException {
+    public static ObservableList<Timestamp> getAllAppointmentTimesByUser(int userId) throws SQLException {
         // Prepare Observable List variable to hold all users
-        ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
+//        ObservableList<Appointment> upcomingAppointments = FXCollections.observableArrayList();
+        ObservableList<Timestamp> upcomingAppointments = FXCollections.observableArrayList();
         // Create SQL select all users statement
-        String sqlStatement = "SELECT * FROM appointment WHERE userId = ?";
+        String sqlStatement = "SELECT start FROM appointment WHERE userId = ?";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);
@@ -156,32 +157,33 @@ public class AppointmentDao {
         
         ResultSet rs = ps.getResultSet();
         
-        Appointment nextAppointment;
+//        Appointment nextAppointment;
         
+        String nextAppointmentStart;
         // Get User info from dB query
         while(rs.next()) {
-            int appointmentId = rs.getInt("appointmentId");
-            int customerId = rs.getInt("customerId");
-            int userIdent = rs.getInt("userId");
-            String title = rs.getString("title");
-            String description = rs.getString("description");
-            String location = rs.getString("location");
-            String contact = rs.getString("contact");
-            String appointmentType = rs.getString("type");
-            String url = rs.getString("url");
+//            int appointmentId = rs.getInt("appointmentId");
+//            int customerId = rs.getInt("customerId");
+//            int userIdent = rs.getInt("userId");
+//            String title = rs.getString("title");
+//            String description = rs.getString("description");
+//            String location = rs.getString("location");
+//            String contact = rs.getString("contact");
+//            String appointmentType = rs.getString("type");
+//            String url = rs.getString("url");
             Timestamp appointmentStart = rs.getTimestamp("start");
-            Timestamp appointmentEnd = rs.getTimestamp("end");
-            Timestamp createDate = rs.getTimestamp("createDate");
-            String createdBy = rs.getString("createdBy");
-            Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
-            String lastUpdateBy = rs.getString("lastUpdateBy");
+//            Timestamp appointmentEnd = rs.getTimestamp("end");
+//            Timestamp createDate = rs.getTimestamp("createDate");
+//            String createdBy = rs.getString("createdBy");
+//            Timestamp lastUpdate = rs.getTimestamp("lastUpdate");
+//            String lastUpdateBy = rs.getString("lastUpdateBy");
             
             
-            nextAppointment = new Appointment(appointmentId, customerId, userIdent, title, description,
-                                              location, contact, appointmentType, url, 
-                                              Utils.fromUTC(appointmentStart), Utils.fromUTC(appointmentEnd),
-                                              createDate, createdBy, lastUpdate, lastUpdateBy);
-            upcomingAppointments.add(nextAppointment); 
+//            nextAppointment = new Appointment(appointmentId, customerId, userIdent, title, description,
+//                                              location, contact, appointmentType, url, 
+//                                              Utils.fromUTC(appointmentStart), Utils.fromUTC(appointmentEnd),
+//                                              createDate, createdBy, lastUpdate, lastUpdateBy);
+            upcomingAppointments.add(appointmentStart); 
         }
         
         // Return observable list of appointments

@@ -56,6 +56,14 @@ public class Utils {
         return result.get().getText();
     }
     
+    // Alert for upcoming appointment
+    public static void throwUpcomingAppointmentAlert(Timestamp timestamp) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Upcoming Appointment");
+        alert.setHeaderText("There is an appointment coming up at: " + timestamp.toString());
+        Optional<ButtonType> result = alert.showAndWait();
+    }
+    
     
     // Handles exit button click in Korean
     public static void exitApplication(String language) {
