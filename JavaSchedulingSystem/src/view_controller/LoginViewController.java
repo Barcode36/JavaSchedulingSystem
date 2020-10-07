@@ -1,6 +1,7 @@
 
 package view_controller;
 
+import dao.AppointmentDao;
 import dao.UserDao;
 import java.io.IOException;
 import java.net.URL;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import models.Appointment;
 import models.User;
 import utilities.Utils;
 
@@ -51,7 +54,7 @@ public class LoginViewController implements Initializable {
     }    
     
     
-    public void loginSubmitButtonHandler(ActionEvent event) throws IOException, SQLException {
+    public void loginSubmitButtonHandler(ActionEvent event) throws IOException, SQLException, InterruptedException {
         // Query dB for user entered into username field
         User user = UserDao.getUser(usernameField.getText());
         
@@ -73,8 +76,13 @@ public class LoginViewController implements Initializable {
             try {
                 // If entered password, matches password from dB, change scene to Appointments View
                 if (enteredPass == null ? officialPassword == null : enteredPass.equals(officialPassword)) {
+                    
+                    // Record login in log.txt
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     Utils.loginTimestamp(user.getUserName(), timestamp);
+                    
+                    
+                    // Change view to Appointments View
                     FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
                     Parent root = loader.load();
@@ -84,6 +92,7 @@ public class LoginViewController implements Initializable {
         
                     AppointmentsViewController controller = loader.getController();
                     controller.initUser(user);
+                    controller.upcomingAppointments(user);
                     stage.show();
         
                 } else {

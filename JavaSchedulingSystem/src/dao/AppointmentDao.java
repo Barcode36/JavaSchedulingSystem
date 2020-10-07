@@ -141,6 +141,34 @@ public class AppointmentDao {
     }
     
     
+    // Get all appointments
+    public static ObservableList<Timestamp> getAllAppointmentTimesByUser(int userId) throws SQLException {
+        ObservableList<Timestamp> upcomingAppointments = FXCollections.observableArrayList();
+        
+        // Create SQL select all users statement
+        String sqlStatement = "SELECT start FROM appointment WHERE userId = ?";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setInt(1, userId);
+        ps.execute();
+        
+        ResultSet rs = ps.getResultSet();
+        
+        String nextAppointmentStart;
+        
+        // Get User info from dB query
+        while(rs.next()) {
+            Timestamp appointmentStart = rs.getTimestamp("start");
+            upcomingAppointments.add(appointmentStart); 
+        }
+        
+        // Return observable list of appointments
+        return upcomingAppointments;
+    }
+    
+    
     
     // Add new appointment to dB
     public static void createAppointment(int customerId, int userId, String title, String description,
