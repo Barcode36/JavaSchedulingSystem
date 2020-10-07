@@ -22,7 +22,7 @@ F. Write exception controls to prevent each of the following. You may use the sa
 
 G. Write two or more lambda expressions to make your program more efficient, justifying the use of each lambda expression with an in-line comment.
  
-H. Write code to provide an alert if there is an appointment within 15 minutes of the user’s log-in.
+~H. Write code to provide an alert if there is an appointment within 15 minutes of the user’s log-in.~
 
 I. Provide the ability to generate each  of the following reports:
 
