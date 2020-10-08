@@ -180,9 +180,9 @@ public class AppointmentsViewController implements Initializable {
         }
     }
     
+    // Show all appointments in Appointments table view
     public void viewAllHandler(ActionEvent event) {
         try {
-            // Populate appointments table view
             ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
             appointmentsTable.setItems(appointments);
         } catch (SQLException ex) {
@@ -190,11 +190,13 @@ public class AppointmentsViewController implements Initializable {
         }
     }
     
+    // Show only appointments in the current week in Appointments table view
     public void viewByWeekHandler(ActionEvent event) {
         // TODO
         
     }
     
+    // Show only appointments in the current month in Appointments table view
     public void viewByMonthHandler(ActionEvent event) throws SQLException {
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH) + 1;
