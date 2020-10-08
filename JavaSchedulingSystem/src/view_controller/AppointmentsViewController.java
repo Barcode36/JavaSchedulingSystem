@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -200,7 +201,7 @@ public class AppointmentsViewController implements Initializable {
         int year = cal.get(Calendar.YEAR);
         String yearMonth = String.valueOf(year) + "-" + String.valueOf(month);
         ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
-        ObservableList<AppointmentShort> apptsToRemove;
+        ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
 
         appointments.forEach(appointment -> {
            Timestamp start = appointment.getAppointmentStart();
