@@ -196,6 +196,7 @@ public class AppointmentsViewController implements Initializable {
     public void viewByWeekHandler(ActionEvent event) throws SQLException {
         Calendar cal = Calendar.getInstance();
         int thisWeek = cal.get(Calendar.WEEK_OF_YEAR);
+        int thisYear = cal.get(Calendar.YEAR);
         ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
         ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
         
@@ -204,7 +205,7 @@ public class AppointmentsViewController implements Initializable {
             Timestamp timestamp = Utils.fromUTC(appointment.getAppointmentStart());
             Date date = Date.valueOf(timestamp.toString().substring(0, 10));
             calendar.setTime(date);
-            if(calendar.get(Calendar.WEEK_OF_YEAR)!= thisWeek) {
+            if(calendar.get(Calendar.YEAR) != thisYear || calendar.get(Calendar.WEEK_OF_YEAR)!= thisWeek) {
                 apptsToRemove.add(appointment);
             }
         });
