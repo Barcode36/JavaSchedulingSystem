@@ -5,12 +5,16 @@ import dao.AppointmentDao;
 import dao.CustomerDao;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -178,16 +182,56 @@ public class AppointmentsViewController implements Initializable {
         }
     }
     
+    // Show all appointments in Appointments table view
     public void viewAllHandler(ActionEvent event) {
-        // TODO - view all appts functionality
+        try {
+            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+            appointmentsTable.setItems(appointments);
+        } catch (SQLException ex) {
+            Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void viewByWeekHandler(ActionEvent event) {
-        // TODO - view appts by week functionality
+    // Show only appointments in the current week in Appointments table view
+    public void viewByWeekHandler(ActionEvent event) throws SQLException {
+        Calendar cal = Calendar.getInstance();
+        int thisWeek = cal.get(Calendar.WEEK_OF_YEAR);
+        int thisYear = cal.get(Calendar.YEAR);
+        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+        ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
+        
+        appointments.forEach(appointment -> {
+            Calendar calendar = Calendar.getInstance();
+            Timestamp timestamp = Utils.fromUTC(appointment.getAppointmentStart());
+            Date date = Date.valueOf(timestamp.toString().substring(0, 10));
+            calendar.setTime(date);
+            if(calendar.get(Calendar.YEAR) != thisYear || calendar.get(Calendar.WEEK_OF_YEAR)!= thisWeek) {
+                apptsToRemove.add(appointment);
+            }
+        });
+        appointments.removeAll(apptsToRemove);
+        appointmentsTable.setItems(appointments);
+        
     }
     
-    public void viewByMonthHandler(ActionEvent event) {
-        // TODO - view appts by month functionality
+    // Show only appointments in the current month in Appointments table view
+    public void viewByMonthHandler(ActionEvent event) throws SQLException {
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH) + 1;
+        int year = cal.get(Calendar.YEAR);
+        String yearMonth = String.valueOf(year) + "-" + String.valueOf(month);
+        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+        ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
+
+        appointments.forEach(appointment -> {
+           Timestamp start = Utils.fromUTC(appointment.getAppointmentStart());
+           String timeString = start.toString().substring(0, 7);
+            if(!timeString.equals(yearMonth)) {
+                apptsToRemove.add(appointment);
+            }
+        });
+        appointments.removeAll(apptsToRemove);
+        appointmentsTable.setItems(appointments);
     }
     
     

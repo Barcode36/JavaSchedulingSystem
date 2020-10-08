@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view_controller.AppointmentsViewController">
@@ -25,10 +26,13 @@
                               <TableColumn fx:id="appointmentCustomerColumn" prefWidth="281.0" text="Customer" />
                           </columns>
                         </TableView>
-                        <RadioButton fx:id="viewWeekRadio" layoutX="213.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByWeekHandler" text="Week" />
-                        <RadioButton fx:id="viewMonthRadio" layoutX="279.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByMonthHandler" text="Month" />
+                        <RadioButton fx:id="viewWeekRadio" layoutX="213.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByWeekHandler" text="Week">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="viewBy" />
+                           </toggleGroup></RadioButton>
+                        <RadioButton fx:id="viewMonthRadio" layoutX="279.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewByMonthHandler" text="Month" toggleGroup="$viewBy" />
                         <Label layoutX="107.0" layoutY="23.0" text="View By" />
-                        <RadioButton fx:id="viewAllRadio" layoutX="163.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewAllHandler" text="All" />
+                        <RadioButton fx:id="viewAllRadio" layoutX="163.0" layoutY="23.0" mnemonicParsing="false" onAction="#viewAllHandler" text="All" toggleGroup="$viewBy" />
                         <Button fx:id="editApptButton" disable="true" layoutX="16.0" layoutY="94.0" mnemonicParsing="false" onAction="#editApptButtonHandler" prefHeight="27.0" prefWidth="73.0" text="Edit Appt" />
                      </children>
                   </AnchorPane>
