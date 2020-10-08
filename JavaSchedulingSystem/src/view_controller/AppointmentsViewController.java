@@ -5,9 +5,11 @@ import dao.AppointmentDao;
 import dao.CustomerDao;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -191,8 +193,23 @@ public class AppointmentsViewController implements Initializable {
     }
     
     // Show only appointments in the current week in Appointments table view
-    public void viewByWeekHandler(ActionEvent event) {
-        // TODO
+    public void viewByWeekHandler(ActionEvent event) throws SQLException {
+        Calendar cal = Calendar.getInstance();
+        int thisWeek = cal.get(Calendar.WEEK_OF_YEAR);
+        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+        ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
+        
+        appointments.forEach(appointment -> {
+            Calendar calendar = Calendar.getInstance();
+            Timestamp timestamp = Utils.fromUTC(appointment.getAppointmentStart());
+            Date date = Date.valueOf(timestamp.toString().substring(0, 10));
+            calendar.setTime(date);
+            if(calendar.get(Calendar.WEEK_OF_YEAR)!= thisWeek) {
+                apptsToRemove.add(appointment);
+            }
+        });
+        appointments.removeAll(apptsToRemove);
+        appointmentsTable.setItems(appointments);
         
     }
     
@@ -206,7 +223,7 @@ public class AppointmentsViewController implements Initializable {
         ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
 
         appointments.forEach(appointment -> {
-           Timestamp start = appointment.getAppointmentStart();
+           Timestamp start = Utils.fromUTC(appointment.getAppointmentStart());
            String timeString = start.toString().substring(0, 7);
             if(!timeString.equals(yearMonth)) {
                 apptsToRemove.add(appointment);
