@@ -8,6 +8,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -179,15 +180,37 @@ public class AppointmentsViewController implements Initializable {
     }
     
     public void viewAllHandler(ActionEvent event) {
-        // TODO - view all appts functionality
+        try {
+            // Populate appointments table view
+            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+            appointmentsTable.setItems(appointments);
+        } catch (SQLException ex) {
+            Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void viewByWeekHandler(ActionEvent event) {
-        // TODO - view appts by week functionality
+        // TODO
+        
     }
     
-    public void viewByMonthHandler(ActionEvent event) {
-        // TODO - view appts by month functionality
+    public void viewByMonthHandler(ActionEvent event) throws SQLException {
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH) + 1;
+        int year = cal.get(Calendar.YEAR);
+        String yearMonth = String.valueOf(year) + "-" + String.valueOf(month);
+        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+        ObservableList<AppointmentShort> apptsToRemove;
+
+        appointments.forEach(appointment -> {
+           Timestamp start = appointment.getAppointmentStart();
+           String timeString = start.toString().substring(0, 7);
+            if(!timeString.equals(yearMonth)) {
+                apptsToRemove.add(appointment);
+            }
+        });
+        appointments.removeAll(apptsToRemove);
+        appointmentsTable.setItems(appointments);
     }
     
     
