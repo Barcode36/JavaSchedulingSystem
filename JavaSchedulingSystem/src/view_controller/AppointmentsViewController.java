@@ -281,7 +281,7 @@ public class AppointmentsViewController implements Initializable {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        SpecificReportViewController controller = loader.getController();
+        LoginReportViewController controller = loader.getController();
         controller.initUser(user);
         stage.show();
         
@@ -289,13 +289,13 @@ public class AppointmentsViewController implements Initializable {
     
     public void consultantScheduleReportButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("SpecificReportView.fxml"));
+                                           .getResource("ConsultantScheduleReportView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        SpecificReportViewController controller = loader.getController();
+        LoginReportViewController controller = loader.getController();
         controller.initUser(user);
         stage.show();
     }
@@ -308,20 +308,20 @@ public class AppointmentsViewController implements Initializable {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        SpecificReportViewController controller = loader.getController();
+        LoginReportViewController controller = loader.getController();
         controller.initUser(user);
         stage.show();
     }
     
     public void loginReportButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("SpecificReportView.fxml"));
+                                           .getResource("LoginReportView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        SpecificReportViewController controller = loader.getController();
+        LoginReportViewController controller = loader.getController();
         controller.initUser(user);
         stage.show();
     }
