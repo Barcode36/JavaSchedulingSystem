@@ -271,17 +271,16 @@ public class AppointmentsViewController implements Initializable {
     
     
     //**** Report View methods ****//
-    // TODO - each of these methods should open the same view 
-    // but display different reports in that view
+   
     public void apptTypesByMonthReportButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("SpecificReportView.fxml"));
+                                           .getResource("AppointmentsByMonthReportView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        LoginReportViewController controller = loader.getController();
+        AppointmentsByMonthReportViewController controller = loader.getController();
         controller.initUser(user);
         stage.show();
         
