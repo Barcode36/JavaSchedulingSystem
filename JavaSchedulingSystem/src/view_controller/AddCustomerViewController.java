@@ -65,17 +65,8 @@ public class AddCustomerViewController implements Initializable {
         String customerName = customerNameField.getText();
         String address = addressField.getText();
         String phone = phoneField.getText();
+        boolean phoneValid = Utils.checkPhoneNumbers(phone);
         
-        phone = phone.toLowerCase();
-        char[] charArray = phone.toCharArray();
-        boolean phoneValid = true;
-        for (int i = 0; i < charArray.length; i++) {
-            char ch = charArray[i];
-            if(!(ch >= '0' && ch <= '9')) {
-                phoneValid = false;
-                break;
-            }
-        }
         
         // If the phone number contains letters, throw error
         if(!phoneValid) {

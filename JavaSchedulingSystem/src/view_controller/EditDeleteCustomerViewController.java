@@ -106,39 +106,78 @@ public class EditDeleteCustomerViewController implements Initializable {
         String customerName = customerNameField.getText();
         String address = addressField.getText();
         String phone = phoneField.getText();
+        boolean phoneValid = Utils.checkPhoneNumbers(phone);
         
-        // If address does not exist, create it first
-        Address dBAddress = AddressDao.getAddress(address);
-        if(dBAddress == null) {
-            Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
-            AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");
+        // If the phone number contains letters, throw error
+        if(!phoneValid) {
+            Utils.throwErrorAlert("Phone number must not contain letters.");
+            FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AddCustomerView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        
+            AddCustomerViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show();
+        } else if(customerName.isEmpty()) {         // if customer name field is blank, throw error
+            Utils.throwErrorAlert("Customer Name field must not be blank.");
+            FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AddCustomerView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        
+            AddCustomerViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show();
+        } else if(address.isEmpty()) {              // if address field is blank, throw error
+            Utils.throwErrorAlert("Address field must not be blank.");
+            FXMLLoader loader = new FXMLLoader(getClass()
+                                           .getResource("AddCustomerView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        
+            AddCustomerViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show();
+        } else {                                    // if all fields are valid, add the new customer
+            
+            // If address does not exist, create it first
+            Address dBAddress = AddressDao.getAddress(address);
+            if(dBAddress == null) {
+                Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
+                AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");
+            }
+        
+            int addressId = AddressDao.getAddress(address).getAddressId();
+        
+            // If the phone number for the current address is
+            // different from the value in the dB, update it
+            String addressPhone = AddressDao.getAddress(address).getPhone();
+            if (phone == null ? addressPhone != null : !phone.equals(addressPhone)) {
+                AddressDao.updatePhone(addressId, phone);
+            }
+        
+        
+            // Update customer
+            CustomerDao.updateCustomer(customerId, customerName, addressId);
+        
+            // Change scene to Appointments View
+            FXMLLoader loader = new FXMLLoader(getClass()
+                                            .getResource("AppointmentsView.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+        
+            AppointmentsViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show(); 
         }
-        
-        int addressId = AddressDao.getAddress(address).getAddressId();
-        
-        // If the phone number for the current address is
-        // different from the value in the dB, update it
-        String addressPhone = AddressDao.getAddress(address).getPhone();
-        if (phone == null ? addressPhone != null : !phone.equals(addressPhone)) {
-            AddressDao.updatePhone(addressId, phone);
-        }
-        
-        
-        // Update customer
-        CustomerDao.updateCustomer(customerId, customerName, addressId);
-        
-        // Change scene to Appointments View
-        FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("AppointmentsView.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        
-        AppointmentsViewController controller = loader.getController();
-        controller.initUser(user);
-        stage.show();
-        
     }
-   
 }

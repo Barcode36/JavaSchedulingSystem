@@ -151,4 +151,18 @@ public class Utils {
         }
     }
     
+    public static Boolean checkPhoneNumbers(String phone) {
+        phone = phone.toLowerCase();
+        char[] charArray = phone.toCharArray();
+        boolean phoneValid = true;
+        for (int i = 0; i < charArray.length; i++) {
+            char ch = charArray[i];
+            if(!(ch >= '0' && ch <= '9')) {
+                phoneValid = false;
+                break;
+            }
+        }
+        return phoneValid;
+    }
+    
 }
