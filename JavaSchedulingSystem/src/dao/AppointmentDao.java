@@ -109,16 +109,17 @@ public class AppointmentDao {
     
     
     // Get all appointments
-    public static ObservableList<AppointmentShort> getAllAppointments() throws SQLException {
+    public static ObservableList<AppointmentShort> getAllAppointmentsByUser(int userId) throws SQLException {
         // Prepare Observable List variable to hold all users
         ObservableList<AppointmentShort> allAppointments = FXCollections.observableArrayList();
         
         // Create SQL select all users statement
-        String sqlStatement = "SELECT a.appointmentId, a.start, a.end, a.type, c.customerName FROM appointment a INNER JOIN customer c USING(customerId);";
+        String sqlStatement = "SELECT a.appointmentId, a.start, a.end, a.type, c.customerName FROM appointment a INNER JOIN customer c USING(customerId) WHERE userId = ?;";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);
         PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.setInt(1, userId);
         ps.execute();
         
         ResultSet rs = ps.getResultSet();
