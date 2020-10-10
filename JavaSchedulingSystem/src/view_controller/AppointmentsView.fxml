@@ -60,11 +60,11 @@
                      <children>
                         <Label layoutX="141.0" layoutY="90.0" text="Appointment Types By Month Report" />
                         <Label layoutX="184.0" layoutY="139.0" text="Consultant Schedules Report" />
-                        <Label layoutX="212.0" layoutY="187.0" text="One Other Report (TBD)" />
+                        <Label layoutX="165.0" layoutY="187.0" text="Most Public Appearances Report" />
                         <Label layoutX="272.0" layoutY="235.0" text="Login Report" />
                         <Button fx:id="apptTypesReportButton" layoutX="373.0" layoutY="85.0" mnemonicParsing="false" onAction="#apptTypesByMonthReportButtonHandler" text="View Report" />
                         <Button fx:id="consultantScheduleReportButton" layoutX="373.0" layoutY="134.0" mnemonicParsing="false" onAction="#consultantScheduleReportButtonHandler" text="View Report" />
-                        <Button fx:id="oneOtherReportButton" layoutX="373.0" layoutY="182.0" mnemonicParsing="false" onAction="#oneOtherReportButtonHandler" text="View Report" />
+                        <Button fx:id="oneOtherReportButton" layoutX="373.0" layoutY="182.0" mnemonicParsing="false" onAction="#mostAppearancesReportButtonHandler" text="View Report" />
                         <Button fx:id="loginReportButton" layoutX="373.0" layoutY="230.0" mnemonicParsing="false" onAction="#loginReportButtonHandler" text="View Report" />
                      </children></AnchorPane>
               </content>
