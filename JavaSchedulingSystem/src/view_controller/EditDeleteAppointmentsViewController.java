@@ -9,6 +9,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,18 +74,14 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         
         // Set options for appointment start times
         ObservableList<String> startTimes = FXCollections.observableArrayList(
-                "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", 
-                "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00",
-                "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00",
-                "21:00", "22:00", "23:00", "24:00");
+                "08:00", "09:00", "10:00", "11:00", "12:00", "13:00",
+                "14:00", "15:00", "16:00");
         startTimeChoice.setItems(startTimes);
         
         // Set options for appointment end times
         ObservableList<String> endTimes = FXCollections.observableArrayList(
-                "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", 
-                "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00",
-                "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00",
-                "21:00", "22:00", "23:00", "24:00");
+                "09:00", "10:00", "11:00", "12:00", "13:00",
+                "14:00", "15:00", "16:00", "17:00");
         endTimeChoice.setItems(endTimes);
         
     }  
@@ -160,6 +157,16 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         Timestamp startTime = Timestamp.valueOf(startDateString + " " + startTimeString + ":00");        
         Timestamp endTime = Timestamp.valueOf(startDateString + " " + endTimeString + ":00"); 
          
+        // Checking to make sure times are within normal business hours
+        LocalTime tooEarly = LocalTime.parse("07:00");
+        LocalTime tooLate = LocalTime.parse("18:00");
+        LocalTime lst = LocalTime.parse(startTimeString);
+        LocalTime let = LocalTime.parse(endTimeString);
+        
+        // Assert that the user cannot choose a time outside of business hours else throw error
+        assert lst.isAfter(tooEarly) : "Start time is too early.";
+        assert let.isBefore(tooLate) : "End time is too late.";
+
         // First, check to make sure start and end times are valid
         if (Utils.checkForValidTimes(startTimeString, endTimeString)) {
             Utils.throwErrorAlert("Your end time cannot be scheduled prior to your start time.");
