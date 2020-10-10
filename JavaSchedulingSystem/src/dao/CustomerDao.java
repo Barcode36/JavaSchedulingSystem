@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Customer;
+import models.CustomerAppearance;
 import models.CustomerShort;
 
 
@@ -85,6 +86,38 @@ public class CustomerDao {
         return allCustomers;
     }
     
+    
+    // Get all customer appearances
+    public static ObservableList<CustomerAppearance> getAllCustomerAppearances() throws SQLException {
+        
+        // Prepare Observable List variable to hold all users
+        ObservableList<CustomerAppearance> allCustomerAppearances = FXCollections.observableArrayList();
+        
+        // Create SQL select all users statement
+        String sqlStatement = "SELECT c.customerName, COUNT(a.customerId) AS appearances FROM appointment a INNER JOIN customer c USING(customerId) GROUP BY c.customerName ORDER BY appearances DESC;";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.execute();
+        
+        ResultSet rs = ps.getResultSet();
+        
+        CustomerAppearance nextCustomerAppearance;
+        
+        // Get User info from dB query
+        while(rs.next()) {
+            String name = rs.getString("customerName");
+            int appearances = rs.getInt("appearances");
+            
+            nextCustomerAppearance = new CustomerAppearance(name, appearances);  
+            allCustomerAppearances.add(nextCustomerAppearance);
+            
+        }
+        
+        // Return observable list
+        return allCustomerAppearances;
+    }
     
     
     // Add a new customer to dB

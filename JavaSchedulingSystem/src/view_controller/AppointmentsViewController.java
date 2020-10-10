@@ -299,15 +299,15 @@ public class AppointmentsViewController implements Initializable {
         stage.show();
     }
     
-    public void oneOtherReportButtonHandler(ActionEvent event) throws IOException {
+    public void mostAppearancesReportButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("SpecificReportView.fxml"));
+                                           .getResource("MostAppearancesReportView.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        LoginReportViewController controller = loader.getController();
+        MostAppearancesReportViewController controller = loader.getController();
         controller.initUser(user);
         stage.show();
     }
