@@ -70,41 +70,11 @@ public class AddCustomerViewController implements Initializable {
         
         // If the phone number contains letters, throw error
         if(!phoneValid) {
-            Utils.throwErrorAlert("Phone number must not contain letters.");
-            FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("AddCustomerView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-        
-            AddCustomerViewController controller = loader.getController();
-            controller.initUser(user);
-            stage.show();
+            Utils.throwErrorAlert("Phone number must be in valid format.");
         } else if(customerName.isEmpty()) {     // if customer name field is blank, throw error
             Utils.throwErrorAlert("Customer Name field must not be blank.");
-            FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("AddCustomerView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-        
-            AddCustomerViewController controller = loader.getController();
-            controller.initUser(user);
-            stage.show();
         } else if(address.isEmpty()) {          // if address field is blank, throw error
             Utils.throwErrorAlert("Address field must not be blank.");
-            FXMLLoader loader = new FXMLLoader(getClass()
-                                           .getResource("AddCustomerView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-        
-            AddCustomerViewController controller = loader.getController();
-            controller.initUser(user);
-            stage.show();
         } else {                                // if all fields are valid, add the new customer
         
             Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());

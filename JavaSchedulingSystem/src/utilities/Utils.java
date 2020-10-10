@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -152,17 +154,14 @@ public class Utils {
     }
     
     public static Boolean checkPhoneNumbers(String phone) {
-        phone = phone.toLowerCase();
-        char[] charArray = phone.toCharArray();
-        boolean phoneValid = true;
-        for (int i = 0; i < charArray.length; i++) {
-            char ch = charArray[i];
-            if(!(ch >= '0' && ch <= '9')) {
-                phoneValid = false;
-                break;
-            }
+        String regex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
+        Pattern regexPattern = Pattern.compile(regex);
+        Matcher matcher = regexPattern.matcher(phone);
+        if(matcher.find()) {
+            return true;
+        } else {
+            return false;
         }
-        return phoneValid;
     }
     
 }
