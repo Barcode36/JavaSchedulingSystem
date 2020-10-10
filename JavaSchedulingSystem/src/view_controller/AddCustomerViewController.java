@@ -81,26 +81,32 @@ public class AddCustomerViewController implements Initializable {
             int newAddressId = AddressDao.getAddressId();
             Address dBAddress = AddressDao.getAddress(address);
             
-            // If the address doesn't already exist, add it first, then add customer with the new address Id
-            if(dBAddress == null) {
-                AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");
-                CustomerDao.createCustomer(customerName, newAddressId, 1, timestamp, "admin", timestamp, "admin"); 
+            // Don't add customer if they already exist
+            if(CustomerDao.getCustomer(customerName) != null) {
+                Utils.throwErrorAlert("Customer already exists.");
             } else {
-                // If the address does exist, add new customer with existing Id
-                CustomerDao.createCustomer(customerName, dBAddress.getAddressId(), 1, timestamp, "admin", timestamp, "admin"); 
-            }      
+            
+                // If the address doesn't already exist, add it first, then add customer with the new address Id
+                if(dBAddress == null) {
+                    AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");
+                    CustomerDao.createCustomer(customerName, newAddressId, 1, timestamp, "admin", timestamp, "admin"); 
+                } else {
+                    // If the address does exist, add new customer with existing Id
+                    CustomerDao.createCustomer(customerName, dBAddress.getAddressId(), 1, timestamp, "admin", timestamp, "admin"); 
+                }      
        
-            FXMLLoader loader = new FXMLLoader(getClass()
+                FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
         
-            AppointmentsViewController controller = loader.getController();
-            controller.initUser(user);
-            stage.show();
+                AppointmentsViewController controller = loader.getController();
+                controller.initUser(user);
+                stage.show();
         
+            }
         }
     }
 }
