@@ -9,7 +9,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,7 +28,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import models.Appointment;
 import models.AppointmentShort;
 import models.CustomerShort;
 import models.User;
@@ -64,29 +62,10 @@ public class AppointmentsViewController implements Initializable {
     @FXML private Button loginReportButton;
     
     User user;
-    
+    int userId;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
-       //****** Appointments Table ******
-       
-       // Bind appointment table columns
-       appointmentCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-       appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
-       appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
-       
-        
-        try {
-            // Populate appointments table view
-            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
-            appointmentsTable.setItems(appointments);
-        } catch (SQLException ex) {
-            Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
-       
-       
-        
+
        //****** Customer Table ******
        
        // Bind customer table columns
@@ -103,17 +82,35 @@ public class AppointmentsViewController implements Initializable {
             Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
     }   
     
     // Set current user of application
     public void initUser(User user) {
         this.user = user;
+        this.userId = user.getUserId();
+        populateAppointmentTable();
+    }
+    
+    public void populateAppointmentTable() {
+       
+       // Bind appointment table columns
+       appointmentCustomerColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+       appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentType"));
+       appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentStart"));
+       
+        
+        try {
+            // Populate appointments table view
+            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointmentsByUser(this.userId);
+            appointmentsTable.setItems(appointments);
+        } catch (SQLException ex) {
+            Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     // Check to see if current user has appointment within 15 minutes of login
     public void upcomingAppointments(User user) throws SQLException, InterruptedException {
-        ObservableList<Timestamp> upcomingAppointmentTimes = AppointmentDao.getAllAppointmentTimesByUser(user.getUserId());
+        ObservableList<Timestamp> upcomingAppointmentTimes = AppointmentDao.getAllAppointmentTimesByUser(this.userId);
         
         // Get Instant for now and 15 mins from now
         Instant now = Instant.now();
@@ -185,7 +182,7 @@ public class AppointmentsViewController implements Initializable {
     // Show all appointments in Appointments table view
     public void viewAllHandler(ActionEvent event) {
         try {
-            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+            ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointmentsByUser(this.userId);
             appointmentsTable.setItems(appointments);
         } catch (SQLException ex) {
             Logger.getLogger(AppointmentsViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +194,7 @@ public class AppointmentsViewController implements Initializable {
         Calendar cal = Calendar.getInstance();
         int thisWeek = cal.get(Calendar.WEEK_OF_YEAR);
         int thisYear = cal.get(Calendar.YEAR);
-        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointmentsByUser(this.userId);
         ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
         
         appointments.forEach(appointment -> {
@@ -220,7 +217,7 @@ public class AppointmentsViewController implements Initializable {
         int month = cal.get(Calendar.MONTH) + 1;
         int year = cal.get(Calendar.YEAR);
         String yearMonth = String.valueOf(year) + "-" + String.valueOf(month);
-        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointments();
+        ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointmentsByUser(this.userId);
         ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
 
         appointments.forEach(appointment -> {
