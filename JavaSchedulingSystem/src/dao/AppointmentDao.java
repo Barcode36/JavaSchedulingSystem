@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Appointment;
+import models.AppointmentMonth;
 import models.AppointmentShort;
 import utilities.Utils;
 
@@ -166,6 +167,37 @@ public class AppointmentDao {
         
         // Return observable list of appointments
         return upcomingAppointments;
+    }
+    
+    
+    // Get all appointment types by month
+    public static ObservableList<AppointmentMonth> getAllAppointmentsByMonth() throws SQLException {
+        ObservableList<AppointmentMonth> appointmentsByMonth = FXCollections.observableArrayList();
+        
+        // Create SQL select all users statement
+        String sqlStatement = "SELECT YEAR(start) AS year, MONTH(start) AS month, type, COUNT(type) AS typeCount FROM appointment WHERE type IS NOT NULL GROUP BY YEAR(start), MONTH(start), type;";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.execute();
+        
+        ResultSet rs = ps.getResultSet();
+        
+        AppointmentMonth nextAppointmentMonth;
+        
+        // Get User info from dB query
+        while(rs.next()) {
+            int year = rs.getInt("year");
+            int month = rs.getInt("month");
+            String type = rs.getString("type");
+            int typeCount = rs.getInt("typeCount");
+            nextAppointmentMonth = new AppointmentMonth(year, month, type, typeCount);
+            appointmentsByMonth.add(nextAppointmentMonth);
+        }
+        
+        // Return observable list of appointments        
+        return appointmentsByMonth;
     }
     
     
