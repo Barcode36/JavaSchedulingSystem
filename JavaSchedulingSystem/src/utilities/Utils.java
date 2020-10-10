@@ -10,12 +10,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -141,6 +147,17 @@ public class Utils {
         Integer startHour = Integer.parseInt(startTime.substring(0,2));
         Integer endHour = Integer.parseInt(endTime.substring(0, 2));
         if(startHour > endHour) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public static Boolean checkPhoneNumbers(String phone) {
+        String regex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
+        Pattern regexPattern = Pattern.compile(regex);
+        Matcher matcher = regexPattern.matcher(phone);
+        if(matcher.find()) {
             return true;
         } else {
             return false;

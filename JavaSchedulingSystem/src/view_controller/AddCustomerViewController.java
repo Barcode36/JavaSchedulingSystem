@@ -37,7 +37,7 @@ public class AddCustomerViewController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
     }    
     
     // Set current user of application
@@ -59,37 +59,48 @@ public class AddCustomerViewController implements Initializable {
         stage.show();
     }
     
-    public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
+    public void saveButtonHandler(ActionEvent event) throws IOException, SQLException, InterruptedException {
         
         // TODO - go to dB and create new customer
         String customerName = customerNameField.getText();
         String address = addressField.getText();
         String phone = phoneField.getText();
-        Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
-        int newAddressId = AddressDao.getAddressId();
+        boolean phoneValid = Utils.checkPhoneNumbers(phone);
         
         
-        Address dBAddress = AddressDao.getAddress(address);
-        // If the address doesn't already exist, add it first, then add customer with the new address Id
-        if(dBAddress == null) {
-            AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");
-            CustomerDao.createCustomer(customerName, newAddressId, 1, timestamp, "admin", timestamp, "admin"); 
-        } else {
-            // If the address does exist, add new customer with existing Id
-            CustomerDao.createCustomer(customerName, dBAddress.getAddressId(), 1, timestamp, "admin", timestamp, "admin"); 
-        }      
+        // If the phone number contains letters, throw error
+        if(!phoneValid) {
+            Utils.throwErrorAlert("Phone number must be in valid format.");
+        } else if(customerName.isEmpty()) {     // if customer name field is blank, throw error
+            Utils.throwErrorAlert("Customer Name field must not be blank.");
+        } else if(address.isEmpty()) {          // if address field is blank, throw error
+            Utils.throwErrorAlert("Address field must not be blank.");
+        } else {                                // if all fields are valid, add the new customer
+        
+            Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
+            int newAddressId = AddressDao.getAddressId();
+            Address dBAddress = AddressDao.getAddress(address);
+            
+            // If the address doesn't already exist, add it first, then add customer with the new address Id
+            if(dBAddress == null) {
+                AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");
+                CustomerDao.createCustomer(customerName, newAddressId, 1, timestamp, "admin", timestamp, "admin"); 
+            } else {
+                // If the address does exist, add new customer with existing Id
+                CustomerDao.createCustomer(customerName, dBAddress.getAddressId(), 1, timestamp, "admin", timestamp, "admin"); 
+            }      
        
-        FXMLLoader loader = new FXMLLoader(getClass()
+            FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
         
-        AppointmentsViewController controller = loader.getController();
-        controller.initUser(user);
-        stage.show();
+            AppointmentsViewController controller = loader.getController();
+            controller.initUser(user);
+            stage.show();
         
+        }
     }
-    
 }
