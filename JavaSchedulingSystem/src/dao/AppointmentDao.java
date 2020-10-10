@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import models.Appointment;
 import models.AppointmentMonth;
 import models.AppointmentShort;
+import models.ConsultantSchedule;
 import utilities.Utils;
 
 

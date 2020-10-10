@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import models.ConsultantSchedule;
 
 public class UserDao {
     
@@ -85,6 +86,38 @@ public class UserDao {
         
         // Return users observable list
         return allUsers;
+    }
+    
+    
+    
+    // Get all appointment types by month
+    public static ObservableList<ConsultantSchedule> getAllConsultantSchedules() throws SQLException {
+        ObservableList<ConsultantSchedule> consultantSchedules = FXCollections.observableArrayList();
+        
+        // Create SQL select all consultant schedules statement
+        String sqlStatement = "SELECT u.userName, a.type, c.customerName, a.start FROM appointment a INNER JOIN user u USING(userId) INNER JOIN customer c USING (customerId) GROUP BY u.userName, a.start, a.type, c.customerName;";
+        
+        // Get reference to PreparedStatement
+        DBQuery.setPreparedStatement(conn, sqlStatement);
+        PreparedStatement ps = DBQuery.getPreparedStatement();
+        ps.execute();
+        
+        ResultSet rs = ps.getResultSet();
+        
+        ConsultantSchedule nextConsultantSchedule;
+        
+        // Get User info from dB query
+        while(rs.next()) {
+            String username = rs.getString("userName");
+            String type = rs.getString("type");
+            String customerName = rs.getString("customerName");
+            Timestamp start = rs.getTimestamp("start");
+            nextConsultantSchedule = new ConsultantSchedule(username, type, customerName, start);
+            consultantSchedules.add(nextConsultantSchedule);
+        }
+        
+        // Return observable list of consultantSchedules        
+        return consultantSchedules;
     }
     
     

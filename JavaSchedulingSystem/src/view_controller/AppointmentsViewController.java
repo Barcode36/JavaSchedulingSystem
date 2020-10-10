@@ -294,7 +294,7 @@ public class AppointmentsViewController implements Initializable {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         
-        LoginReportViewController controller = loader.getController();
+        ConsultantScheduleReportController controller = loader.getController();
         controller.initUser(user);
         stage.show();
     }
