@@ -96,6 +96,7 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         appointmentId = appointment.getAppointmentId();
         apptTypeChoiceBox.setValue(appointment.getAppointmentType());
         customerChoiceBox.setValue(appointment.getCustomerName());
+        dateField.setEditable(false);
         
         // Get start and end timestamps and parse them out
         String startTime = appointment.getAppointmentStart().toString();

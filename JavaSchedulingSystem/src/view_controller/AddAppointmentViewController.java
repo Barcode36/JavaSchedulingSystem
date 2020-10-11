@@ -64,23 +64,28 @@ public class AddAppointmentViewController implements Initializable {
                 customerNames.add(cs.getCustomerName());
             }
             customerChoice.setItems(customerNames);
+            customerChoice.setValue(customerNames.get(0));
             
         } catch (SQLException ex) {
             Logger.getLogger(AddAppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        dateField.setEditable(false);
+        dateField.setValue(LocalDate.now());
         
         // Set options for appointment start times
         ObservableList<String> startTimes = FXCollections.observableArrayList(
                 "08:00", "09:00", "10:00", "11:00", "12:00", "13:00",
                 "14:00", "15:00", "16:00");
         startTimeChoice.setItems(startTimes);
+        startTimeChoice.setValue("08:00");
         
         // Set options for appointment end times
         ObservableList<String> endTimes = FXCollections.observableArrayList(
                 "09:00", "10:00", "11:00", "12:00", "13:00",
                 "14:00", "15:00", "16:00", "17:00");
         endTimeChoice.setItems(endTimes);
+        endTimeChoice.setValue("09:00");
         
     }    
     
@@ -93,9 +98,9 @@ public class AddAppointmentViewController implements Initializable {
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException, InterruptedException {
         
         // Get customerId of chosen customer
-        // TODO - wrap with try catch
         String customerName = customerChoice.getSelectionModel().getSelectedItem().toString();
         int customerId = CustomerDao.getCustomer(customerName).getCustomerId();
+        
         
         // Get userId of current application user
         int userId = this.user.getUserId();
@@ -124,7 +129,7 @@ public class AddAppointmentViewController implements Initializable {
         // Get current timestamp
         Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
         
-        // First, check to make sure start and end times are valid
+        // Make sure the appointment form is valid
         if (Utils.checkForValidTimes(startTimeString, endTimeString)) {
             Utils.throwErrorAlert("Your end time cannot be scheduled prior to your start time.");
         } else if(Utils.areOverlappingAppts(userId, startTime)) {
@@ -149,9 +154,7 @@ public class AddAppointmentViewController implements Initializable {
             AppointmentsViewController controller = loader.getController();
             controller.initUser(user);
             stage.show();
-        }
-        
-        
+        }   
     }
     
     public void cancelButtonHandler(ActionEvent event) throws IOException {
