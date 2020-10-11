@@ -127,6 +127,8 @@ public class AddAppointmentViewController implements Initializable {
         // First, check to make sure start and end times are valid
         if (Utils.checkForValidTimes(startTimeString, endTimeString)) {
             Utils.throwErrorAlert("Your end time cannot be scheduled prior to your start time.");
+        } else if(Utils.areOverlappingAppts(userId, startTime)) {
+            Utils.throwErrorAlert("There is already an appointment at that time.");
         } else {
             // Wait just long enough for customer dB call above to finish
             Thread.sleep(100);
