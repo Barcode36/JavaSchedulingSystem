@@ -163,7 +163,7 @@ public class Utils {
         for(AppointmentShort as : allAppointments) {
             Timestamp dBStart = as.getAppointmentStart();
             Timestamp dBEnd = as.getAppointmentEnd();
-            if(start.after(dBStart) && start.before(dBEnd)) {
+            if((start.after(dBStart) && start.before(dBEnd)) || start.equals(dBStart)) {
                 areOverlaps = true;
             }
         }
