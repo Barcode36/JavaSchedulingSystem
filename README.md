@@ -10,15 +10,15 @@
 
 ~E. Provide the ability to automatically adjust appointment times based on user time zones and daylight saving time.~
 
-F. Write exception controls to prevent each of the following. You may use the same mechanism of exception control more than once, but you must incorporate at least  two different mechanisms of exception control.
+~F. Write exception controls to prevent each of the following. You may use the same mechanism of exception control more than once, but you must incorporate at least  two different mechanisms of exception control.~
 
-* scheduling an appointment outside business hours
+~* scheduling an appointment outside business hours~
 
-* scheduling overlapping appointments
+~* scheduling overlapping appointments~
 
-* entering nonexistent or invalid customer data
+~* entering nonexistent or invalid customer data~
 
-* entering an incorrect username and password
+~* entering an incorrect username and password~
 
 G. Write two or more lambda expressions to make your program more efficient, justifying the use of each lambda expression with an in-line comment.
  
