@@ -197,6 +197,8 @@ public class AppointmentsViewController implements Initializable {
         ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointmentsByUser(this.userId);
         ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
         
+        // Using lambda expression here rather than for loop 
+        // for conciseness and easier comprehension
         appointments.forEach(appointment -> {
             Calendar calendar = Calendar.getInstance();
             Timestamp timestamp = Utils.fromUTC(appointment.getAppointmentStart());
@@ -220,6 +222,8 @@ public class AppointmentsViewController implements Initializable {
         ObservableList<AppointmentShort> appointments = AppointmentDao.getAllAppointmentsByUser(this.userId);
         ObservableList<AppointmentShort> apptsToRemove = FXCollections.observableArrayList();
 
+        // Using lambda expression here rather than for loop 
+        // for conciseness and easier comprehension
         appointments.forEach(appointment -> {
            Timestamp start = Utils.fromUTC(appointment.getAppointmentStart());
            String timeString = start.toString().substring(0, 7);

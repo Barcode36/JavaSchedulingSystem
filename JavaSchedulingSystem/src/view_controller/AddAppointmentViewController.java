@@ -60,9 +60,11 @@ public class AddAppointmentViewController implements Initializable {
         try {
             ObservableList<CustomerShort> customers = CustomerDao.getAllCustomers();
             
-            for(CustomerShort cs : customers) {
+            // Using lambda expression here rather than for loop 
+            // for conciseness and easier comprehension
+            customers.forEach((cs) -> {
                 customerNames.add(cs.getCustomerName());
-            }
+            });
             customerChoice.setItems(customerNames);
             customerChoice.setValue(customerNames.get(0));
             
@@ -170,25 +172,43 @@ public class AddAppointmentViewController implements Initializable {
         stage.show();
     }
     
+    // ********* This commented out section below is before the lambda expression
+    // ********* I've converted to a lambda expression here because:
+    // ********* A: The lambda expression is less verbose
+    // ********* B: The lambda expression is easier to comprehend
+    // ********* C: I have no need to pass the inner method around my code base by name
     
     // Check to make sure user isn't trying to schedule an appointment in the past
-    public void checkForValidDate() {
+     public void checkForValidDate() {
     
-        // Add event listener that detects when date picker field loses focus
-        dateField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) {
-                if(unfocused) {
-                    LocalDate today = LocalDate.now();
-                    LocalDate selectedDate = dateField.getValue();
+    // Add event listener that detects when date picker field loses focus
+    //    dateField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+    //        @Override
+    //        public void changed(ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) {
+    //            if(unfocused) {
+    //                LocalDate today = LocalDate.now();
+    //                LocalDate selectedDate = dateField.getValue();
+    //            
+    //                // If the user tries to create an appointment before today's date
+    //                if(selectedDate.isBefore(today)) {
+    //                    Utils.throwErrorAlert("You cannot schedule an appointment in the past.");
+    //                }
+    //            } 
+    //        }
+    //    });
+        
+        dateField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) -> {
+            if(unfocused) {
+                LocalDate today = LocalDate.now();
+                LocalDate selectedDate = dateField.getValue();
                 
-                    // If the user tries to create an appointment before today's date
-                    if(selectedDate.isBefore(today)) {
-                        Utils.throwErrorAlert("You cannot schedule an appointment in the past.");
-                    }
+                // If the user tries to create an appointment before today's date
+                if(selectedDate.isBefore(today)) {
+                    Utils.throwErrorAlert("You cannot schedule an appointment in the past.");
                 } 
             }
         });
+        
     }
     
 }
