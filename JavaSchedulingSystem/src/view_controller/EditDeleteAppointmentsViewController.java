@@ -170,6 +170,8 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         // First, check to make sure start and end times are valid
         if (Utils.checkForValidTimes(startTimeString, endTimeString)) {
             Utils.throwErrorAlert("Your end time cannot be scheduled prior to your start time.");
+        } else if(Utils.areOverlappingAppts(this.user.getUserId(), startTime)) {
+            Utils.throwErrorAlert("There is already an appointment at that time.");
         } else {
             AppointmentDao.updateAppointment(this.appointmentId, appointmentType, Utils.toUTC(startTime), 
                                              Utils.toUTC(endTime), customerId);

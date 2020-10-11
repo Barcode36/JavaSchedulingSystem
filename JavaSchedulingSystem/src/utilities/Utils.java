@@ -4,11 +4,13 @@ package utilities;
 // Utility methods common to lots of view controllers
 
 import com.sun.scenario.effect.Offset;
+import dao.AppointmentDao;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.Clock;
@@ -22,6 +24,7 @@ import java.util.Optional;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,6 +34,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
+import models.AppointmentShort;
 
 public class Utils {
     
@@ -151,6 +155,19 @@ public class Utils {
         } else {
             return false;
         }
+    }
+    
+    public static Boolean areOverlappingAppts(int userId, Timestamp start) throws SQLException {
+        boolean areOverlaps = false;
+        ObservableList<AppointmentShort> allAppointments = AppointmentDao.getAllAppointmentsByUser(userId);
+        for(AppointmentShort as : allAppointments) {
+            Timestamp dBStart = as.getAppointmentStart();
+            Timestamp dBEnd = as.getAppointmentEnd();
+            if(start.after(dBStart) && start.before(dBEnd)) {
+                areOverlaps = true;
+            }
+        }
+        return areOverlaps;
     }
     
     public static Boolean checkPhoneNumbers(String phone) {
