@@ -1,20 +1,22 @@
 
 package models;
 
+// Object model for short version of applications
+
 import java.sql.Timestamp;
 import javafx.beans.property.SimpleStringProperty;
 
-
-
-
 public class AppointmentShort {
+    
+    // AppointmentShort Object fields
     private int appointmentId;
     private Timestamp appointmentStart;
     private SimpleStringProperty appointmentType = new SimpleStringProperty();
     private SimpleStringProperty customerName = new SimpleStringProperty();
     private Timestamp appointmentEnd;
     
-    // Constructor
+    
+    // AppointmentShort Constructor
     public AppointmentShort(int appointmentId, Timestamp appointmentStart, Timestamp appointmentEnd, String appointmentType, String customerName) {
         setAppointmentId(appointmentId);
         this.appointmentStart = appointmentStart;
@@ -24,8 +26,7 @@ public class AppointmentShort {
     }
     
     
-    
-    // AppointmentId Getters and Setters
+    // AppointmentId Getter and Setter
     public int getAppointmentId() {
         return this.appointmentId;
     }
@@ -35,7 +36,7 @@ public class AppointmentShort {
     }
     
     
-    // Appointment Start Getters and Setters
+    // Appointment Start Getter and Setter
     public Timestamp getAppointmentStart() {
         return appointmentStart;
     }
@@ -45,8 +46,7 @@ public class AppointmentShort {
     }
     
     
-    
-    // Appointment End Getters and Setters
+    // Appointment End Getter and Setter
     public Timestamp getAppointmentEnd() {
         return appointmentEnd;
     }
@@ -55,9 +55,8 @@ public class AppointmentShort {
         this.appointmentEnd = appointmentEnd;
     }
     
-    
-    
-    // Appointment Type Getters and Setters
+
+    // Appointment Type Getter and Setter
     public String getAppointmentType() {
         return this.appointmentType.get();
     }
@@ -66,9 +65,8 @@ public class AppointmentShort {
         this.appointmentType.set(appointmentType);
     }
     
-    
-    
-    // CustomerName Getters and Setters
+
+    // CustomerName Getter and Setter
     public String getCustomerName() {
         return this.customerName.get();
     }
@@ -76,6 +74,4 @@ public class AppointmentShort {
     public void setCustomerName(String customerName) {
         this.customerName.set(customerName);
     }
-    
-    
 }

@@ -1,8 +1,9 @@
 
 package models;
 
-import java.sql.Timestamp;
+// Object model for application addresses
 
+import java.sql.Timestamp;
 
 public class Address {
     
@@ -35,9 +36,8 @@ public class Address {
         this.lastUpdateBy = lastUpdateBy;
     }
     
-    
-    
-    // Address ID Getters and Setters
+
+    // Address ID Getter and Setter
     public int getAddressId() {
         return addressId;
     }
@@ -46,9 +46,8 @@ public class Address {
         this.addressId = addressId;
     } 
     
-    
-    
-    // Address Getters and Setters
+
+    // Address Getter and Setter
     public String getAddress() {
         return address;
     }
@@ -57,9 +56,8 @@ public class Address {
         this.address = address;
     }
     
-    
-    
-    // Address2 Getters and Setters
+
+    // Address2 Getter and Setter
     public String getAddress2() {
         return address;
     }
@@ -68,9 +66,8 @@ public class Address {
         this.address2 = address2;
     }
     
-    
-    
-    // City ID Getters and Setters
+
+    // City ID Getter and Setter
     public int getCityId() {
         return cityId;
     }
@@ -79,9 +76,8 @@ public class Address {
         this.cityId = cityId;
     }
     
-    
-    
-    // Postal Code Getters and Setters
+
+    // Postal Code Getter and Setter
     public String getPostalCode() {
         return postalCode;
     }
@@ -90,9 +86,8 @@ public class Address {
         this.postalCode = postalCode;
     }
     
-    
-    
-    // Phone Getters and Setters
+
+    // Phone Getter and Setter
     public String getPhone() {
         return phone;
     }
@@ -101,9 +96,8 @@ public class Address {
         this.phone = phone;
     }
     
-    
-    
-    // Create Date Getters and Setters
+
+    // Create Date Getter and Setter
     public Timestamp getCreateDate() {
         return createDate;
     }
@@ -112,9 +106,8 @@ public class Address {
         this.createDate = createDate;
     }
     
-    
-    
-    // CreatedBy Getters and Setters
+
+    // CreatedBy Getter and Setter
     public String getCreatedBy() {
         return createdBy;
     }
@@ -123,9 +116,8 @@ public class Address {
         this.createdBy = createdBy;
     }
     
-    
-    
-    // Last update Getters and Setters
+
+    // Last update Getter and Setter
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -134,9 +126,8 @@ public class Address {
         this.lastUpdate = lastUpdate;
     }
     
-    
-    
-    // Last Update By Getters and Setters
+
+    // Last Update By Getter and Setter
     public String getLastUpdateBy() {
         return lastUpdateBy;
     }
@@ -144,5 +135,4 @@ public class Address {
     public void setLastUpdateBy(String lastUpdateBy) {
         this.lastUpdateBy = lastUpdateBy;
     }
-    
 }

@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,6 +62,7 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         try {
             ObservableList<CustomerShort> customers = CustomerDao.getAllCustomers();
             
+            // Example of functional loop using lambdas
             customers.forEach((cs) -> {
                 customerNames.add(cs.getCustomerName());
             });
@@ -82,14 +82,15 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         ObservableList<String> endTimes = FXCollections.observableArrayList(
                 "09:00", "10:00", "11:00", "12:00", "13:00",
                 "14:00", "15:00", "16:00", "17:00");
-        endTimeChoice.setItems(endTimes);
-        
+        endTimeChoice.setItems(endTimes);  
     }  
+    
     
     // Set current user of application
     public void initUser(User user) {
         this.user = user;
     }
+    
     
     // Load initial customer data into edit fields
     public void initAppointment(AppointmentShort appointment) {
@@ -112,9 +113,9 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         
         String endTimePart = endTime.toString().substring(11, 16);
         endTimeChoice.setValue(endTimePart);
-        endTimeChoice.setValue(endTimePart);
-        
+        endTimeChoice.setValue(endTimePart);  
     }
+    
     
     // Delete appointment and return to Appointments View
     public void deleteButtonHandler(ActionEvent event) throws IOException, SQLException {
@@ -131,6 +132,7 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         stage.show();
     }
 
+    
     // Do nothing in dB and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
@@ -144,6 +146,7 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         controller.initUser(user);
         stage.show();
     }
+    
     
     // Update appointment and return to Appointment View
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
@@ -189,14 +192,14 @@ public class EditDeleteAppointmentsViewController implements Initializable {
         }
     }
     
-    // ********* This commented out section below is before the lambda expression
-    // ********* I've converted to a lambda expression here because:
-    // ********* A: The lambda expression is less verbose
-    // ********* B: The lambda expression is easier to comprehend
-    // ********* C: I have no need to pass the inner method around my code base by name
     
     // Check to make sure user isn't trying to schedule an appointment in the past
     public void checkForValidDate() {
+        // ********* This commented out section below is before I replaced it with the lambda expression
+        // ********* I've converted to a lambda expression here because:
+        // ********* A: The lambda expression is less verbose
+        // ********* B: The lambda expression is easier to comprehend
+        // ********* C: I have no need to pass the inner method around my code base by name
         // Add event listener that detects when date picker field loses focus
         // dateField.focusedProperty().addListener(new ChangeListener<Boolean>() {
         //      @Override
@@ -225,6 +228,4 @@ public class EditDeleteAppointmentsViewController implements Initializable {
             }
         });
     }
-    
-    
 }

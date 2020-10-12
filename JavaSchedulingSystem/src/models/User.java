@@ -6,7 +6,6 @@ package models;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
-
 public class User {
     
     // User Object fields
@@ -33,8 +32,7 @@ public class User {
         this.lastUpdateBy = lastUpdateBy;
     }
     
-    // UserID Getters and Setters
-    
+    // UserID Getter and Setter
     public int getUserId() {
         return userId;
     }
@@ -44,8 +42,7 @@ public class User {
     }
     
     
-    // Username Getters and Setters
-    
+    // Username Getter and Setter
     public String getUserName() {
         return username;
     }
@@ -55,8 +52,7 @@ public class User {
     }
     
     
-    // Password Getters and Setters
-    
+    // Password Getter and Setter
     public String getUserPassword() {
         return userPassword;
     }
@@ -66,8 +62,7 @@ public class User {
     }
     
     
-    // Active Getters and Setters
-    
+    // Active Getter and Setter
     public int getUserActive() {
         return active;
     }
@@ -77,8 +72,7 @@ public class User {
     }
     
     
-    // Create Date Getters and Setters
-    
+    // Create Date Getter and Setter
     public LocalDate getUserCreateDate() {
         return createDate;
     }
@@ -88,8 +82,7 @@ public class User {
     }
     
     
-    // Created By Getters and Setters
-    
+    // Created By Getter and Setter
     public String getUserCreatedBy() {
         return createdBy;
     }
@@ -99,8 +92,7 @@ public class User {
     }
     
     
-    // Last Update Getters and Setters
-    
+    // Last Update Getter and Setter
     public Timestamp getUserLastUpdate() {
         return lastUpdate;
     }
@@ -110,8 +102,7 @@ public class User {
     }
     
     
-    // Last Update By Getters and Setters
-    
+    // Last Update By Getter and Setter
     public String getUserLastUpdateBy() {
         return lastUpdateBy;
     }
@@ -119,5 +110,4 @@ public class User {
     public void setUserLastUpdateBy(String lastUpdateBy) {
         this.lastUpdateBy = lastUpdateBy;
     }
-    
 }

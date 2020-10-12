@@ -50,13 +50,14 @@ public class LoginReportViewController implements Initializable {
         textBlock.setEditable(false);
     }   
     
+    
     // Set current user of application
     public void initUser(User user) {
         this.user = user;
     }
     
     
-    
+    // Handle back button clicks
     public void backButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
@@ -69,5 +70,4 @@ public class LoginReportViewController implements Initializable {
         controller.initUser(user);
         stage.show();
     }
-    
 }

@@ -17,7 +17,9 @@ import models.CustomerShort;
 
 public class CustomerDao {
     
+    // Get single customer by customer name
     public static Customer getCustomer(String customerName) throws SQLException {
+        
         // Create SQL select statement using customerName
         String sqlStatement = "SELECT * FROM customer WHERE customerName = ?";
         
@@ -46,16 +48,13 @@ public class CustomerDao {
             selectedCustomer = new Customer(customerId, name, addressId, active, 
                                             createDate, createdBy, lastUpdate, lastUpdateBy);    
         }
-       
+        // Return customer
         return selectedCustomer;
     }
     
     
-
     // Get all customers
     public static ObservableList<CustomerShort> getAllCustomers() throws SQLException {
-        
-        // Prepare Observable List variable to hold all users
         ObservableList<CustomerShort> allCustomers = FXCollections.observableArrayList();
         
         // Create SQL select all users statement
@@ -70,7 +69,7 @@ public class CustomerDao {
         
         CustomerShort nextCustomer;
         
-        // Get User info from dB query
+        // Get customer info from dB query
         while(rs.next()) {
             int customerId = rs.getInt("customerId");
             String name = rs.getString("customerName");
@@ -79,21 +78,18 @@ public class CustomerDao {
             
             nextCustomer = new CustomerShort(customerId, name, address, phone);  
             allCustomers.add(nextCustomer);
-            
         }
         
-        // Return observable list
+        // Return observable list of customers
         return allCustomers;
     }
     
     
     // Get all customer appearances
     public static ObservableList<CustomerAppearance> getAllCustomerAppearances() throws SQLException {
-        
-        // Prepare Observable List variable to hold all users
         ObservableList<CustomerAppearance> allCustomerAppearances = FXCollections.observableArrayList();
         
-        // Create SQL select all users statement
+        // Create SQL select all customers appearances statement
         String sqlStatement = "SELECT c.customerName, COUNT(a.customerId) AS appearances FROM appointment a INNER JOIN customer c USING(customerId) GROUP BY c.customerName ORDER BY appearances DESC;";
         
         // Get reference to PreparedStatement
@@ -105,17 +101,16 @@ public class CustomerDao {
         
         CustomerAppearance nextCustomerAppearance;
         
-        // Get User info from dB query
+        // Get customer info from dB query
         while(rs.next()) {
             String name = rs.getString("customerName");
             int appearances = rs.getInt("appearances");
             
             nextCustomerAppearance = new CustomerAppearance(name, appearances);  
-            allCustomerAppearances.add(nextCustomerAppearance);
-            
+            allCustomerAppearances.add(nextCustomerAppearance);  
         }
         
-        // Return observable list
+        // Return observable list of customer appearances
         return allCustomerAppearances;
     }
     
@@ -142,9 +137,10 @@ public class CustomerDao {
         ps.execute();
     }
     
+    // Update existing customer
     public static void updateCustomer(int customerId, String customerName, int addressId) throws SQLException {
     
-        // Create SQL select statement using customerName
+        // Create SQL update statement using customer info
         String sqlStatement = "UPDATE customer SET customerName = ?, addressId = ? WHERE customerId = ?";
         
         // Get reference to PreparedStatement
@@ -154,12 +150,12 @@ public class CustomerDao {
         ps.setInt(2, addressId);
         ps.setInt(3, customerId);
         ps.execute();
-        
     }
     
+    // Delete customer
     public static void deleteCustomer(int customerId) throws SQLException {
     
-        // Create SQL select statement using customerName
+        // Create SQL delete statement using customerName
         String sqlStatement = "DELETE FROM customer WHERE customerId = ?";
         
         // Get reference to PreparedStatement
@@ -167,7 +163,5 @@ public class CustomerDao {
         PreparedStatement ps = DBQuery.getPreparedStatement();
         ps.setInt(1, customerId);
         ps.execute();
-        
     }
-    
 }

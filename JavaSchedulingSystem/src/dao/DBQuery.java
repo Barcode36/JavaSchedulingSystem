@@ -1,5 +1,4 @@
 
-// This class provides getter and setter for DB Statement object
 package dao;
 
 import com.mysql.jdbc.Connection;

@@ -4,10 +4,7 @@ package view_controller;
 import dao.AppointmentDao;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,21 +19,23 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
-import models.AppointmentShort;
 import models.User;
 import models.AppointmentMonth;
-import utilities.Utils;
 
 
 public class AppointmentsByMonthReportViewController implements Initializable {
-    User user;
+    
+    // FXML variables for view controls
     @FXML private Button backButton;
     @FXML private TextArea textArea;
+    
+    User user;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textArea.setEditable(false);
         
+        // Print all appointment types by month to UI
         try {
             ObservableList<AppointmentMonth> appointments = AppointmentDao.getAllAppointmentsByMonth();
             for(AppointmentMonth am : appointments) {
@@ -54,8 +53,6 @@ public class AppointmentsByMonthReportViewController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(AppointmentsByMonthReportViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
     }    
     
     
@@ -65,7 +62,7 @@ public class AppointmentsByMonthReportViewController implements Initializable {
     }
     
     
-    
+    // Handle clicks on back button
     public void backButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
@@ -78,5 +75,4 @@ public class AppointmentsByMonthReportViewController implements Initializable {
         controller.initUser(user);
         stage.show();
     }
-    
 }

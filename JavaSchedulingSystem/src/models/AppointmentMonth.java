@@ -1,13 +1,18 @@
 
 package models;
 
+// Object model for application appointment per month
 
 public class AppointmentMonth {
+    
+    // AppointmentMonth Object fields
     private int year;
     private int month;
     private String type;
     private int typeCount;
     
+    
+    // AppointmentMonth constructor
     public AppointmentMonth (int year, int month, String type, int typeCount) {
         this.year = year;
         this.month = month;
@@ -15,7 +20,8 @@ public class AppointmentMonth {
         this.typeCount = typeCount;
     }
     
-    // Year Getters and Setters
+    
+    // Year Getter and Setter
     public int getYear() {
         return this.year;
     }
@@ -24,10 +30,8 @@ public class AppointmentMonth {
         this.year = year;
     }
     
-    
-    
-    
-    // Month Getters and Setters
+
+    // Month Getter and Setter
     public int getMonth() {
         return this.month;
     }
@@ -36,9 +40,8 @@ public class AppointmentMonth {
         this.month = month;
     }
     
-    
-    
-    // Type Getters and Setters
+
+    // Type Getter and Setter
     public String getType() {
         return this.type;
     }
@@ -47,15 +50,13 @@ public class AppointmentMonth {
         this.type = type;
     }
     
-    
-    
-    // TypeCount Getters and Setters
+
+    // TypeCount Getter and Setter
     public int getTypeCount() {
         return this.typeCount;
     }
     
     public void setTypeCount(int typeCount) {
         this.typeCount = typeCount;
-    }
-    
+    }   
 }

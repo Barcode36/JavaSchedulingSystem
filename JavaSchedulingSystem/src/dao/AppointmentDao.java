@@ -11,14 +11,14 @@ import javafx.collections.ObservableList;
 import models.Appointment;
 import models.AppointmentMonth;
 import models.AppointmentShort;
-import models.ConsultantSchedule;
 import utilities.Utils;
 
 
 
 public class AppointmentDao {
     
-    // Get single appointment
+    
+    // Get single appointment by id
     public static Appointment getAppointmentById(int appointmentId) throws SQLException {
     
          // Create SQL select statement using appointmentId
@@ -34,7 +34,7 @@ public class AppointmentDao {
         
         Appointment selectedAppointment = null;
         
-        // Get Customer info from dB query
+        // Get appointment info from dB query
         while(rs.next()) {
             int appointmentIdNum = rs.getInt("appointmentId");
             int customerId = rs.getInt("customerId");
@@ -63,10 +63,10 @@ public class AppointmentDao {
     }
     
     
-    // Get single appointment
+    // Get single appointment by customerId
     public static Appointment getAppointmentByCustomerId(int customerId) throws SQLException {
     
-         // Create SQL select statement using appointmentId
+         // Create SQL select statement using customerId
         String sqlStatement = "SELECT * FROM appointment WHERE customerId = ?";
         
         // Get reference to PreparedStatement
@@ -79,7 +79,7 @@ public class AppointmentDao {
         
         Appointment selectedAppointment = null;
         
-        // Get Customer info from dB query
+        // Get appointment info from dB query
         while(rs.next()) {
             int appointmentId = rs.getInt("appointmentId");
             int custId = rs.getInt("customerId");
@@ -110,7 +110,6 @@ public class AppointmentDao {
     
     // Get all appointments
     public static ObservableList<AppointmentShort> getAllAppointmentsByUser(int userId) throws SQLException {
-        // Prepare Observable List variable to hold all users
         ObservableList<AppointmentShort> allAppointments = FXCollections.observableArrayList();
         
         // Create SQL select all users statement
@@ -126,7 +125,7 @@ public class AppointmentDao {
         
         AppointmentShort nextAppointment;
         
-        // Get User info from dB query
+        // Get appointment info from dB query
         while(rs.next()) {
             int appointmentId = rs.getInt("appointmentId");
             Timestamp appointmentStart = rs.getTimestamp("start");
@@ -135,8 +134,7 @@ public class AppointmentDao {
             Timestamp appointmentEnd = rs.getTimestamp("end");
             
             nextAppointment = new AppointmentShort(appointmentId, Utils.fromUTC(appointmentStart), Utils.fromUTC(appointmentEnd), appointmentType, customerName);  
-            allAppointments.add(nextAppointment);
-            
+            allAppointments.add(nextAppointment);   
         }
         
         // Return observable list of appointments
@@ -144,11 +142,11 @@ public class AppointmentDao {
     }
     
     
-    // Get all appointments
+    // Get all appointment times for current user
     public static ObservableList<Timestamp> getAllAppointmentTimesByUser(int userId) throws SQLException {
         ObservableList<Timestamp> upcomingAppointments = FXCollections.observableArrayList();
         
-        // Create SQL select all users statement
+        // Create SQL select all appointments by userid statement
         String sqlStatement = "SELECT start FROM appointment WHERE userId = ?";
         
         // Get reference to PreparedStatement
@@ -161,7 +159,7 @@ public class AppointmentDao {
         
         String nextAppointmentStart;
         
-        // Get User info from dB query
+        // Get appointment info from dB query
         while(rs.next()) {
             Timestamp appointmentStart = rs.getTimestamp("start");
             upcomingAppointments.add(appointmentStart); 
@@ -176,7 +174,7 @@ public class AppointmentDao {
     public static ObservableList<AppointmentMonth> getAllAppointmentsByMonth() throws SQLException {
         ObservableList<AppointmentMonth> appointmentsByMonth = FXCollections.observableArrayList();
         
-        // Create SQL select all users statement
+        // Create SQL select all appointments by month statement
         String sqlStatement = "SELECT YEAR(start) AS year, MONTH(start) AS month, type, COUNT(type) AS typeCount FROM appointment WHERE type IS NOT NULL GROUP BY YEAR(start), MONTH(start), type;";
         
         // Get reference to PreparedStatement
@@ -188,7 +186,7 @@ public class AppointmentDao {
         
         AppointmentMonth nextAppointmentMonth;
         
-        // Get User info from dB query
+        // Get appointment info from dB query
         while(rs.next()) {
             int year = rs.getInt("year");
             int month = rs.getInt("month");
@@ -203,7 +201,6 @@ public class AppointmentDao {
     }
     
     
-    
     // Add new appointment to dB
     public static void createAppointment(int customerId, int userId, String title, String description,
                                          String location, String contact, String appointmentType, 
@@ -211,7 +208,7 @@ public class AppointmentDao {
                                          Timestamp appointmentEnd, Timestamp createDate, String createdBy,
                                          Timestamp lastUpdate, String lastUpdateBy) throws SQLException {
         
-        // Create SQL insert statement using Customer info
+        // Create SQL insert statement using appointment info
         String sqlStatement = "INSERT INTO appointment(customerId, userId, title, description,"
                               + "location, contact, type, url, start,"
                               + "end, createDate, createdBy, lastUpdate, lastUpdateBy)"
@@ -234,7 +231,6 @@ public class AppointmentDao {
     }
     
     
-    
     // Update appointment
     public static void updateAppointment(int appointmentId, String appointmentType,
                                          Timestamp appointmentStart, Timestamp appointmentEnd, 
@@ -255,7 +251,6 @@ public class AppointmentDao {
         ps.execute();
         
     }
-    
     
     
     // Delete appointment

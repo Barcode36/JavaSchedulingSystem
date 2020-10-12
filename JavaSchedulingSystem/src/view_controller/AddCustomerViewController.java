@@ -40,10 +40,12 @@ public class AddCustomerViewController implements Initializable {
        
     }    
     
+    
     // Set current user of application
     public void initUser(User user) {
         this.user = user;
     }
+    
     
     // Do nothing and return to Customer View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
@@ -59,16 +61,16 @@ public class AddCustomerViewController implements Initializable {
         stage.show();
     }
     
+    
+    // Handle save button clicks
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException, InterruptedException {
-        
-        // TODO - go to dB and create new customer
         String customerName = customerNameField.getText();
         String address = addressField.getText();
         String phone = phoneField.getText();
         boolean phoneValid = Utils.checkPhoneNumbers(phone);
         
         
-        // If the phone number contains letters, throw error
+        // If the phone number is not valid, throw error
         if(!phoneValid) {
             Utils.throwErrorAlert("Phone number must be in valid format.");
         } else if(customerName.isEmpty()) {     // if customer name field is blank, throw error
@@ -76,7 +78,6 @@ public class AddCustomerViewController implements Initializable {
         } else if(address.isEmpty()) {          // if address field is blank, throw error
             Utils.throwErrorAlert("Address field must not be blank.");
         } else {                                // if all fields are valid, add the new customer
-        
             Timestamp timestamp = Timestamp.valueOf(LocalDate.now().atStartOfDay());
             int newAddressId = AddressDao.getAddressId();
             Address dBAddress = AddressDao.getAddress(address);
@@ -85,7 +86,6 @@ public class AddCustomerViewController implements Initializable {
             if(CustomerDao.getCustomer(customerName) != null) {
                 Utils.throwErrorAlert("Customer already exists.");
             } else {
-            
                 // If the address doesn't already exist, add it first, then add customer with the new address Id
                 if(dBAddress == null) {
                     AddressDao.createAddress(address, "", 1, "", phone, timestamp, "admin", timestamp, "admin");

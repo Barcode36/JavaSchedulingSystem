@@ -1,15 +1,20 @@
 
 package models;
 
+// Object model for application consultant schedules
+
 import java.sql.Timestamp;
 
-
 public class ConsultantSchedule {
+    
+    // ConsultantSchedule Object fields
     private String username;
     private String type;
     private String customerName;
     private Timestamp start;
     
+    
+    // ConsultantSchedule constructor
     public ConsultantSchedule(String username, String type, String customerName, Timestamp start) {
         this.username = username;
         this.type = type;
@@ -18,7 +23,7 @@ public class ConsultantSchedule {
     }
     
     
-    // Username Getters and Setters
+    // Username Getter and Setter
     public String getUserName() {
         return this.username;
     }
@@ -27,9 +32,8 @@ public class ConsultantSchedule {
         this.username = username;
     }
     
-    
-    
-    // Type Getters and Setters
+
+    // Type Getter and Setter
     public String getType() {
         return this.type;
     }
@@ -38,9 +42,8 @@ public class ConsultantSchedule {
         this.type = type;
     }
     
-    
-    
-    // CustomerName Getters and Setters
+
+    // CustomerName Getter and Setter
     public String getCustomerName() {
         return this.customerName;
     }
@@ -49,9 +52,8 @@ public class ConsultantSchedule {
         this.customerName = customerName;
     }
     
-    
-    
-    // Start Getters and Setters
+
+    // Start Getter and Setter
     public Timestamp getStart() {
         return this.start;
     }
@@ -59,5 +61,4 @@ public class ConsultantSchedule {
     public void setStart(Timestamp start) {
         this.start = start;
     }  
-    
 }

@@ -11,6 +11,7 @@ import models.Address;
 
 public class AddressDao {
     
+    
     // Get single Address
     public static Address getAddress(String address) throws SQLException {
     
@@ -27,7 +28,7 @@ public class AddressDao {
         
         Address selectedAddress = null;
         
-        // Get City info from dB query
+        // Get Address info from dB query
         while(rs.next()) {
             int addressId = rs.getInt("addressId");
             String address1 = rs.getString("address");
@@ -48,7 +49,6 @@ public class AddressDao {
         // Return address
         return selectedAddress;
     }
-    
     
     
     // Add new address to dB
@@ -77,10 +77,10 @@ public class AddressDao {
     }
     
     
-    // Update address in database
+    // Update phone in database
     public static void updatePhone(int addressId, String phone) throws SQLException {
         
-        // Create SQL insert statement using address info
+        // Create SQL insert statement using phone and address info
         String sqlStatement = "UPDATE address SET phone = ? WHERE addressId = ?";
         
         // Get reference to PreparedStatement
@@ -92,10 +92,11 @@ public class AddressDao {
     }
     
     
-    // Get single Address
+    // Get single Address Id
     public static int getAddressId() throws SQLException {
     
-         String sqlStatement = "SELECT max(addressId)+1 FROM address";
+        // Create SQL select statement for new addressId
+        String sqlStatement = "SELECT max(addressId)+1 FROM address";
         
         // Get reference to PreparedStatement
         DBQuery.setPreparedStatement(conn, sqlStatement);

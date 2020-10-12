@@ -12,6 +12,7 @@ public class DBConnection {
     private static final String PROTOCOL = "jdbc";
     private static final String VENDORNAME = ":mysql:";
     private static final String IPADDRESS = "//wgudb.ucertify.com/U06ciQ";
+    
     //JDBC URL
     private static final String JDBCURL = PROTOCOL + VENDORNAME + IPADDRESS;
     
@@ -23,7 +24,7 @@ public class DBConnection {
     private static final String USERNAME = "U06ciQ";
     private static final String PASSWORD = "53688727274";
     
-    
+    // Start connection to database
     public static Connection startConnection() {
         try {
             Class.forName(MYSQLJDBCDRIVER);
@@ -33,11 +34,10 @@ public class DBConnection {
             catch(ClassNotFoundException | SQLException e) {
                 System.out.println(e.getMessage());
         }
-        
         return conn;
     }
     
-    
+    // Close connection to database
     public static void closeConnection() {
     
         try {
@@ -47,5 +47,4 @@ public class DBConnection {
             System.out.println(e.getMessage());
         }
     }
-    
 }
