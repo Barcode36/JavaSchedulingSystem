@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-
 public class Customer {
     
     // Customer Object fields
@@ -34,8 +33,8 @@ public class Customer {
         setCustomerLastUpdateBy(lastUpdateBy);
     }
     
-    // CustomerID Getters and Setters
     
+    // CustomerID Getter and Setter
     public int getCustomerId() {
         return customerId.get();
     }
@@ -45,8 +44,7 @@ public class Customer {
     }
     
     
-    // First Name Getters and Setters
-    
+    // First Name Getter and Setter
     public String getCustomerName() {
         return customerName.get();
     }
@@ -56,8 +54,7 @@ public class Customer {
     }
     
     
-    // Address Getters and Setters
-    
+    // Address Getter and Setter
     public int getCustomerAddressId() {
         return addressId.get();
     }
@@ -67,7 +64,7 @@ public class Customer {
     }
     
     
-    // Active Getters and Setters
+    // Active Getter and Setter
     public int getCustomerActive() {
         return active.get();
     }
@@ -77,7 +74,7 @@ public class Customer {
     }
     
     
-    // Create Date Getters and Setters
+    // Create Date Getter and Setter
     public Timestamp getCustomerCreateDate() {
         return createDate;
     }
@@ -87,7 +84,7 @@ public class Customer {
     }
     
     
-    // Created By Getters and Setters
+    // Created By Getter and Setter
     public String getCustomerCreatedBy() {
         return createdBy.get();
     }
@@ -97,7 +94,7 @@ public class Customer {
     }
     
     
-    // Last Update Getters and Setters
+    // Last Update Getter and Setter
     public Timestamp getCustomerLastUpdate() {
         return lastUpdate;
     }
@@ -107,7 +104,7 @@ public class Customer {
     }
     
     
-    // Last Updated By Getters and Setters
+    // Last Updated By Getter and Setter
     public String getCustomerLastUpdateBy() {
         return lastUpdateBy.get();
     }
@@ -115,5 +112,4 @@ public class Customer {
     public void setCustomerLastUpdateBy(String lastUpdateBy) {
         this.lastUpdateBy.set(lastUpdateBy);
     }
-    
 }

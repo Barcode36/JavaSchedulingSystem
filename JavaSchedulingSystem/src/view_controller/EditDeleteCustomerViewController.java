@@ -45,10 +45,12 @@ public class EditDeleteCustomerViewController implements Initializable {
     
     }    
     
+    
     // Set current user of application
     public void initUser(User user) {
         this.user = user;
     }
+    
     
     // Load initial customer data into edit fields
     public void initCustomer(CustomerShort customer) {
@@ -59,10 +61,8 @@ public class EditDeleteCustomerViewController implements Initializable {
     }
     
     
-    
     // Delete customer and change scene to Appointments View
     public void deleteButtonHandler(ActionEvent event) throws IOException, SQLException {
-        
         Appointment appointment = AppointmentDao.getAppointmentByCustomerId(customerId);
         if (appointment == null) {
             // Delete customer and change scene to Appointments View
@@ -79,12 +79,10 @@ public class EditDeleteCustomerViewController implements Initializable {
             stage.show();
         } else {
             Utils.throwErrorAlert("This customer cannot be deleted because they are scheduled for an appointment.");
-        }
-        
+        } 
     }
     
-    
-    
+
     // Do nothing and return to Appointments View
     public void cancelButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
@@ -102,13 +100,12 @@ public class EditDeleteCustomerViewController implements Initializable {
     
     // Edit customer and change scene to Appointments View
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException {
-    
         String customerName = customerNameField.getText();
         String address = addressField.getText();
         String phone = phoneField.getText();
         boolean phoneValid = Utils.checkPhoneNumbers(phone);
         
-        // If the phone number contains letters, throw error
+        // If the phone number is not valid, throw error
         if(!phoneValid) {
             Utils.throwErrorAlert("Phone number must be in valid format."); 
         } else if(customerName.isEmpty()) {         // if customer name field is blank, throw error

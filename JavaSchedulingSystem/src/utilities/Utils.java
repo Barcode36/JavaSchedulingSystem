@@ -3,23 +3,14 @@ package utilities;
 
 // Utility methods common to lots of view controllers
 
-import com.sun.scenario.effect.Offset;
 import dao.AppointmentDao;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Clock;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -38,6 +29,7 @@ import models.AppointmentShort;
 
 public class Utils {
     
+    
     // Used in controllers to change scenes 
     public static void sceneChanger(String sceneName, ActionEvent event) throws IOException {
             Parent parent = FXMLLoader.load(Utils.class.getClassLoader().getResource(sceneName));
@@ -46,6 +38,7 @@ public class Utils {
             window.setScene(scene);
             window.show();
     }
+    
     
     // Throws confirmation alert in Korean
     public static String throwConfirmationAlert(String language) {
@@ -57,6 +50,7 @@ public class Utils {
         return result.get().getText();
     }
     
+    
     // Override method: Throws confirmation alert
     public static String throwConfirmationAlert() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -65,6 +59,7 @@ public class Utils {
         Optional<ButtonType> result = alert.showAndWait();
         return result.get().getText();
     }
+    
     
     // Alert for upcoming appointment
     public static void throwUpcomingAppointmentAlert(Timestamp timestamp) {
@@ -82,12 +77,14 @@ public class Utils {
         } 
     }
     
+    
     // Override method: Handles exit button click
     public static void exitApplication() {
         if(throwConfirmationAlert().equals("OK")) {
             System.exit(0);
         } 
     }
+    
     
     // Throws error alert in Korean
     public static void throwErrorAlert(String message, String language) {
@@ -98,6 +95,7 @@ public class Utils {
         alert.showAndWait();
     }
     
+    
     // Override method: Throws error alert in English
     public static void throwErrorAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -106,32 +104,26 @@ public class Utils {
         alert.showAndWait();
     }
     
+    
     // Write login timestamp to logfile
     public static void loginTimestamp(String username, Timestamp timestamp) throws IOException {
         String logString = "Username: " + username + "   |   Login Timestamp: " + timestamp.toString() + "\n";
         File file = new File("log.txt");
         FileWriter fileWriter = new FileWriter(file.getAbsoluteFile(), true);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(logString);
-        bufferedWriter.close();
+        // *** Example of try with resources
+        try (BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+            bufferedWriter.write(logString);
+        }
     }    
     
     
     // Convert local timestamp to UTC timestamp and return UTC timestamp
     public static Timestamp toUTC(Timestamp localTimestamp) {
-        // Convert local Timestamp to an Instant
         Instant localInstant = localTimestamp.toInstant();
-        
-        // Get the time zone of the machine and get the UTC offset
         TimeZone tz = TimeZone.getDefault();
         int offset = tz.getOffset(System.currentTimeMillis());
-        
-        // Subtract offset from local instant to get utc millis
         Instant utcMillis = localInstant.minusMillis(offset);
-        
-        // Convert utc millis to utc timestamp
         Timestamp utcTimestamp = Timestamp.from(utcMillis);
-        
         return utcTimestamp;
     }
     
@@ -147,16 +139,15 @@ public class Utils {
     }
     
     
+    // Confirm that start time is before end time
     public static Boolean checkForValidTimes(String startTime, String endTime) {
         Integer startHour = Integer.parseInt(startTime.substring(0,2));
         Integer endHour = Integer.parseInt(endTime.substring(0, 2));
-        if(startHour > endHour) {
-            return true;
-        } else {
-            return false;
-        }
+        return startHour > endHour;
     }
     
+    
+    // Confirm that there are no overlapping appointments
     public static Boolean areOverlappingAppts(int userId, Timestamp start) throws SQLException {
         boolean areOverlaps = false;
         ObservableList<AppointmentShort> allAppointments = AppointmentDao.getAllAppointmentsByUser(userId);
@@ -170,15 +161,12 @@ public class Utils {
         return areOverlaps;
     }
     
+    
+    // Confirm phone numbers are in a valid format
     public static Boolean checkPhoneNumbers(String phone) {
         String regex = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$";
         Pattern regexPattern = Pattern.compile(regex);
         Matcher matcher = regexPattern.matcher(phone);
-        if(matcher.find()) {
-            return true;
-        } else {
-            return false;
-        }
+        return matcher.find();
     }
-    
 }

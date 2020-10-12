@@ -12,7 +12,6 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,14 +59,13 @@ public class AddAppointmentViewController implements Initializable {
         try {
             ObservableList<CustomerShort> customers = CustomerDao.getAllCustomers();
             
-            // Using lambda expression here rather than for loop 
-            // for conciseness and easier comprehension
+            //********* Using lambda expression here rather than for loop 
+            //********* for conciseness and easier comprehension
             customers.forEach((cs) -> {
                 customerNames.add(cs.getCustomerName());
             });
             customerChoice.setItems(customerNames);
             customerChoice.setValue(customerNames.get(0));
-            
         } catch (SQLException ex) {
             Logger.getLogger(AddAppointmentViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -87,23 +85,22 @@ public class AddAppointmentViewController implements Initializable {
                 "09:00", "10:00", "11:00", "12:00", "13:00",
                 "14:00", "15:00", "16:00", "17:00");
         endTimeChoice.setItems(endTimes);
-        endTimeChoice.setValue("09:00");
-        
+        endTimeChoice.setValue("09:00");   
     }    
+    
     
     // Set current user of application
     public void initUser(User user) {
         this.user = user;
     }
     
-    
+    // Handle clicks on save button
     public void saveButtonHandler(ActionEvent event) throws IOException, SQLException, InterruptedException {
         
         // Get customerId of chosen customer
         String customerName = customerChoice.getSelectionModel().getSelectedItem().toString();
         int customerId = CustomerDao.getCustomer(customerName).getCustomerId();
-        
-        
+
         // Get userId of current application user
         int userId = this.user.getUserId();
         
@@ -121,7 +118,7 @@ public class AddAppointmentViewController implements Initializable {
         LocalTime lst = LocalTime.parse(startTimeString);
         LocalTime let = LocalTime.parse(endTimeString);
         
-        // Assert that the user cannot choose a time outside of business hours else throw error
+        //********* Assert that the user cannot choose a time outside of business hours else throw error
         assert lst.isAfter(tooEarly) : "Start time is too early.";
         assert let.isBefore(tooLate) : "End time is too late.";
         
@@ -159,6 +156,7 @@ public class AddAppointmentViewController implements Initializable {
         }   
     }
     
+    // Handle cancel button clicks
     public void cancelButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
@@ -172,30 +170,29 @@ public class AddAppointmentViewController implements Initializable {
         stage.show();
     }
     
-    // ********* This commented out section below is before the lambda expression
-    // ********* I've converted to a lambda expression here because:
-    // ********* A: The lambda expression is less verbose
-    // ********* B: The lambda expression is easier to comprehend
-    // ********* C: I have no need to pass the inner method around my code base by name
-    
+
     // Check to make sure user isn't trying to schedule an appointment in the past
-     public void checkForValidDate() {
-    
-    // Add event listener that detects when date picker field loses focus
-    //    dateField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-    //        @Override
-    //        public void changed(ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) {
-    //            if(unfocused) {
-    //                LocalDate today = LocalDate.now();
-    //                LocalDate selectedDate = dateField.getValue();
-    //            
-    //                // If the user tries to create an appointment before today's date
-    //                if(selectedDate.isBefore(today)) {
-    //                    Utils.throwErrorAlert("You cannot schedule an appointment in the past.");
-    //                }
-    //            } 
-    //        }
-    //    });
+    public void checkForValidDate() {
+        // ********* This commented out section below is before the lambda expression
+        // ********* I've converted to a lambda expression here because:
+        // ********* A: The lambda expression is less verbose
+        // ********* B: The lambda expression is easier to comprehend
+        // ********* C: I have no need to pass the inner method around my code base by name
+        // Add event listener that detects when date picker field loses focus
+        //    dateField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+        //        @Override
+        //        public void changed(ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) {
+        //            if(unfocused) {
+        //                LocalDate today = LocalDate.now();
+        //                LocalDate selectedDate = dateField.getValue();
+        //            
+        //                // If the user tries to create an appointment before today's date
+        //                if(selectedDate.isBefore(today)) {
+        //                    Utils.throwErrorAlert("You cannot schedule an appointment in the past.");
+        //                }
+        //            } 
+        //        }
+        //    });
         
         dateField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean unfocused, Boolean focused) -> {
             if(unfocused) {
@@ -208,8 +205,6 @@ public class AddAppointmentViewController implements Initializable {
                 } 
             }
         });
-        
-    }
-    
+    } 
 }
 

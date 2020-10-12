@@ -13,10 +13,11 @@ import models.City;
 
 public class CityDao {
     
+    
     // Get single city
     public static City getCity(String city) throws SQLException {
     
-         // Create SQL select statement using appointmentId
+         // Create SQL select statement using cityId
         String sqlStatement = "SELECT * FROM city WHERE city = ?";
         
         // Get reference to PreparedStatement
@@ -44,17 +45,16 @@ public class CityDao {
                                     lastUpdate, lastUpdateBy);    
         }
 
-        // Return appointment
+        // Return city
         return selectedCity;
     }
-    
     
     
     // Add new city to dB
     public static void createCity(int cityId, String city, int countryId, Timestamp createDate, 
                                   String createdBy, Timestamp lastUpdate, String lastUpdateBy) throws SQLException {
         
-        // Create SQL insert statement using Customer info
+        // Create SQL insert statement using city info
         String sqlStatement = "INSERT INTO city(city, countryId, createDate, createdBy,"
                                                 + " lastUpdate, lastUpdatedBy) "
                                                 + "VALUES(?, 1, ?, ?, ?, ?)";

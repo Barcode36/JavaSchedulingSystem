@@ -14,6 +14,7 @@ import models.ConsultantSchedule;
 
 public class UserDao {
     
+    
     // Get a single user from dB
     public static User getUser(String userName) throws SQLException {
         // Create SQL select statement using userName entered into login form
@@ -43,16 +44,13 @@ public class UserDao {
             selectedUser = new User(userId, name, pass, active, createDate, 
                                     createdBy, lastUpdate, lastUpdateBy);    
         }
-       
+        // return selected User
         return selectedUser;
     }
     
     
-    
     // Get all users
     public static ObservableList<User> getAllUsers() throws SQLException {
-    
-        // Prepare Observable List variable to hold all users
         ObservableList<User> allUsers = FXCollections.observableArrayList();
         
         // Create SQL select all users statement
@@ -83,14 +81,12 @@ public class UserDao {
             allUsers.add(nextUser);
             
         }
-        
         // Return users observable list
         return allUsers;
     }
     
     
-    
-    // Get all appointment types by month
+    // Get all consultant schedules
     public static ObservableList<ConsultantSchedule> getAllConsultantSchedules() throws SQLException {
         ObservableList<ConsultantSchedule> consultantSchedules = FXCollections.observableArrayList();
         
@@ -106,7 +102,7 @@ public class UserDao {
         
         ConsultantSchedule nextConsultantSchedule;
         
-        // Get User info from dB query
+        // Get consultant schedules info from dB query
         while(rs.next()) {
             String username = rs.getString("userName");
             String type = rs.getString("type");
@@ -115,10 +111,7 @@ public class UserDao {
             nextConsultantSchedule = new ConsultantSchedule(username, type, customerName, start);
             consultantSchedules.add(nextConsultantSchedule);
         }
-        
         // Return observable list of consultantSchedules        
         return consultantSchedules;
     }
-    
-    
 }

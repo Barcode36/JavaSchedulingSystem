@@ -1,8 +1,9 @@
 
 package models;
 
-import java.sql.Timestamp;
+// Object model for application cities
 
+import java.sql.Timestamp;
 
 public class City {
     
@@ -29,9 +30,8 @@ public class City {
         this.lastUpdateBy = lastUpdateBy;
     }
     
-    
-    
-    // City ID Getters and Setters
+
+    // City ID Getter and Setter
     public int getCityId() {
         return cityId;
     }
@@ -40,9 +40,8 @@ public class City {
         this.cityId = cityId;
     }
     
-    
-    
-    // City Getters and Setters
+
+    // City Getter and Setter
     public String getCity() {
         return city;
     }
@@ -51,9 +50,8 @@ public class City {
         this.city = city;
     }
     
-    
-    
-    // Country ID Getters and Setters
+ 
+    // Country ID Getter and Setter
     public int getCountryId() {
         return countryId;
     }
@@ -62,9 +60,8 @@ public class City {
         this.countryId = countryId;
     }
     
-    
-    
-    // Create Date Getters and Setters
+
+    // Create Date Getter and Setter
     public Timestamp getCreateDate() {
         return createDate;
     }
@@ -73,9 +70,8 @@ public class City {
         this.createDate = createDate;
     }
     
-    
-    
-    // Created By Getters and Setters
+
+    // Created By Getter and Setter
     public String getCreatedBy() {
         return createdBy;
     }
@@ -84,9 +80,8 @@ public class City {
         this.createdBy = createdBy;
     }
     
-    
-    
-    // Last Update Getters and Setters
+
+    // Last Update Getter and Setter
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -95,9 +90,8 @@ public class City {
         this.lastUpdate = lastUpdate;
     }
     
-    
-    
-    // Last Update By Getters and Setters
+
+    // Last Update By Getter and Setter
     public String getLastUpdateBy() {
         return lastUpdateBy;
     }
@@ -105,5 +99,4 @@ public class City {
     public void setLastUpdateBy(String lastUpdateBy) {
         this.lastUpdateBy = lastUpdateBy;
     }
-    
 }

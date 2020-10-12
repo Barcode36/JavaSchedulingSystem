@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,10 +24,13 @@ import models.User;
 
 
 public class MostAppearancesReportViewController implements Initializable {
-    User user;
+    
+    // FXML variables for view controls
     @FXML private TextArea textBlock;
     @FXML private Button backButton;
-  
+    
+    User user;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         textBlock.setEditable(false);
@@ -36,14 +38,13 @@ public class MostAppearancesReportViewController implements Initializable {
         try {
             allCustomerAppearances = CustomerDao.getAllCustomerAppearances();
             for(CustomerAppearance ca : allCustomerAppearances) {
-            textBlock.appendText("---------------\n");
-            textBlock.appendText(ca.getCustomerName() + " has " + ca.getAppearances() + " public appearances.\n");
-            textBlock.appendText("---------------\n\n\n");
-        }
+                textBlock.appendText("---------------\n");
+                textBlock.appendText(ca.getCustomerName() + " has " + ca.getAppearances() + " public appearances.\n");
+                textBlock.appendText("---------------\n\n\n");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(MostAppearancesReportViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        } 
     }    
     
     // Set current user of application
@@ -51,9 +52,8 @@ public class MostAppearancesReportViewController implements Initializable {
         this.user = user;
     }    
     
-    
-    
-     public void backButtonHandler(ActionEvent event) throws IOException {
+    // Handle clicks on back button
+    public void backButtonHandler(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass()
                                            .getResource("AppointmentsView.fxml"));
         Parent root = loader.load();
@@ -65,5 +65,4 @@ public class MostAppearancesReportViewController implements Initializable {
         controller.initUser(user);
         stage.show();
     }
-    
 }

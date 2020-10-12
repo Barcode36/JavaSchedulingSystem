@@ -7,8 +7,6 @@ import java.sql.Timestamp;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-
-
 public class Appointment {
     
     // Appointment Object fields
@@ -48,13 +46,11 @@ public class Appointment {
         this.createDate = createDate;
         setCreatedBy(createdBy);
         this.lastUpdate = lastUpdate;
-        setLastUpdateBy(lastUpdateBy);
-       
+        setLastUpdateBy(lastUpdateBy); 
     }
     
     
-    
-    // Appointment ID Getters and Setters
+    // Appointment ID Getter and Setter
     public int getAppointmentId() {
         return appointmentId.get();
     }
@@ -63,9 +59,8 @@ public class Appointment {
         this.appointmentId.set(appointmentId);
     }
     
-    
-    
-    // Customer ID Getters and Setters
+
+    // Customer ID Getter and Setter
     public int getCustomerId() {
         return customerId.get();
     }
@@ -75,7 +70,7 @@ public class Appointment {
     }
     
     
-    // User ID Getters and Setters
+    // User ID Getter and Setter
     public int getUserId() {
         return userId.get();
     }
@@ -85,8 +80,7 @@ public class Appointment {
     }
     
     
-    
-    // Title Getters and Setters
+    // Title Getter and Setter
     public String getTitle() {
         return title.get();
     }
@@ -96,8 +90,7 @@ public class Appointment {
     }
     
     
-    
-    // Description Getters and Setters
+    // Description Getter and Setter
     public String getDescription() {
         return description.get();
     }
@@ -107,8 +100,7 @@ public class Appointment {
     }
     
     
-    
-    // Location Getters and Setters
+    // Location Getter and Setter
     public String getLocation() {
         return location.get();
     }
@@ -118,8 +110,7 @@ public class Appointment {
     }
     
     
-    
-    // Contact Getters and Setters
+    // Contact Getter and Setter
     public String getContact() {
         return contact.get();
     }
@@ -129,9 +120,7 @@ public class Appointment {
     }
     
     
-    
-    // Appointment Type Getters and Setters
-    
+    // Appointment Type Getter and Setter
     public String getAppointmentType() {
         return appointmentType.get();
     }
@@ -141,8 +130,7 @@ public class Appointment {
     }
     
     
-    
-    // Appointment URL Getters and Setters
+    // Appointment URL Getter and Setter
     public String getAppointmentURL() {
         return appointmentURL.get();
     }
@@ -151,9 +139,8 @@ public class Appointment {
         this.appointmentURL.set(appointmentURL);
     }
     
-    
-    
-    // Appointment Start Getters and Setters
+
+    // Appointment Start Getter and Setter
     public Timestamp getAppointmentStart() {
         return appointmentStart;
     }
@@ -162,9 +149,8 @@ public class Appointment {
         this.appointmentStart = appointmentStart;
     }
     
-    
-    
-    // Appointment End Getters and Setters
+
+    // Appointment End Getter and Setter
     public Timestamp getAppointmentEnd() {
         return appointmentEnd;
     }
@@ -173,9 +159,8 @@ public class Appointment {
         this.appointmentEnd = appointmentEnd;
     }
     
-    
-    
-    // Create Date Getters and Setters
+
+    // Create Date Getter and Setter
     public Timestamp getCreateDate() {
         return createDate;
     }
@@ -184,9 +169,8 @@ public class Appointment {
         this.createDate = createDate;
     }
     
-    
-    
-    // CreatedBy Getters and Setters
+
+    // CreatedBy Getter and Setter
     public String getCreatedBy() {
         return createdBy.get();
     }
@@ -195,9 +179,8 @@ public class Appointment {
         this.createdBy.set(createdBy);
     }
     
-    
-    
-    // Last update Getters and Setters
+
+    // Last update Getter and Setter
     public Timestamp getLastUpdate() {
         return lastUpdate;
     }
@@ -206,9 +189,8 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
     }
     
-    
-    
-    // Last Update By Getters and Setters
+
+    // Last Update By Getter and Setter
     public String getLastUpdateBy() {
         return lastUpdateBy.get();
     }
@@ -216,5 +198,4 @@ public class Appointment {
     public void setLastUpdateBy(String lastUpdateBy) {
         this.lastUpdateBy.set(lastUpdateBy);
     }
-    
 }

@@ -1,7 +1,6 @@
 
 package view_controller;
 
-import dao.AppointmentDao;
 import dao.UserDao;
 import java.io.IOException;
 import java.net.URL;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +19,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.Appointment;
 import models.User;
 import utilities.Utils;
 
@@ -54,6 +51,7 @@ public class LoginViewController implements Initializable {
     }    
     
     
+    // Handle clicks on login submit button
     public void loginSubmitButtonHandler(ActionEvent event) throws IOException, SQLException, InterruptedException {
         // Query dB for user entered into username field
         User user = UserDao.getUser(usernameField.getText());
@@ -64,8 +62,7 @@ public class LoginViewController implements Initializable {
                 Utils.throwErrorAlert("사용자 이름 또는 비밀번호가 유효하지 않습니다.", "Korean");
             } else {
                 Utils.throwErrorAlert("Your username or password is invalid.");
-            }
-            
+            }    
         } else {
             // Get that user's real password
             String officialPassword = user.getUserPassword();
@@ -109,6 +106,7 @@ public class LoginViewController implements Initializable {
         }      
     }
     
+    
     // Close application
     public void loginExitButtonHandler(ActionEvent event) throws SQLException {
         if(this.language.equals("한국어")) {
@@ -117,5 +115,4 @@ public class LoginViewController implements Initializable {
             Utils.exitApplication();
         }
     }
-  
 }
